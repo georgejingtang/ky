@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>唐静考研英语逐句翻译库</title>
+    <style>
+        :root { --primary-color: #2563eb; --text-main: #1e293b; --text-muted: #64748b; }
+        body { font-family: -apple-system, sans-serif; line-height: 1.6; color: var(--text-main); max-width: 800px; margin: 0 auto; padding: 20px; background: #f8fafc; }
+        .header { text-align: center; margin-bottom: 30px; }
+        #searchBox { width: 100%; padding: 12px 20px; font-size: 16px; border: 2px solid #e2e8f0; border-radius: 10px; outline: none; transition: border-color 0.2s; box-sizing: border-box; }
+        #searchBox:focus { border-color: var(--primary-color); }
+        .result-count { margin-top: 10px; font-size: 14px; color: var(--text-muted); }
+        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+        .en { font-size: 18px; font-weight: 600; color: #0f172a; margin-bottom: 8px; }
+        .cn { font-size: 16px; color: #475569; border-left: 4px solid #e2e8f0; padding-left: 12px; }
+        .note { font-size: 13px; color: var(--primary-color); margin-top: 10px; background: #eff6ff; padding: 4px 8px; display: inline-block; border-radius: 4px; }
+        mark { background: #fef08a; color: #854d0e; padding: 0 2px; border-radius: 2px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>My English Corpus</h1>
+    <p>输入单词，在唐静老师的文章中搜索句子</p>
+    <input type="text" id="searchBox" placeholder="搜索单词，例如：media, exploit..." autofocus>
+    <div id="count" class="result-count"></div>
+</div>
+
+<div id="results"></div>
+
+<script>
+    let corpus = [];
+
+    // 获取数据
+    fetch('data.json')
+        .then(res => res.json())
+        .then(data => {
+            corpus = data;
+            document.getElementById('count').innerText = `共加载 ${data.length} 条翻译句子`;
+        });
+
+    const searchBox = document.getElementById('searchBox');
+    const resultsDiv = document.getElementById('results');
+
+    searchBox.addEventListener('input', (e) => {
+        const query = e.target.value.trim().toLowerCase();
+        resultsDiv.innerHTML = '';
+        
+        if (query.length < 2) return;
+
+        const filtered = corpus.filter(item => 
+            item.en.toLowerCase().includes(query)
+        );
+
+        document.getElementById('count').innerText = `找到 ${filtered.length} 个匹配结果`;
+
+        filtered.forEach(item => {
+            const regex = new RegExp(`(${query})`, 'gi');
+            const highlightedEn = item.en.replace(regex, '<mark>$1</mark>');
+            
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="en">${highlightedEn}</div>
+                <div class="cn">${item.cn}</div>
+                ${item.note ? `<div class="note">${item.note}</div>` : ''}
+            `;
+            resultsDiv.appendChild(card);
+        });
+    });
+</script>
+
+</body>
+</html>
