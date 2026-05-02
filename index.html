@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>唐静考研英语</title>
+    <style>
+        :root { --primary-color: #2563eb; --text-main: #1e293b; --text-muted: #64748b; }
+        body { font-family: -apple-system, system-ui, sans-serif; line-height: 1.6; color: var(--text-main); max-width: 850px; margin: 0 auto; padding: 20px; background: #f8fafc; }
+        .header { text-align: center; margin-bottom: 30px; padding: 20px 0; }
+        .header h1 { font-size: 2.5rem; color: #0f172a; margin-bottom: 8px; }
+        #searchBox { width: 100%; padding: 15px 25px; font-size: 18px; border: 2px solid #e2e8f0; border-radius: 12px; outline: none; transition: all 0.2s; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); box-sizing: border-box; }
+        #searchBox:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+        .result-count { margin-top: 15px; font-size: 14px; color: var(--text-muted); font-weight: 500; }
+        .card { background: white; padding: 24px; border-radius: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 20px; border: 1px solid #f1f5f9; }
+        .source-tag { font-size: 12px; color: #6366f1; font-weight: bold; margin-bottom: 10px; background: #eef2ff; display: inline-block; padding: 4px 10px; border-radius: 6px; }
+        .en { font-size: 19px; font-weight: 600; color: #0f172a; margin-bottom: 12px; line-height: 1.4; }
+        .cn { font-size: 17px; color: #334155; border-left: 4px solid #cbd5e1; padding-left: 15px; margin-top: 10px; line-height: 1.5; background: #fcfcfc; padding-top: 5px; padding-bottom: 5px; }
+        mark { background: #fef08a; color: #854d0e; padding: 0 2px; border-radius: 2px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>唐静考研英语</h1>
+    <p>精准检索英语一、英语二历年真题翻译句子</p>
+    <input type="text" id="searchBox" placeholder="输入单词 (如 media)..." autofocus>
+    <div id="count" class="result-count">正在同步数据库...</div>
+</div>
+
+<div id="results"></div>
+
+<script>
+    let corpus = [];
+
+    // 加载合并后的数据库
+    fetch('./fixed_tangjing_db.json')
+        .then(res => {
+            if (!res.ok) throw new Error('Network response was not ok');
+            return res.json();
+        })
+        .then(data => {
+            corpus = data;
+            document.getElementById('count').innerText = `共加载 ${data.length} 条翻译句子`;
+        })
+        .catch(err => {
+            console.error(err);
+            document.getElementById('count').innerText = "❌ 数据库加载失败，请检查 fixed_tangjing_db.json 是否在仓库根目录";
+        });
+
+    const searchBox = document.getElementById('searchBox');
+    const resultsDiv = document.getElementById('results');
+
+    searchBox.addEventListener('input', (e) => {
+        const query = e.target.value.trim().toLowerCase();
+        resultsDiv.innerHTML = '';
+        
+        if (query.length < 2) {
+            document.getElementById('count').innerText = `共加载 ${corpus.length} 条翻译句子`;
+            return;
+        }
+
+        // 精准单词边界匹配，解决 media 匹配 immediately 的问题[cite: 1]
+        const searchRegex = new RegExp('\\b' + query, 'i');
+
+        const filtered = corpus.filter(item => {
+            const cleanEn = item.en ? item.en.replace(/\(\d+\s*words\)/g, '') : "";[cite: 1]
+            return (cleanEn && searchRegex.test(cleanEn)) || (item.cn && item.cn.includes(query));
+        });
+
+        document.getElementById('count').innerText = `找到 ${filtered.length} 个匹配结果`;
+
+        filtered.forEach(item => {
+            const highlightRegex = new RegExp('(\\b' + query + '\\w*)', 'gi');
+            const cleanEn = item.en.replace(/\(\d+\s*words\)/g, '').trim();[cite: 1]
+            const highlightedEn = cleanEn.replace(highlightRegex, '<mark>$1</mark>');
+            const highlightedCn = item.cn.replace(new RegExp('(' + query + ')', 'gi'), '<mark>$1</mark>');
+            
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="source-tag">📌 ${item.id}</div> 
+                <div class="en">${highlightedEn}</div>
+                <div class="cn">${highlightedCn}</div>
+            `;
+            resultsDiv.appendChild(card);
+        });
+    });
+</script>
+
+</body>
+</html>
