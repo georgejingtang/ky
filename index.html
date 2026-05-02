@@ -6,28 +6,27 @@
     <title>唐静考研英语逐句翻译库</title>
     <style>
         :root { --primary-color: #2563eb; --text-main: #1e293b; --text-muted: #64748b; }
-        body { font-family: -apple-system, sans-serif; line-height: 1.6; color: var(--text-main); max-width: 800px; margin: 0 auto; padding: 20px; background: #f8fafc; }
-        .header { text-align: center; margin-bottom: 30px; }
-        #searchBox { width: 100%; padding: 12px 20px; font-size: 16px; border: 2px solid #e2e8f0; border-radius: 10px; outline: none; transition: border-color 0.2s; box-sizing: border-box; }
-        #searchBox:focus { border-color: var(--primary-color); }
-        .result-count { margin-top: 10px; font-size: 14px; color: var(--text-muted); }
-        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 16px; animation: fadeIn 0.3s ease; position: relative; }
-        /* 问题3修复：显示文章年份/ID的样式 */
-        .source-id { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; font-family: monospace; background: #f1f5f9; display: inline-block; padding: 2px 6px; border-radius: 4px; }
-        .en { font-size: 18px; font-weight: 600; color: #0f172a; margin-bottom: 8px; }
-        .cn { font-size: 16px; color: #475569; border-left: 4px solid var(--primary-color); padding-left: 12px; background: #fcfcfc; padding-top: 5px; padding-bottom: 5px; }
-        .note { font-size: 13px; color: var(--primary-color); margin-top: 10px; background: #eff6ff; padding: 4px 8px; display: inline-block; border-radius: 4px; }
-        mark { background: #fef08a; color: #854d0e; padding: 0 2px; border-radius: 2px; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: var(--text-main); max-width: 850px; margin: 0 auto; padding: 20px; background: #f8fafc; }
+        .header { text-align: center; margin-bottom: 30px; padding: 20px 0; }
+        .header h1 { font-size: 2.2rem; color: #0f172a; margin-bottom: 10px; }
+        #searchBox { width: 100%; padding: 15px 25px; font-size: 18px; border: 2px solid #e2e8f0; border-radius: 12px; outline: none; transition: all 0.2s; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); box-sizing: border-box; }
+        #searchBox:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+        .result-count { margin-top: 15px; font-size: 14px; color: var(--text-muted); font-weight: 500; }
+        .card { background: white; padding: 24px; border-radius: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 20px; border: 1px solid #f1f5f9; transition: transform 0.2s; }
+        .source-id { font-size: 13px; color: #6366f1; font-weight: bold; margin-bottom: 10px; background: #eef2ff; display: inline-block; padding: 4px 10px; border-radius: 6px; text-transform: uppercase; }
+        .en { font-size: 19px; font-weight: 600; color: #0f172a; margin-bottom: 12px; line-height: 1.4; }
+        .cn { font-size: 17px; color: #334155; border-left: 4px solid #cbd5e1; padding-left: 15px; margin-top: 10px; line-height: 1.5; }
+        mark { background: #fef08a; color: #854d0e; padding: 0 2px; border-radius: 2px; font-weight: bold; }
+        .no-result { text-align: center; color: var(--text-muted); margin-top: 50px; }
     </style>
 </head>
 <body>
 
 <div class="header">
     <h1>My English Corpus</h1>
-    <p>输入单词，在唐静老师的文章中搜索句子</p>
-    <input type="text" id="searchBox" placeholder="搜索单词，例如：media, exploit..." autofocus>
-    <div id="count" class="result-count"></div>
+    <p>输入关键词，在唐静老师的文章中检索句子</p>
+    <input type="text" id="searchBox" placeholder="搜索单词或中文关键词..." autofocus>
+    <div id="count" class="result-count">正在加载数据库...</div>
 </div>
 
 <div id="results"></div>
@@ -35,16 +34,15 @@
 <script>
     let corpus = [];
 
-    // 问题1修复：引用修复后的正确文件名 fixed_tangjing_db.json
+    // 核心：读取你修复后的 JSON 文件
     fetch('fixed_tangjing_db.json')
         .then(res => res.json())
         .then(data => {
-            // 兼容可能存在的 sentences 层级
-            corpus = data.sentences || data;
-            document.getElementById('count').innerText = `共加载 ${corpus.length} 条翻译句子`;
+            corpus = data;
+            document.getElementById('count').innerText = `共加载 ${data.length} 条翻译句子`;
         })
         .catch(err => {
-            document.getElementById('count').innerText = "数据加载失败，请确保 fixed_tangjing_db.json 在仓库中。";
+            document.getElementById('count').innerText = "❌ 数据库加载失败，请检查文件名是否为 fixed_tangjing_db.json";
         });
 
     const searchBox = document.getElementById('searchBox');
@@ -54,9 +52,12 @@
         const query = e.target.value.trim().toLowerCase();
         resultsDiv.innerHTML = '';
         
-        if (query.length < 2) return;
+        if (query.length < 2) {
+            document.getElementById('count').innerText = query.length === 1 ? "请输入至少2个字符" : `共加载 ${corpus.length} 条翻译句子`;
+            return;
+        }
 
-        // 问题1修复：搜索逻辑同时匹配英文(en)和中文(cn)
+        // 同时支持英文原文和中文翻译搜索
         const filtered = corpus.filter(item => 
             (item.en && item.en.toLowerCase().includes(query)) || 
             (item.cn && item.cn.includes(query))
@@ -64,20 +65,25 @@
 
         document.getElementById('count').innerText = `找到 ${filtered.length} 个匹配结果`;
 
+        if (filtered.length === 0) {
+            resultsDiv.innerHTML = '<div class="no-result">未找到相关句子，换个词试试？</div>';
+            return;
+        }
+
         filtered.forEach(item => {
-            // 英文高亮逻辑
             const regex = new RegExp(`(${query})`, 'gi');
-            const highlightedEn = item.en ? item.en.replace(regex, '<mark>$1</mark>') : "";
-            const highlightedCn = item.cn ? item.cn.replace(regex, '<mark>$1</mark>') : "";
+            
+            // 自动清理字数统计杂质 (如: (6 words))
+            const cleanEn = item.en.replace(/\(\d+\s*words\)/g, '').trim();
+            const highlightedEn = cleanEn.replace(regex, '<mark>$1</mark>');
+            const highlightedCn = item.cn.replace(regex, '<mark>$1</mark>');
             
             const card = document.createElement('div');
             card.className = 'card';
-            // 问题2&3修复：显示 ID (年份)，且只保留干净的 en 和 cn 字段
             card.innerHTML = `
-                <div class="source-id">文章编号: ${item.id || '未知'}</div>
+                <div class="source-id">📚 ${item.id}</div> 
                 <div class="en">${highlightedEn}</div>
                 <div class="cn">${highlightedCn}</div>
-                ${item.note && item.note !== "None" ? `<div class="note">📝 笔记: ${item.note}</div>` : ''}
             `;
             resultsDiv.appendChild(card);
         });
