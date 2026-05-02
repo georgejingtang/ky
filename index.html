@@ -11,9 +11,11 @@
         #searchBox { width: 100%; padding: 12px 20px; font-size: 16px; border: 2px solid #e2e8f0; border-radius: 10px; outline: none; transition: border-color 0.2s; box-sizing: border-box; }
         #searchBox:focus { border-color: var(--primary-color); }
         .result-count { margin-top: 10px; font-size: 14px; color: var(--text-muted); }
-        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 16px; animation: fadeIn 0.3s ease; position: relative; }
+        /* 问题3修复：显示文章年份/ID的样式 */
+        .source-id { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; font-family: monospace; background: #f1f5f9; display: inline-block; padding: 2px 6px; border-radius: 4px; }
         .en { font-size: 18px; font-weight: 600; color: #0f172a; margin-bottom: 8px; }
-        .cn { font-size: 16px; color: #475569; border-left: 4px solid #e2e8f0; padding-left: 12px; }
+        .cn { font-size: 16px; color: #475569; border-left: 4px solid var(--primary-color); padding-left: 12px; background: #fcfcfc; padding-top: 5px; padding-bottom: 5px; }
         .note { font-size: 13px; color: var(--primary-color); margin-top: 10px; background: #eff6ff; padding: 4px 8px; display: inline-block; border-radius: 4px; }
         mark { background: #fef08a; color: #854d0e; padding: 0 2px; border-radius: 2px; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -33,12 +35,16 @@
 <script>
     let corpus = [];
 
-    // 获取数据
-    fetch('data.json')
+    // 问题1修复：引用修复后的正确文件名 fixed_tangjing_db.json
+    fetch('fixed_tangjing_db.json')
         .then(res => res.json())
         .then(data => {
-            corpus = data;
-            document.getElementById('count').innerText = `共加载 ${data.length} 条翻译句子`;
+            // 兼容可能存在的 sentences 层级
+            corpus = data.sentences || data;
+            document.getElementById('count').innerText = `共加载 ${corpus.length} 条翻译句子`;
+        })
+        .catch(err => {
+            document.getElementById('count').innerText = "数据加载失败，请确保 fixed_tangjing_db.json 在仓库中。";
         });
 
     const searchBox = document.getElementById('searchBox');
@@ -50,22 +56,28 @@
         
         if (query.length < 2) return;
 
+        // 问题1修复：搜索逻辑同时匹配英文(en)和中文(cn)
         const filtered = corpus.filter(item => 
-            item.en.toLowerCase().includes(query)
+            (item.en && item.en.toLowerCase().includes(query)) || 
+            (item.cn && item.cn.includes(query))
         );
 
         document.getElementById('count').innerText = `找到 ${filtered.length} 个匹配结果`;
 
         filtered.forEach(item => {
+            // 英文高亮逻辑
             const regex = new RegExp(`(${query})`, 'gi');
-            const highlightedEn = item.en.replace(regex, '<mark>$1</mark>');
+            const highlightedEn = item.en ? item.en.replace(regex, '<mark>$1</mark>') : "";
+            const highlightedCn = item.cn ? item.cn.replace(regex, '<mark>$1</mark>') : "";
             
             const card = document.createElement('div');
             card.className = 'card';
+            // 问题2&3修复：显示 ID (年份)，且只保留干净的 en 和 cn 字段
             card.innerHTML = `
+                <div class="source-id">文章编号: ${item.id || '未知'}</div>
                 <div class="en">${highlightedEn}</div>
-                <div class="cn">${item.cn}</div>
-                ${item.note ? `<div class="note">${item.note}</div>` : ''}
+                <div class="cn">${highlightedCn}</div>
+                ${item.note && item.note !== "None" ? `<div class="note">📝 笔记: ${item.note}</div>` : ''}
             `;
             resultsDiv.appendChild(card);
         });
