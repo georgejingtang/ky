@@ -2,59 +2,31 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>唐静考研英语逐句翻译库</title>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            max-width: 1000px;
-            margin: 20px auto;
-            padding: 0 20px;
-            line-height: 1.6;
-        }
-        h1 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-        }
-        .subtitle {
-            color: #6c757d;
-            margin-bottom: 20px;
-        }
-        .search-box {
-            margin: 20px 0;
-            display: flex;
-            gap: 10px;
-        }
-        #searchInput {
-            flex: 1;
-            padding: 12px 16px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-        #searchInput:focus {
-            border-color: #3498db;
-        }
-        button {
-            padding: 12px 28px;
-            font-size: 16px;
-            background: #3498db;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        button:hover {
-            background: #2980b9;
-        }
+        :root { --primary-color: #2563eb; --text-main: #1e293b; --text-muted: #64748b; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: var(--text-main); max-width: 850px; margin: 0 auto; padding: 20px; background: #f8fafc; }
+        .header { text-align: center; margin-bottom: 30px; padding: 20px 0; }
+        .header h1 { font-size: 2.2rem; color: #0f172a; margin-bottom: 10px; }
+        #searchBox { width: 100%; padding: 15px 25px; font-size: 18px; border: 2px solid #e2e8f0; border-radius: 12px; outline: none; transition: all 0.2s; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); box-sizing: border-box; }
+        #searchBox:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+        .result-count { margin-top: 15px; font-size: 14px; color: var(--text-muted); font-weight: 500; }
+        .card { background: white; padding: 24px; border-radius: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 20px; border: 1px solid #f1f5f9; transition: transform 0.2s; }
+        .source-id { font-size: 13px; color: #6366f1; font-weight: bold; margin-bottom: 10px; background: #eef2ff; display: inline-block; padding: 4px 10px; border-radius: 6px; text-transform: uppercase; }
+        .en { font-size: 19px; font-weight: 600; color: #0f172a; margin-bottom: 12px; line-height: 1.4; }
+        .cn { font-size: 17px; color: #334155; border-left: 4px solid #cbd5e1; padding-left: 15px; margin-top: 10px; line-height: 1.5; }
+        mark { background: #fef08a; color: #854d0e; padding: 0 2px; border-radius: 2px; font-weight: bold; }
+        .no-result { text-align: center; color: var(--text-muted); margin-top: 50px; }
+        
+        /* 新增：考研大纲单词提示样式 */
         .vocab-badge {
-            padding: 12px 16px;
-            margin: 15px 0;
-            border-radius: 8px;
-            font-weight: bold;
+            padding: 10px 16px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            font-weight: 500;
+            text-align: center;
+            font-size: 14px;
         }
         .vocab-in {
             background: #d4edda;
@@ -66,197 +38,135 @@
             border-left: 4px solid #ffc107;
             color: #856404;
         }
-        .result-count {
-            color: #6c757d;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        .result-item {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 15px;
-            transition: box-shadow 0.2s;
-        }
-        .result-item:hover {
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .result-source {
-            color: #3498db;
-            font-weight: bold;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-        .result-english {
-            color: #2c3e50;
-            margin-bottom: 8px;
-            line-height: 1.5;
-        }
-        .result-chinese {
-            color: #6c757d;
-            font-size: 14px;
-            border-top: 1px dashed #dee2e6;
-            padding-top: 8px;
-            margin-top: 8px;
-        }
-        .no-results {
-            background: #f8f9fa;
-            padding: 40px;
-            text-align: center;
-            border-radius: 8px;
-            color: #6c757d;
-        }
-        .loading {
-            color: #6c757d;
-            text-align: center;
-            padding: 40px;
-            font-style: italic;
-        }
     </style>
 </head>
 <body>
-    <h1>📖 唐静考研英语逐句翻译库</h1>
-    <div class="subtitle">输入关键词，在唐静老师的考研文章中检索句子</div>
 
-    <div class="search-box">
-        <input type="text" id="searchInput" placeholder="输入关键词搜索..." onkeypress="if(event.key==='Enter') search()">
-        <button onclick="search()">搜索</button>
-    </div>
+<div class="header">
+    <h1>唐静考研</h1>
+    <p>输入关键词，在唐静老师的考研文章中检索句子</p>
+    <input type="text" id="searchBox" placeholder="搜索单词或中文关键词..." autofocus>
+    <div id="count" class="result-count">正在加载数据库...</div>
+</div>
 
-    <div id="results">
-        <div class="loading">✨ 输入关键词开始搜索，系统会自动显示是否属于考研大纲单词</div>
-    </div>
+<div id="results"></div>
 
-    <script>
-        let vocabularySet = new Set();
-        let searchData = [];
+<script>
+    let corpus = [];
+    let vocabularySet = new Set();  // 新增：存储考研大纲单词
 
-        // 加载考研大纲单词表
-        async function loadVocabulary() {
-            try {
-                const response = await fetch('大纲.txt');
-                if (!response.ok) {
-                    throw new Error('文件不存在或加载失败');
-                }
-                const text = await response.text();
-                const lines = text.split(/\r?\n/);
-                let count = 0;
-                lines.forEach(line => {
-                    let word = line.trim().toLowerCase();
-                    // 过滤空行、包含斜杠的变体（如 a/an）、注释行
-                    if (word && !word.includes('/') && !word.startsWith('#') && !word.includes(' ')) {
-                        vocabularySet.add(word);
-                        count++;
-                    }
-                });
-                console.log(`✅ 加载完成，共 ${vocabularySet.size} 个考研大纲单词`);
-            } catch (error) {
-                console.error('单词表加载失败:', error);
-                // 备选：手动添加常用词保证功能可用
-                const fallbackWords = ['a', 'an', 'the', 'and', 'to', 'of', 'for', 'with', 'great', 'ability', 'good', 'bad'];
-                fallbackWords.forEach(w => vocabularySet.add(w));
-                console.log(`⚠️ 使用备选单词表，共 ${vocabularySet.size} 个单词`);
+    // 新增：加载考研大纲单词表
+    async function loadVocabulary() {
+        try {
+            const response = await fetch('大纲.txt');
+            if (!response.ok) {
+                throw new Error('大纲.txt 加载失败');
             }
-        }
-
-        // 加载翻译数据
-        async function loadSearchData() {
-            try {
-                const response = await fetch('fixed_tangjing_db.json');
-                if (!response.ok) {
-                    throw new Error('数据文件不存在或加载失败');
+            const text = await response.text();
+            const lines = text.split(/\r?\n/);
+            lines.forEach(line => {
+                let word = line.trim().toLowerCase();
+                if (word && !word.includes('/') && !word.startsWith('#')) {
+                    vocabularySet.add(word);
                 }
-                searchData = await response.json();
-                console.log(`✅ 加载完成，共 ${searchData.length} 条翻译数据`);
-            } catch (error) {
-                console.error('翻译数据加载失败:', error);
-                // 备选示例数据
-                searchData = [
-                    { source: "英语一2009年第2篇", english: "This DNA can reveal genetic information about only one or two ancestors, even though, for example, just three generations back people also have six other great-grandparents.", chinese: "这种DNA检测只能检测出一两位祖先的基因信息，尽管，比如说，仅上溯三代，每个人还有另外六位曾祖父母。" },
-                    { source: "英语一2011年第1篇", english: "For my part, I have no idea whether Gilbert is a great conductor or even a good one.", chinese: "对我来说，我不知道吉尔伯特是不是一个伟大的指挥家；也不知道他到底算不算是一个好指挥。" },
-                    { source: "英语一2011年第1篇", english: "For the time, attention, and money of the art-loving public, classical instrumentalists must compete not only with opera houses, dance troupes, theater companies, and museums.", chinese: "为了争取爱好艺术的公众的时间、精力和金钱，古典器乐演奏家不仅必须和歌剧院、舞蹈团、话剧团和博物馆竞争。" }
-                ];
-                console.log(`⚠️ 使用备选数据，共 ${searchData.length} 条`);
-            }
-        }
-
-        function isVocabularyWord(word) {
-            if (!word) return false;
-            return vocabularySet.has(word.toLowerCase());
-        }
-
-        // 防止XSS攻击
-        function escapeHtml(str) {
-            if (!str) return '';
-            return str.replace(/[&<>]/g, function(m) {
-                if (m === '&') return '&amp;';
-                if (m === '<') return '&lt;';
-                if (m === '>') return '&gt;';
-                return m;
             });
+            console.log(`✅ 已加载 ${vocabularySet.size} 个考研大纲单词`);
+        } catch (error) {
+            console.error('大纲单词表加载失败:', error);
+        }
+    }
+
+    // 新增：判断是否在大纲中
+    function isInVocabulary(word) {
+        if (!word) return false;
+        return vocabularySet.has(word.toLowerCase());
+    }
+
+    // 新增：生成单词状态提示HTML
+    function getVocabularyBadge(keyword) {
+        if (!keyword || keyword.length < 1) return '';
+        if (isInVocabulary(keyword)) {
+            return `<div class="vocab-badge vocab-in">✅ "${keyword}" 属于考研大纲单词</div>`;
+        } else {
+            return `<div class="vocab-badge vocab-out">📚 "${keyword}" 不在考研大纲单词表中</div>`;
+        }
+    }
+
+    // 原有的加载数据逻辑
+    fetch('fixed_tangjing_db.json')
+        .then(res => res.json())
+        .then(data => {
+            corpus = data;
+            document.getElementById('count').innerText = `共加载 ${data.length} 条翻译句子`;
+        })
+        .catch(err => {
+            document.getElementById('count').innerText = "❌ 数据库加载失败，请检查文件名是否为 fixed_tangjing_db.json";
+        });
+
+    // 加载单词表
+    loadVocabulary();
+
+    const searchBox = document.getElementById('searchBox');
+    const resultsDiv = document.getElementById('results');
+
+    searchBox.addEventListener('input', (e) => {
+        const query = e.target.value.trim();
+        
+        resultsDiv.innerHTML = '';
+        
+        if (query.length < 2) {
+            document.getElementById('count').innerText = query.length === 1 ? "请输入至少2个字符" : `共加载 ${corpus.length} 条翻译句子`;
+            return;
         }
 
-        function search() {
-            const keyword = document.getElementById('searchInput').value.trim();
-            const resultsDiv = document.getElementById('results');
-            
-            if (!keyword) {
-                resultsDiv.innerHTML = '<div class="no-results">📝 请输入要搜索的关键词</div>';
-                return;
+        // 同时支持英文原文和中文翻译搜索
+        const filtered = corpus.filter(item => {
+            // 中文搜索保持原有的包含匹配
+            if (item.cn && item.cn.includes(query)) {
+                return true;
             }
-
-            // 搜索匹配的结果（在英文原文中搜索）
-            const results = searchData.filter(item => 
-                item.english && item.english.toLowerCase().includes(keyword.toLowerCase())
-            );
-
-            let html = '';
-
-            // 显示单词大纲状态
-            if (isVocabularyWord(keyword)) {
-                html += `<div class="vocab-badge vocab-in">
-                    ✅ "${escapeHtml(keyword)}" 属于考研大纲单词
-                </div>`;
-            } else {
-                html += `<div class="vocab-badge vocab-out">
-                    📚 "${escapeHtml(keyword)}" 不在考研大纲单词表中
-                </div>`;
+            // 英文搜索使用单词边界匹配
+            if (item.en) {
+                const cleanEn = item.en.replace(/\(\d+\s*words\)/g, '').trim();
+                const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                const wordBoundaryRegex = new RegExp(`\\b${escapedQuery}\\b`, 'gi');
+                return wordBoundaryRegex.test(cleanEn);
             }
+            return false;
+        });
 
-            html += `<div class="result-count">🔍 找到 ${results.length} 个匹配结果</div>`;
+        document.getElementById('count').innerText = `找到 ${filtered.length} 个匹配结果`;
 
-            // 显示搜索结果
-            if (results.length === 0) {
-                html += '<div class="no-results">😔 没有找到包含该关键词的句子，请尝试其他关键词</div>';
-            } else {
-                results.forEach(item => {
-                    html += `
-                        <div class="result-item">
-                            <div class="result-source">📌 ${escapeHtml(item.source || '未知来源')}</div>
-                            <div class="result-english">${escapeHtml(item.english || '')}</div>
-                            <div class="result-chinese">${escapeHtml(item.chinese || '')}</div>
-                        </div>
-                    `;
-                });
-            }
-
-            resultsDiv.innerHTML = html;
+        if (filtered.length === 0) {
+            // 即使没有搜索结果，也显示单词状态
+            const vocabHtml = getVocabularyBadge(query);
+            resultsDiv.innerHTML = vocabHtml + '<div class="no-result">未找到相关句子，换个词试试？</div>';
+            return;
         }
 
-        // 初始化
-        async function init() {
-            const resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = '<div class="loading">📚 正在加载单词表和数据，请稍候...</div>';
+        // 显示单词状态 + 搜索结果
+        let allHtml = getVocabularyBadge(query);
+        
+        filtered.forEach(item => {
+            const cleanEn = item.en.replace(/\(\d+\s*words\)/g, '').trim();
+            const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const wordBoundaryRegex = new RegExp(`\\b(${escapedQuery})\\b`, 'gi');
+            const highlightedEn = cleanEn.replace(wordBoundaryRegex, '<mark>$1</mark>');
+            const cnRegex = query.length >= 2 ? new RegExp(`(${escapedQuery})`, 'gi') : null;
+            const highlightedCn = cnRegex ? item.cn.replace(cnRegex, '<mark>$1</mark>') : item.cn;
             
-            await loadVocabulary();
-            await loadSearchData();
-            
-            resultsDiv.innerHTML = '<div class="loading">✨ 加载完成！输入关键词开始搜索</div>';
-        }
+            allHtml += `
+                <div class="card">
+                    <div class="source-id">📚 ${item.id}</div>
+                    <div class="en">${highlightedEn}</div>
+                    <div class="cn">${highlightedCn}</div>
+                </div>
+            `;
+        });
+        
+        resultsDiv.innerHTML = allHtml;
+    });
+</script>
 
-        init();
-    </script>
 </body>
 </html>
