@@ -20,9 +20,10 @@
         .opts { margin-top: 8px; padding-left: 15px; font-size: 15px; color: #475569; line-height: 1.8; }
         mark { background: #fef08a; color: #854d0e; padding: 0 2px; border-radius: 2px; font-weight: bold; }
         .no-result { text-align: center; color: var(--text-muted); margin-top: 50px; }
-        .vocab-badge { padding: 10px 16px; margin-bottom: 20px; border-radius: 12px; font-weight: 500; text-align: center; font-size: 14px; }
+        .vocab-badge { padding: 10px 16px; margin-bottom: 10px; border-radius: 12px; font-weight: 500; text-align: center; font-size: 14px; }
         .vocab-in { background: #d4edda; border-left: 4px solid #28a745; color: #155724; }
         .vocab-out { background: #fff3cd; border-left: 4px solid #ffc107; color: #856404; }
+        .freq-badge { padding: 10px 16px; margin-bottom: 10px; border-radius: 12px; font-weight: 500; text-align: center; font-size: 14px; background: #e8f0fe; border-left: 4px solid #4285f4; color: #1a56db; }
         .source-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-right: 6px; background: #e0e7ff; color: #3730a3; }
         .source-tag.reading { background: #dbeafe; color: #1e40af; }
         .source-tag.fanyi { background: #fce7f3; color: #9d174d; }
@@ -49,6 +50,7 @@
 
     let corpus = [];
     let vocabularySet = new Set();
+    let freqSet = new Set();
 
     function extractWordCount(enText) {
         const match = enText.match(/\((\d+)\s*words\)/i);
@@ -59,18 +61,12 @@
         return enText.replace(/\(\d+\s*words\)/gi, '').trim();
     }
 
-    // 英文高亮：用函数回调替换，避免 $1 字面显示问题
-    function highlightEnglish(text, regex) {
-        if (!regex) return text;
+    function highlightText(text, regex) {
+        if (!regex || !text) return text;
         return text.replace(regex, match => `<mark>${match}</mark>`);
     }
 
-    // 中文高亮
-    function highlightChinese(text, regex) {
-        if (!regex) return text;
-        return text.replace(regex, match => `<mark>${match}</mark>`);
-    }
-
+    // 加载大纲单词
     async function loadVocabulary() {
         try {
             const response = await fetch('大纲.txt');
@@ -84,18 +80,46 @@
         } catch (error) { console.error('大纲单词表加载失败:', error); }
     }
 
+    // 加载1200高频词
+    async function loadFreqWords() {
+        try {
+            const response = await fetch('1200.txt');
+            if (!response.ok) throw new Error('1200.txt 加载失败');
+            const text = await response.text();
+            text.split(/\r?\n/).forEach(line => {
+                let word = line.trim().toLowerCase();
+                if (word && !word.includes('/') && !word.startsWith('#')) freqSet.add(word);
+            });
+            console.log(`✅ 已加载 ${freqSet.size} 个1200高频词`);
+        } catch (error) { console.error('1200高频词表加载失败:', error); }
+    }
+
     function isInVocabulary(word) {
         if (!word) return false;
         return vocabularySet.has(word.toLowerCase());
     }
 
-    function getVocabularyBadge(keyword) {
+    function isInFreq(word) {
+        if (!word) return false;
+        return freqSet.has(word.toLowerCase());
+    }
+
+    function getBadges(keyword) {
         if (!keyword || keyword.length < 1) return '';
-        if (isInVocabulary(keyword)) return `<div class="vocab-badge vocab-in">✅ "${keyword}" 属于考研大纲单词</div>`;
-        return `<div class="vocab-badge vocab-out">📚 "${keyword}" 不在考研大纲单词表中</div>`;
+        let html = '';
+        if (isInVocabulary(keyword)) {
+            html += `<div class="vocab-badge vocab-in">✅ "${keyword}" 属于考研大纲单词</div>`;
+        } else {
+            html += `<div class="vocab-badge vocab-out">📚 "${keyword}" 不在考研大纲单词表中</div>`;
+        }
+        if (isInFreq(keyword)) {
+            html += `<div class="freq-badge">🔵 "${keyword}" 属于1200高频词</div>`;
+        }
+        return html;
     }
 
     async function loadAllData() {
+        corpus = [];
         for (const file of JSON_FILES) {
             try {
                 const response = await fetch(file.name);
@@ -115,6 +139,7 @@
     }
 
     loadVocabulary();
+    loadFreqWords();
     loadAllData();
 
     const searchBox = document.getElementById('searchBox');
@@ -135,9 +160,7 @@
 
         const isChinese = hasChinese(query);
         const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-        // 英文前缀匹配正则，中文包含匹配正则
-        const prefixRegex = isChinese ? null : new RegExp(`\\b${escapedQuery}[a-zA-Z]*\\b`, 'gi');
+        const enRegex = isChinese ? null : new RegExp(`\\b${escapedQuery}[a-zA-Z]*\\b`, 'gi');
         const cnRegex = new RegExp(escapedQuery, 'gi');
 
         const filtered = corpus.filter(item => {
@@ -154,28 +177,29 @@
             if (isChinese) {
                 return cnTexts.some(text => cnRegex.test(text));
             } else {
-                return enTexts.some(text => prefixRegex.test(text));
+                return enTexts.some(text => enRegex.test(text));
             }
         });
 
         document.getElementById('count').innerText = `找到 ${filtered.length} 个匹配结果`;
 
+        // 先显示单词状态（大纲+高频）
+        let allHtml = getBadges(query);
+
         if (filtered.length === 0) {
-            resultsDiv.innerHTML = getVocabularyBadge(query) + '<div class="no-result">未找到相关句子，换个词试试？</div>';
+            allHtml += '<div class="no-result">未找到相关句子，换个词试试？</div>';
+            resultsDiv.innerHTML = allHtml;
             return;
         }
 
-        let allHtml = getVocabularyBadge(query);
-
         filtered.forEach(item => {
             if (item.en_q && item.en_opts) {
-                // 题干选项类型
-                const highlightedEnQ = highlightEnglish(item.en_q, prefixRegex);
-                const highlightedCnQ = highlightChinese(item.cn_q, cnRegex);
+                const highlightedEnQ = highlightText(item.en_q, enRegex);
+                const highlightedCnQ = highlightText(item.cn_q, cnRegex);
                 let optsHtml = '';
                 for (let i = 0; i < item.en_opts.length; i++) {
-                    const highlightedEnOpt = highlightEnglish(item.en_opts[i], prefixRegex);
-                    const highlightedCnOpt = highlightChinese(item.cn_opts[i] || '', cnRegex);
+                    const highlightedEnOpt = highlightText(item.en_opts[i], enRegex);
+                    const highlightedCnOpt = highlightText(item.cn_opts[i] || '', cnRegex);
                     optsHtml += `<div><span class="opt-en">${highlightedEnOpt}</span>　<span class="opt-cn">${highlightedCnOpt}</span></div>`;
                 }
                 allHtml += `
@@ -190,10 +214,9 @@
                     </div>
                 `;
             } else {
-                // 阅读/翻译/完型类型
                 const cleanEn = cleanEnglish(item.en || '');
-                const highlightedEn = highlightEnglish(cleanEn, prefixRegex);
-                const highlightedCn = item.cn ? highlightChinese(item.cn, cnRegex) : '';
+                const highlightedEn = highlightText(cleanEn, enRegex);
+                const highlightedCn = item.cn ? highlightText(item.cn, cnRegex) : '';
                 const wordCountHtml = item._wordCount ? `<span class="word-count">(${item._wordCount} words)</span>` : '';
 
                 allHtml += `
