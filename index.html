@@ -44,7 +44,7 @@
         { name: '1reading.json', tag: '阅读', tagClass: 'reading' },
         { name: '2fanyi.json', tag: '翻译', tagClass: 'fanyi' },
         { name: '3wanxing.json', tag: '完型', tagClass: 'wanxing' },
-        { name: '4tiganxuanxiang.json', tag: '提纲选讲', tagClass: 'tigang' }
+        { name: '4tiganxuanxiang.json', tag: '题干选项', tagClass: 'tigang' }
     ];
 
     let corpus = [];
@@ -57,6 +57,18 @@
 
     function cleanEnglish(enText) {
         return enText.replace(/\(\d+\s*words\)/gi, '').trim();
+    }
+
+    // 英文高亮：用函数回调替换，避免 $1 字面显示问题
+    function highlightEnglish(text, regex) {
+        if (!regex) return text;
+        return text.replace(regex, match => `<mark>${match}</mark>`);
+    }
+
+    // 中文高亮
+    function highlightChinese(text, regex) {
+        if (!regex) return text;
+        return text.replace(regex, match => `<mark>${match}</mark>`);
     }
 
     async function loadVocabulary() {
@@ -108,7 +120,6 @@
     const searchBox = document.getElementById('searchBox');
     const resultsDiv = document.getElementById('results');
 
-    // 判断是否包含中文字符
     function hasChinese(text) {
         return /[\u4e00-\u9fa5]/.test(text);
     }
@@ -125,25 +136,23 @@
         const isChinese = hasChinese(query);
         const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-        // 英文用前缀匹配正则，中文用包含匹配
+        // 英文前缀匹配正则，中文包含匹配正则
         const prefixRegex = isChinese ? null : new RegExp(`\\b${escapedQuery}[a-zA-Z]*\\b`, 'gi');
-        const cnContainsRegex = new RegExp(escapedQuery, 'gi');
+        const cnRegex = new RegExp(escapedQuery, 'gi');
 
         const filtered = corpus.filter(item => {
-            // 收集该条目的所有中文文本
             const cnTexts = [];
             if (item.cn) cnTexts.push(item.cn);
             if (item.cn_q) cnTexts.push(item.cn_q);
             if (item.cn_opts) cnTexts.push(...item.cn_opts);
 
-            // 收集该条目的所有英文文本
             const enTexts = [];
             if (item.en) enTexts.push(cleanEnglish(item.en));
             if (item.en_q) enTexts.push(item.en_q);
             if (item.en_opts) enTexts.push(...item.en_opts);
 
             if (isChinese) {
-                return cnTexts.some(text => cnContainsRegex.test(text));
+                return cnTexts.some(text => cnRegex.test(text));
             } else {
                 return enTexts.some(text => prefixRegex.test(text));
             }
@@ -159,14 +168,14 @@
         let allHtml = getVocabularyBadge(query);
 
         filtered.forEach(item => {
-            // 提纲选讲类型（阅读题）
             if (item.en_q && item.en_opts) {
-                const highlightedEnQ = isChinese ? item.en_q : item.en_q.replace(prefixRegex, '<mark>$1</mark>');
-                const highlightedCnQ = item.cn_q.replace(cnContainsRegex, '<mark>$1</mark>');
+                // 题干选项类型
+                const highlightedEnQ = highlightEnglish(item.en_q, prefixRegex);
+                const highlightedCnQ = highlightChinese(item.cn_q, cnRegex);
                 let optsHtml = '';
                 for (let i = 0; i < item.en_opts.length; i++) {
-                    const highlightedEnOpt = isChinese ? item.en_opts[i] : item.en_opts[i].replace(prefixRegex, '<mark>$1</mark>');
-                    const highlightedCnOpt = (item.cn_opts[i] || '').replace(cnContainsRegex, '<mark>$1</mark>');
+                    const highlightedEnOpt = highlightEnglish(item.en_opts[i], prefixRegex);
+                    const highlightedCnOpt = highlightChinese(item.cn_opts[i] || '', cnRegex);
                     optsHtml += `<div><span class="opt-en">${highlightedEnOpt}</span>　<span class="opt-cn">${highlightedCnOpt}</span></div>`;
                 }
                 allHtml += `
@@ -181,10 +190,10 @@
                     </div>
                 `;
             } else {
-                // 完型/翻译类型
+                // 阅读/翻译/完型类型
                 const cleanEn = cleanEnglish(item.en || '');
-                const highlightedEn = isChinese ? cleanEn : cleanEn.replace(prefixRegex, '<mark>$1</mark>');
-                const highlightedCn = item.cn ? item.cn.replace(cnContainsRegex, '<mark>$1</mark>') : '';
+                const highlightedEn = highlightEnglish(cleanEn, prefixRegex);
+                const highlightedCn = item.cn ? highlightChinese(item.cn, cnRegex) : '';
                 const wordCountHtml = item._wordCount ? `<span class="word-count">(${item._wordCount} words)</span>` : '';
 
                 allHtml += `
