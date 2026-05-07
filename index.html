@@ -13,44 +13,21 @@
         #searchBox:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
         .result-count { margin-top: 15px; font-size: 14px; color: var(--text-muted); font-weight: 500; }
         .card { background: white; padding: 24px; border-radius: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 20px; border: 1px solid #f1f5f9; transition: transform 0.2s; }
-        .source-id { font-size: 13px; color: #6366f1; font-weight: bold; margin-bottom: 10px; background: #eef2ff; display: inline-block; padding: 4px 10px; border-radius: 6px; text-transform: uppercase; }
+        .source-id { font-size: 13px; color: #6366f1; font-weight: bold; margin-bottom: 10px; background: #eef2ff; display: inline-block; padding: 4px 10px; border-radius: 6px; }
         .en { font-size: 19px; font-weight: 600; color: #0f172a; margin-bottom: 12px; line-height: 1.4; }
         .word-count { font-size: 13px; color: #94a3b8; font-weight: normal; margin-left: 6px; }
         .cn { font-size: 17px; color: #334155; border-left: 4px solid #cbd5e1; padding-left: 15px; margin-top: 10px; line-height: 1.5; }
+        .opts { margin-top: 8px; padding-left: 15px; font-size: 15px; color: #475569; line-height: 1.8; }
+        .opts .opt-en { font-weight: 500; }
+        .opts .opt-cn { color: #64748b; margin-left: 6px; }
         mark { background: #fef08a; color: #854d0e; padding: 0 2px; border-radius: 2px; font-weight: bold; }
         .no-result { text-align: center; color: var(--text-muted); margin-top: 50px; }
 
-        /* 考研大纲单词提示样式 */
-        .vocab-badge {
-            padding: 10px 16px;
-            margin-bottom: 20px;
-            border-radius: 12px;
-            font-weight: 500;
-            text-align: center;
-            font-size: 14px;
-        }
-        .vocab-in {
-            background: #d4edda;
-            border-left: 4px solid #28a745;
-            color: #155724;
-        }
-        .vocab-out {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            color: #856404;
-        }
+        .vocab-badge { padding: 10px 16px; margin-bottom: 20px; border-radius: 12px; font-weight: 500; text-align: center; font-size: 14px; }
+        .vocab-in { background: #d4edda; border-left: 4px solid #28a745; color: #155724; }
+        .vocab-out { background: #fff3cd; border-left: 4px solid #ffc107; color: #856404; }
 
-        /* 来源标签样式 */
-        .source-tag {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-right: 6px;
-            background: #e0e7ff;
-            color: #3730a3;
-        }
+        .source-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-right: 6px; background: #e0e7ff; color: #3730a3; }
         .source-tag.reading { background: #dbeafe; color: #1e40af; }
         .source-tag.fanyi { background: #fce7f3; color: #9d174d; }
         .source-tag.wanxing { background: #d1fae5; color: #065f46; }
@@ -69,95 +46,68 @@
 <div id="results"></div>
 
 <script>
-    // 按指定顺序加载的JSON文件
     const JSON_FILES = [
         { name: '1reading.json', tag: '阅读', tagClass: 'reading' },
         { name: '2fanyi.json', tag: '翻译', tagClass: 'fanyi' },
         { name: '3wanxing.json', tag: '完型', tagClass: 'wanxing' },
-        { name: '4tiganxuanxuang.json', tag: '提纲选讲', tagClass: 'tigang' }
+        { name: '4tiganxuanxiang.json', tag: '提纲选讲', tagClass: 'tigang' }
     ];
 
     let corpus = [];
     let vocabularySet = new Set();
 
-    // 从英文句子中提取字数统计 (如 "(20 words)")
     function extractWordCount(enText) {
         const match = enText.match(/\((\d+)\s*words\)/i);
         return match ? match[1] : null;
     }
 
-    // 移除字数统计部分，返回纯净的英文句子
     function cleanEnglish(enText) {
         return enText.replace(/\(\d+\s*words\)/gi, '').trim();
     }
 
-    // 加载考研大纲单词表
     async function loadVocabulary() {
         try {
             const response = await fetch('大纲.txt');
-            if (!response.ok) {
-                throw new Error('大纲.txt 加载失败');
-            }
+            if (!response.ok) throw new Error('大纲.txt 加载失败');
             const text = await response.text();
-            const lines = text.split(/\r?\n/);
-            lines.forEach(line => {
+            text.split(/\r?\n/).forEach(line => {
                 let word = line.trim().toLowerCase();
-                if (word && !word.includes('/') && !word.startsWith('#')) {
-                    vocabularySet.add(word);
-                }
+                if (word && !word.includes('/') && !word.startsWith('#')) vocabularySet.add(word);
             });
             console.log(`✅ 已加载 ${vocabularySet.size} 个考研大纲单词`);
-        } catch (error) {
-            console.error('大纲单词表加载失败:', error);
-        }
+        } catch (error) { console.error('大纲单词表加载失败:', error); }
     }
 
-    // 判断是否在大纲中
     function isInVocabulary(word) {
         if (!word) return false;
         return vocabularySet.has(word.toLowerCase());
     }
 
-    // 生成单词状态提示HTML
     function getVocabularyBadge(keyword) {
         if (!keyword || keyword.length < 1) return '';
-        if (isInVocabulary(keyword)) {
-            return `<div class="vocab-badge vocab-in">✅ "${keyword}" 属于考研大纲单词</div>`;
-        } else {
-            return `<div class="vocab-badge vocab-out">📚 "${keyword}" 不在考研大纲单词表中</div>`;
-        }
+        if (isInVocabulary(keyword)) return `<div class="vocab-badge vocab-in">✅ "${keyword}" 属于考研大纲单词</div>`;
+        return `<div class="vocab-badge vocab-out">📚 "${keyword}" 不在考研大纲单词表中</div>`;
     }
 
-    // 按顺序加载所有JSON文件并合并到corpus，同时打上来源标签
     async function loadAllData() {
-        let totalCount = 0;
         for (const file of JSON_FILES) {
             try {
                 const response = await fetch(file.name);
-                if (!response.ok) {
-                    console.warn(`⚠️ ${file.name} 加载失败，跳过`);
-                    continue;
-                }
+                if (!response.ok) { console.warn(`⚠️ ${file.name} 加载失败`); continue; }
                 const data = await response.json();
                 const items = Array.isArray(data) ? data : [data];
-                // 为每个条目添加来源标签和排序权重
                 items.forEach(item => {
                     item._sourceTag = file.tag;
                     item._sourceClass = file.tagClass;
-                    // 预提取字数
                     item._wordCount = extractWordCount(item.en || '');
                 });
                 corpus = corpus.concat(items);
-                totalCount += items.length;
                 console.log(`✅ 已加载 ${file.name} (${items.length} 条)`);
-            } catch (error) {
-                console.error(`${file.name} 加载失败:`, error);
-            }
+            } catch (error) { console.error(`${file.name} 加载失败:`, error); }
         }
         document.getElementById('count').innerText = `共加载 ${corpus.length} 条翻译句子`;
     }
 
-    // 初始化：加载单词表和数据库
     loadVocabulary();
     loadAllData();
 
@@ -166,7 +116,6 @@
 
     searchBox.addEventListener('input', (e) => {
         const query = e.target.value.trim();
-
         resultsDiv.innerHTML = '';
 
         if (query.length < 2) {
@@ -174,53 +123,74 @@
             return;
         }
 
-        // 同时支持英文原文和中文翻译搜索
+        const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const prefixRegex = new RegExp(`\\b${escapedQuery}[a-zA-Z]*\\b`, 'gi');
+        const cnRegex = new RegExp(`(${escapedQuery})`, 'gi');
+
         const filtered = corpus.filter(item => {
-            // 中文搜索保持原有的包含匹配
-            if (item.cn && item.cn.includes(query)) {
-                return true;
-            }
-            // 英文搜索使用前缀匹配（支持派生词、单复数等）
-            if (item.en) {
-                const cleanEn = cleanEnglish(item.en);
-                const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                const prefixRegex = new RegExp(`\\b${escapedQuery}[a-zA-Z]*\\b`, 'gi');
-                return prefixRegex.test(cleanEn);
-            }
-            return false;
+            // 中文搜索
+            if (item.cn && item.cn.includes(query)) return true;
+            if (item.cn_q && item.cn_q.includes(query)) return true;
+            if (item.cn_opts && item.cn_opts.some(opt => opt.includes(query))) return true;
+
+            // 英文搜索
+            const enTexts = [];
+            if (item.en) enTexts.push(cleanEnglish(item.en));
+            if (item.en_q) enTexts.push(item.en_q);
+            if (item.en_opts) enTexts.push(...item.en_opts);
+
+            return enTexts.some(text => prefixRegex.test(text));
         });
 
         document.getElementById('count').innerText = `找到 ${filtered.length} 个匹配结果`;
 
         if (filtered.length === 0) {
-            const vocabHtml = getVocabularyBadge(query);
-            resultsDiv.innerHTML = vocabHtml + '<div class="no-result">未找到相关句子，换个词试试？</div>';
+            resultsDiv.innerHTML = getVocabularyBadge(query) + '<div class="no-result">未找到相关句子，换个词试试？</div>';
             return;
         }
 
-        // 显示单词状态 + 搜索结果（保持原始顺序，即按文件顺序排列）
         let allHtml = getVocabularyBadge(query);
 
         filtered.forEach(item => {
-            const cleanEn = cleanEnglish(item.en);
-            const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            const highlightRegex = new RegExp(`\\b(${escapedQuery}[a-zA-Z]*)\\b`, 'gi');
-            const highlightedEn = cleanEn.replace(highlightRegex, '<mark>$1</mark>');
-            const cnRegex = query.length >= 2 ? new RegExp(`(${escapedQuery})`, 'gi') : null;
-            const highlightedCn = cnRegex ? item.cn.replace(cnRegex, '<mark>$1</mark>') : item.cn;
-            // 字数统计展示
-            const wordCountHtml = item._wordCount ? `<span class="word-count">(${item._wordCount} words)</span>` : '';
-
-            allHtml += `
-                <div class="card">
-                    <div class="source-id">
-                        <span class="source-tag ${item._sourceClass}">${item._sourceTag}</span>
-                        📚 ${item.id}
+            // 提纲选讲类型（阅读题）
+            if (item.en_q && item.en_opts) {
+                const highlightedEnQ = item.en_q.replace(prefixRegex, '<mark>$1</mark>');
+                const highlightedCnQ = item.cn_q.replace(cnRegex, '<mark>$1</mark>');
+                let optsHtml = '';
+                for (let i = 0; i < item.en_opts.length; i++) {
+                    const highlightedEnOpt = item.en_opts[i].replace(prefixRegex, '<mark>$1</mark>');
+                    const highlightedCnOpt = (item.cn_opts[i] || '').replace(cnRegex, '<mark>$1</mark>');
+                    optsHtml += `<div class="opt-item"><span class="opt-en">${highlightedEnOpt}</span><span class="opt-cn">${highlightedCnOpt}</span></div>`;
+                }
+                allHtml += `
+                    <div class="card">
+                        <div class="source-id">
+                            <span class="source-tag ${item._sourceClass}">${item._sourceTag}</span>
+                            📚 ${item.display_id || item.id}
+                        </div>
+                        <div class="en">${highlightedEnQ}</div>
+                        <div class="cn">${highlightedCnQ}</div>
+                        <div class="opts">${optsHtml}</div>
                     </div>
-                    <div class="en">${highlightedEn} ${wordCountHtml}</div>
-                    <div class="cn">${highlightedCn}</div>
-                </div>
-            `;
+                `;
+            } else {
+                // 完型/翻译类型
+                const cleanEn = cleanEnglish(item.en || '');
+                const highlightedEn = cleanEn.replace(prefixRegex, '<mark>$1</mark>');
+                const highlightedCn = item.cn ? item.cn.replace(cnRegex, '<mark>$1</mark>') : '';
+                const wordCountHtml = item._wordCount ? `<span class="word-count">(${item._wordCount} words)</span>` : '';
+
+                allHtml += `
+                    <div class="card">
+                        <div class="source-id">
+                            <span class="source-tag ${item._sourceClass}">${item._sourceTag}</span>
+                            📚 ${item.id}
+                        </div>
+                        <div class="en">${highlightedEn} ${wordCountHtml}</div>
+                        <div class="cn">${highlightedCn}</div>
+                    </div>
+                `;
+            }
         });
 
         resultsDiv.innerHTML = allHtml;
