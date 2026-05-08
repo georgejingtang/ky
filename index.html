@@ -60,7 +60,7 @@
 <body>
 <div class="header">
     <h1>唐静考研</h1>
-    <p>输入任意词，在05年至今的考研试卷中检索所有句子（✨ 点击结果中任意单词可快速搜索）</p>
+    <p>输入任意词，在05年至今的考研试卷中检索（✨ 点击结果中任意单词可快速检索）</p>
     <input type="text" id="searchBox" placeholder="搜索单词或中文关键词..." autofocus>
     <div id="count" class="result-count">正在加载数据库...</div>
 </div>
@@ -247,11 +247,9 @@
         return text.replace(regex, match => `<mark>${match}</mark>`);
     }
 
-    // 归属判定函数（支持扩展）
     function checkBelonging(word, targetSet) {
         if (!word) return false;
         if (targetSet.has(word.toLowerCase())) return true;
-        // 扩展后检查
         const expanded = expandSearchWord(word);
         for (const w of expanded) {
             if (targetSet.has(w)) return true;
@@ -424,6 +422,7 @@
             expandedSet.add(query);
         }
         
+        // 修复：只匹配完整的单词，不使用 [a-z]* 通配符
         let enRegex = null;
         if (!isChinese) {
             const escapedTerms = searchTermsForFilter.map(term => term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
