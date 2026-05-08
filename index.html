@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>唐静考研英语逐句翻译库</title>
-    <!-- Font Awesome 6 (免费图标库，用于彩色书籍图标) -->
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* ... (您的CSS样式保持不变) ... */
         :root { --primary-color: #2563eb; --text-main: #1e293b; --text-muted: #64748b; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: var(--text-main); max-width: 850px; margin: 0 auto; padding: 20px; background: #f8fafc; }
         .header { text-align: center; margin-bottom: 30px; padding: 20px 0; }
@@ -31,100 +32,25 @@
             border: 1px solid #eef2ff;
             overflow: hidden;
         }
-        .badge-row {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            background: #fcfdff;
-            border-bottom: 1px solid #f0f2f5;
-        }
-        .badge-row:last-child {
-            border-bottom: none;
-        }
-        .badge-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 14px;
-            border-radius: 40px;
-            font-size: 13px;
-            font-weight: 500;
-            background: #f1f5f9;
-            color: #1f2937;
-            transition: all 0.1s ease;
-        }
-        .badge-item.in {
-            background: #dcfce7;
-            color: #166534;
-            border-left: 3px solid #22c55e;
-        }
-        .badge-item.freq {
-            background: #e0f2fe;
-            color: #0c4a6e;
-            border-left: 3px solid #0ea5e9;
-        }
-        .badge-item.level-middle {
-            background: #e8f5e9;
-            color: #2e7d32;
-            border-left: 3px solid #4caf50;
-        }
-        .badge-item.level-middle i {
-            color: #4caf50;
-            font-size: 14px;
-            width: 14px;
-        }
-        .badge-item.level-high {
-            background: #fff3e0;
-            color: #ef6c00;
-            border-left: 3px solid #ff9800;
-        }
-        .badge-item.level-high i {
-            color: #ff9800;
-            font-size: 14px;
-            width: 14px;
-        }
-        .badge-item.level-cet4 {
-            background: #e3f2fd;
-            color: #1565c0;
-            border-left: 3px solid #2196f3;
-        }
-        .badge-item.level-cet4 i {
-            color: #2196f3;
-            font-size: 14px;
-            width: 14px;
-        }
-        .badge-item.level-cet6 {
-            background: #f3e5f5;
-            color: #7b1fa2;
-            border-left: 3px solid #9c27b0;
-        }
-        .badge-item.level-cet6 i {
-            color: #9c27b0;
-            font-size: 14px;
-            width: 14px;
-        }
+        .badge-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 12px 16px; background: #fcfdff; border-bottom: 1px solid #f0f2f5; }
+        .badge-row:last-child { border-bottom: none; }
+        .badge-item { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 40px; font-size: 13px; font-weight: 500; background: #f1f5f9; color: #1f2937; transition: all 0.1s ease; }
+        .badge-item.in { background: #dcfce7; color: #166534; border-left: 3px solid #22c55e; }
+        .badge-item.freq { background: #e0f2fe; color: #0c4a6e; border-left: 3px solid #0ea5e9; }
+        .badge-item.level-middle { background: #e8f5e9; color: #2e7d32; border-left: 3px solid #4caf50; }
+        .badge-item.level-middle i { color: #4caf50; font-size: 14px; width: 14px; }
+        .badge-item.level-high { background: #fff3e0; color: #ef6c00; border-left: 3px solid #ff9800; }
+        .badge-item.level-high i { color: #ff9800; font-size: 14px; width: 14px; }
+        .badge-item.level-cet4 { background: #e3f2fd; color: #1565c0; border-left: 3px solid #2196f3; }
+        .badge-item.level-cet4 i { color: #2196f3; font-size: 14px; width: 14px; }
+        .badge-item.level-cet6 { background: #f3e5f5; color: #7b1fa2; border-left: 3px solid #9c27b0; }
+        .badge-item.level-cet6 i { color: #9c27b0; font-size: 14px; width: 14px; }
         
-        .clickable-word {
-            cursor: pointer;
-            display: inline-block;
-            border-radius: 4px;
-            padding: 0 1px;
-            transition: background 0.1s ease;
-        }
-        .clickable-word:hover {
-            background: #e0f2fe;
-        }
-        .clickable-word:active {
-            background: #bae6fd;
-        }
+        .clickable-word { cursor: pointer; display: inline-block; border-radius: 4px; padding: 0 1px; transition: background 0.1s ease; }
+        .clickable-word:hover { background: #e0f2fe; }
+        .clickable-word:active { background: #bae6fd; }
         
-        @media (max-width: 640px) {
-            .badge-row { gap: 8px; padding: 10px 12px; }
-            .badge-item { padding: 4px 10px; font-size: 11px; }
-        }
-
+        @media (max-width: 640px) { .badge-row { gap: 8px; padding: 10px 12px; } .badge-item { padding: 4px 10px; font-size: 11px; } }
         .source-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-right: 6px; background: #e0e7ff; color: #3730a3; }
         .source-tag.reading { background: #dbeafe; color: #1e40af; }
         .source-tag.fanyi { background: #fce7f3; color: #9d174d; }
@@ -143,6 +69,7 @@
 <div id="results"></div>
 
 <script>
+    // ==================== 配置与全局变量 ====================
     const JSON_FILES = [
         { name: '1reading.json', tag: '阅读', tagClass: 'reading' },
         { name: '2fanyi.json', tag: '翻译', tagClass: 'fanyi' },
@@ -159,6 +86,7 @@
     let cet4Set = new Set();
     let cet6Set = new Set();
 
+    // ==================== 辅助函数 ====================
     function extractWordCount(enText) {
         const match = enText.match(/\((\d+)\s*words\)/i);
         return match ? match[1] : null;
@@ -175,6 +103,53 @@
     function isInVocabulary(word)   { return word ? vocabularySet.has(word.toLowerCase()) : false; }
     function isInFreq(word)         { return word ? freqSet.has(word.toLowerCase()) : false; }
 
+    // 生成单词的常见变体，用于增强搜索和高亮
+    function generateWordVariants(word) {
+        const variants = new Set();
+        const lowerWord = word.toLowerCase();
+        variants.add(lowerWord);
+        
+        // 规则1: 加 s / es / ies
+        if (lowerWord.endsWith('y') && !/[aeiou]y$/.test(lowerWord)) {
+            variants.add(lowerWord.slice(0, -1) + 'ies');
+        } else if (lowerWord.endsWith('s') || lowerWord.endsWith('sh') || lowerWord.endsWith('ch') || lowerWord.endsWith('x') || lowerWord.endsWith('z')) {
+            variants.add(lowerWord + 'es');
+        } else {
+            variants.add(lowerWord + 's');
+        }
+        
+        // 规则2: 加 ed / d (过去式)
+        if (lowerWord.endsWith('e')) {
+            variants.add(lowerWord + 'd');
+        } else {
+            variants.add(lowerWord + 'ed');
+            // 处理重读闭音节双写末尾字母 + ed (简化版，如 stop -> stopped)
+            if (/[^aeiou][aeiou][^aeiou]$/.test(lowerWord)) {
+                variants.add(lowerWord + lowerWord.slice(-1) + 'ed');
+            }
+        }
+        
+        // 规则3: 加 ing (现在分词)
+        if (lowerWord.endsWith('e')) {
+            variants.add(lowerWord.slice(0, -1) + 'ing'); // 去 e + ing: smoke -> smoking
+        } else if (/[^aeiou][aeiou][^aeiou]$/.test(lowerWord)) {
+            variants.add(lowerWord + lowerWord.slice(-1) + 'ing'); // 双写: stop -> stopping
+        } else {
+            variants.add(lowerWord + 'ing');
+        }
+        
+        // 规则4: 加 er / or (名词)
+        if (lowerWord.endsWith('e')) {
+            variants.add(lowerWord + 'r');
+        } else {
+            variants.add(lowerWord + 'er');
+        }
+        
+        // 清理并返回数组
+        return Array.from(variants).filter(v => v !== lowerWord);
+    }
+
+    // 获取词库状态卡片
     function getWordStatusCards(keyword) {
         if (!keyword || keyword.length < 1) return '';
 
@@ -205,25 +180,25 @@
         return html;
     }
 
-    // 将句子中的单词变成可点击的span，同时高亮匹配搜索词的单词（包括变体）
-    function makeWordsClickableWithHighlight(text, searchKeyword) {
+    // 高亮文本（用于中文）
+    function highlightText(text, regex) {
+        if (!regex || !text) return text;
+        return text.replace(regex, match => `<mark>${match}</mark>`);
+    }
+
+    // ==================== 核心：可点击单词 + 智能高亮 ====================
+    function makeWordsClickableWithHighlight(text, searchKeyword, searchVariants = []) {
         if (!text) return '';
         
         const lowerKeyword = searchKeyword ? searchKeyword.toLowerCase() : '';
+        const variantSet = new Set(searchVariants.map(v => v.toLowerCase()));
+        if (lowerKeyword) variantSet.add(lowerKeyword);
         
-        // 匹配单词及其变体（字母开头，可包含连字符和撇号）
+        // 匹配单词（字母开头，可包含连字符和撇号）
         return text.replace(/([a-zA-Z]+(?:'[a-zA-Z]+)?(?:-[a-zA-Z]+)?)/g, function(match) {
             const lowerMatch = match.toLowerCase();
-            // 检查是否匹配搜索词（包括变体：如 patent 匹配 patents, patented）
-            let isMatch = false;
-            if (lowerKeyword) {
-                // 如果搜索词长度大于3，匹配以搜索词开头的单词（处理变体）
-                if (lowerKeyword.length >= 3) {
-                    isMatch = lowerMatch === lowerKeyword || lowerMatch.startsWith(lowerKeyword);
-                } else {
-                    isMatch = lowerMatch === lowerKeyword;
-                }
-            }
+            // 检查是否匹配搜索词或其变体
+            const isMatch = variantSet.has(lowerMatch);
             let displayText = match;
             if (isMatch) {
                 displayText = `<mark>${match}</mark>`;
@@ -232,20 +207,15 @@
         });
     }
 
-    function makeTextWordsClickable(text, searchKeyword) {
+    function makeTextWordsClickable(text, searchKeyword, searchVariants = []) {
         if (!text) return '';
         const lowerKeyword = searchKeyword ? searchKeyword.toLowerCase() : '';
+        const variantSet = new Set(searchVariants.map(v => v.toLowerCase()));
+        if (lowerKeyword) variantSet.add(lowerKeyword);
         
         return text.replace(/([a-zA-Z]+(?:'[a-zA-Z]+)?(?:-[a-zA-Z]+)?)/g, function(match) {
             const lowerMatch = match.toLowerCase();
-            let isMatch = false;
-            if (lowerKeyword) {
-                if (lowerKeyword.length >= 3) {
-                    isMatch = lowerMatch === lowerKeyword || lowerMatch.startsWith(lowerKeyword);
-                } else {
-                    isMatch = lowerMatch === lowerKeyword;
-                }
-            }
+            const isMatch = variantSet.has(lowerMatch);
             let displayText = match;
             if (isMatch) {
                 displayText = `<mark>${match}</mark>`;
@@ -254,6 +224,7 @@
         });
     }
 
+    // ==================== 数据加载 ====================
     async function loadAllData() {
         corpus = [];
         for (const file of JSON_FILES) {
@@ -333,6 +304,7 @@
     initWordLists();
     loadAllData();
 
+    // ==================== 搜索与渲染 ====================
     const searchBox = document.getElementById('searchBox');
     const resultsDiv = document.getElementById('results');
 
@@ -358,11 +330,26 @@
         }
 
         const isChinese = hasChinese(query);
-        const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        // 修复：匹配单词及其变体（如 patent, patents, patented）
-        const enRegex = isChinese ? null : new RegExp(`\\b${escapedQuery}[a-z]*\\b`, 'gi');
-        const cnRegex = new RegExp(escapedQuery, 'gi');
+        let searchVariants = [];
+        let searchWordsForFilter = [query];
+        
+        // 如果是英文搜索，生成词形变体用于匹配和高亮
+        if (!isChinese && query.match(/^[a-zA-Z]+$/)) {
+            searchVariants = generateWordVariants(query);
+            searchWordsForFilter = [query, ...searchVariants];
+        }
+        
+        // 构建正则表达式，匹配原词或任何变体
+        let enRegex = null;
+        if (!isChinese) {
+            const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            // 匹配以原词开头的变体，或者直接匹配变体列表
+            const pattern = searchWordsForFilter.map(w => `\\b${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).join('|');
+            enRegex = new RegExp(`(${pattern})`, 'gi');
+        }
+        const cnRegex = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
 
+        // 过滤语料
         const filtered = corpus.filter(item => {
             const cnTexts = [];
             if (item.cn) cnTexts.push(item.cn);
@@ -377,7 +364,8 @@
             if (isChinese) {
                 return cnTexts.some(text => cnRegex.test(text));
             } else {
-                return enTexts.some(text => enRegex.test(text));
+                // 使用增强后的正则表达式进行匹配
+                return enTexts.some(text => enRegex ? enRegex.test(text) : text.toLowerCase().includes(query.toLowerCase()));
             }
         });
 
@@ -391,13 +379,14 @@
             return;
         }
 
+        // 渲染每个句子
         filtered.forEach(item => {
             if (item.en_q && item.en_opts) {
-                const clickableEnQ = makeWordsClickableWithHighlight(item.en_q, query);
+                const clickableEnQ = makeWordsClickableWithHighlight(item.en_q, query, searchVariants);
                 const highlightedCnQ = highlightText(item.cn_q, cnRegex);
                 let optsHtml = '';
                 for (let i = 0; i < item.en_opts.length; i++) {
-                    const clickableEnOpt = makeTextWordsClickable(item.en_opts[i], query);
+                    const clickableEnOpt = makeTextWordsClickable(item.en_opts[i], query, searchVariants);
                     const highlightedCnOpt = highlightText(item.cn_opts[i] || '', cnRegex);
                     optsHtml += `<div><span class="opt-en">${clickableEnOpt}</span>　<span class="opt-cn">${highlightedCnOpt}</span></div>`;
                 }
@@ -414,7 +403,7 @@
                 `;
             } else {
                 const cleanEn = cleanEnglish(item.en || '');
-                const clickableEn = makeWordsClickableWithHighlight(cleanEn, query);
+                const clickableEn = makeWordsClickableWithHighlight(cleanEn, query, searchVariants);
                 const highlightedCn = item.cn ? highlightText(item.cn, cnRegex) : '';
                 const wordCountHtml = item._wordCount ? `<span class="word-count">(${item._wordCount} words)</span>` : '';
 
@@ -445,12 +434,6 @@
         if (word) {
             searchWord(word);
         }
-    }
-
-    // 辅助高亮函数
-    function highlightText(text, regex) {
-        if (!regex || !text) return text;
-        return text.replace(regex, match => `<mark>${match}</mark>`);
     }
 
     searchBox.addEventListener('input', () => {
