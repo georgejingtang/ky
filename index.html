@@ -60,7 +60,7 @@
 <body>
 <div class="header">
     <h1>唐静考研</h1>
-    <p>输入任意词，在05年至今的考研试卷中检索（✨ 点击结果中任意单词可快速检索）</p>
+    <p>输入任意词，在05年至今的考研试卷中搜索（✨ 点击结果中任意单词可快速搜索）</p>
     <input type="text" id="searchBox" placeholder="搜索单词或中文关键词..." autofocus>
     <div id="count" class="result-count">正在加载数据库...</div>
 </div>
@@ -99,7 +99,7 @@
         usUkSpellingMap.set(uk, us);
     }
 
-    // ==================== 不规则动词映射 ====================
+    // ==================== 不规则动词映射（完整版）====================
     const irregularVerbs = new Map();
     const verbIrregulars = [
         ['lead', 'led', 'led'], ['bear', 'bore', 'borne'], ['begin', 'began', 'begun'],
@@ -116,10 +116,24 @@
         ['sow', 'sowed', 'sown'], ['tear', 'tore', 'torn'], ['swear', 'swore', 'sworn'],
         ['go', 'went', 'gone'], ['do', 'did', 'done']
     ];
+    // 添加所有形式的映射（原形、过去式、过去分词都指向同一个原形）
     for (const [base, past, pastPart] of verbIrregulars) {
-        if (!irregularVerbs.has(base)) irregularVerbs.set(base, [base, past, pastPart]);
-        if (!irregularVerbs.has(past)) irregularVerbs.set(past, [base, past, pastPart]);
-        if (!irregularVerbs.has(pastPart)) irregularVerbs.set(pastPart, [base, past, pastPart]);
+        irregularVerbs.set(base, base);
+        irregularVerbs.set(past, base);
+        irregularVerbs.set(pastPart, base);
+    }
+    // 添加 ing 形式的映射（giving -> give, considering -> consider）
+    // 这些规则动词的 ing 形式也添加映射
+    const ingToBase = {
+        'giving': 'give', 'taking': 'take', 'making': 'make', 'having': 'have',
+        'coming': 'come', 'running': 'run', 'sitting': 'sit', 'getting': 'get',
+        'putting': 'put', 'setting': 'set', 'beginning': 'begin', 'winning': 'win',
+        'considering': 'consider', 'providing': 'provide', 'developing': 'develop',
+        'creating': 'create', 'producing': 'produce', 'including': 'include',
+        'involving': 'involve', 'requiring': 'require', 'continuing': 'continue'
+    };
+    for (const [ing, base] of Object.entries(ingToBase)) {
+        irregularVerbs.set(ing, base);
     }
 
     // ==================== 不规则名词复数 ====================
@@ -141,44 +155,46 @@
         irregularPlurals.set(plural, singular);
     }
 
-    // ==================== 核心：词干提取（完全修复版）====================
+    // ==================== 词干提取（备用）====================
     function extractStem(word) {
         const lowerWord = word.toLowerCase();
         
-        // 处理 ing 形式（considering -> consider, providing -> provide）
+        // 处理 ing 形式
         if (lowerWord.endsWith('ing') && lowerWord.length > 4) {
             let stem = lowerWord.slice(0, -3);
-            // 常见规则：去掉 ing 后，如果词干以辅音结尾，尝试补回 e
-            if (stem.length >= 4 && !stem.endsWith('e') && !stem.endsWith('a') && !stem.endsWith('i') && !stem.endsWith('o') && !stem.endsWith('u')) {
-                return stem + 'e';
+            if (stem.endsWith('e')) {
+                return stem;
+            }
+            // 尝试补 e
+            const withE = stem + 'e';
+            if (withE.length > 3) {
+                return withE;
             }
             return stem;
         }
         
-        // 处理 ed 形式（provided -> provide, considered -> consider）
+        // 处理 ed 形式
         if (lowerWord.endsWith('ed') && lowerWord.length > 3) {
             let stem = lowerWord.slice(0, -2);
-            // 如果去掉 ed 后以 e 结尾，直接返回（如 considered -> consider）
             if (stem.endsWith('e')) {
                 return stem;
             }
-            // 否则，尝试补回 e（如 provided -> provid -> provide）
-            if (stem.length >= 4 && !stem.endsWith('e')) {
-                return stem + 'e';
+            const withE = stem + 'e';
+            if (withE.length > 3) {
+                return withE;
             }
-            // 处理双写辅音 + ed: stopped -> stop
             if (stem.length > 1 && stem[stem.length-1] === stem[stem.length-2]) {
                 return stem.slice(0, -1);
             }
             return stem;
         }
         
-        // 处理 ies 形式（studies -> study）
+        // 处理 ies 形式
         if (lowerWord.endsWith('ies') && lowerWord.length > 3) {
             return lowerWord.slice(0, -3) + 'y';
         }
         
-        // 处理 ves 形式（knives -> knife）
+        // 处理 ves 形式
         if (lowerWord.endsWith('ves') && lowerWord.length > 3) {
             return lowerWord.slice(0, -3) + 'f';
         }
@@ -235,13 +251,13 @@
         return Array.from(variants);
     }
 
-    // 获取标准原形
+    // ==================== 核心：获取标准原形 ====================
     function getBaseForm(word) {
         const lowerWord = word.toLowerCase();
         
-        // 1. 不规则动词表映射
+        // 1. 不规则动词/ing 形式映射
         if (irregularVerbs.has(lowerWord)) {
-            return irregularVerbs.get(lowerWord)[0];
+            return irregularVerbs.get(lowerWord);
         }
         
         // 2. 不规则复数映射
@@ -258,30 +274,37 @@
         return lowerWord;
     }
 
-    // 核心：获取完整词族
+    // ==================== 核心：获取完整词族（统一入口）====================
     function getWordFamily(word) {
         const lowerWord = word.toLowerCase();
         const family = new Set();
         
-        // 第一步：获取标准原形
+        // 第一步：获取标准原形（最关键的一步）
         const baseForm = getBaseForm(lowerWord);
         
         // 第二步：添加原形
         family.add(baseForm);
         
-        // 第三步：从原形正向生成所有规则变体
+        // 第三步：从不规则动词表获取所有形式（如果是原形）
+        // 遍历不规则动词表，找到所有匹配的形式
+        for (const [form, base] of irregularVerbs.entries()) {
+            if (base === baseForm) {
+                family.add(form);
+            }
+        }
+        
+        // 第四步：从原形正向生成所有规则变体
         const forward = generateForwardVariants(baseForm);
         forward.forEach(f => family.add(f));
         
-        // 第四步：如果是不规则动词，添加所有不规则形式
-        if (irregularVerbs.has(baseForm)) {
-            const forms = irregularVerbs.get(baseForm);
-            forms.forEach(f => family.add(f));
-        }
-        
         // 第五步：处理复数名词
-        if (irregularPlurals.has(baseForm)) {
-            family.add(irregularPlurals.get(baseForm));
+        for (const [singular, plural] of pluralPairs) {
+            if (singular === baseForm) {
+                family.add(plural);
+            }
+            if (plural === baseForm) {
+                family.add(singular);
+            }
         }
         
         // 第六步：英美拼写变体
