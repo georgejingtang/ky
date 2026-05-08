@@ -21,7 +21,7 @@
         mark { background: #fef08a; color: #854d0e; padding: 0 2px; border-radius: 2px; font-weight: bold; }
         .no-result { text-align: center; color: var(--text-muted); margin-top: 50px; }
         
-        /* 单词状态卡片 - 两行布局 */
+        /* 单词状态卡片 - 只有正面结果，两行排列 */
         .word-status-area {
             background: #ffffff;
             border-radius: 16px;
@@ -59,11 +59,6 @@
             color: #166534;
             border-left: 3px solid #22c55e;
         }
-        .badge-item.out {
-            background: #fee2e2;
-            color: #991b1b;
-            border-left: 3px solid #ef4444;
-        }
         .badge-item.freq {
             background: #e0f2fe;
             color: #0c4a6e;
@@ -77,19 +72,9 @@
         .badge-icon {
             font-size: 14px;
         }
-        .row-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: #475569;
-            background: #eef2ff;
-            padding: 4px 10px;
-            border-radius: 20px;
-            letter-spacing: 0.3px;
-        }
         @media (max-width: 640px) {
             .badge-row { gap: 8px; padding: 10px 12px; }
             .badge-item { padding: 4px 10px; font-size: 11px; }
-            .row-label { font-size: 10px; }
         }
 
         .source-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-right: 6px; background: #e0e7ff; color: #3730a3; }
@@ -143,6 +128,87 @@
         return text.replace(regex, match => `<mark>${match}</mark>`);
     }
 
+    // 检查各级别包含关系
+    function isInMiddleSchool(word) { return word ? middleSchoolSet.has(word.toLowerCase()) : false; }
+    function isInHighSchool(word)   { return word ? highSchoolSet.has(word.toLowerCase()) : false; }
+    function isInCet4(word)         { return word ? cet4Set.has(word.toLowerCase()) : false; }
+    function isInCet6(word)         { return word ? cet6Set.has(word.toLowerCase()) : false; }
+    function isInVocabulary(word)   { return word ? vocabularySet.has(word.toLowerCase()) : false; }
+    function isInFreq(word)         { return word ? freqSet.has(word.toLowerCase()) : false; }
+
+    // 核心：只显示“属于”的类别，不显示“不属于”；第一行: 考研大纲 & 1200高频词；第二行: 初中·高中·四级·六级
+    function getWordStatusCards(keyword) {
+        if (!keyword || keyword.length < 1) return '';
+
+        const lowerKeyword = keyword.toLowerCase();
+        const inVocab = isInVocabulary(lowerKeyword);
+        const inFreq = isInFreq(lowerKeyword);
+        const inMiddle = isInMiddleSchool(lowerKeyword);
+        const inHigh = isInHighSchool(lowerKeyword);
+        const inCet4 = isInCet4(lowerKeyword);
+        const inCet6 = isInCet6(lowerKeyword);
+        
+        // 收集第一行中属于的项目
+        const row1Items = [];
+        if (inVocab) {
+            row1Items.push(`<div class="badge-item in"><span class="badge-icon">🎯</span> “${keyword}” 属于考研大纲单词</div>`);
+        }
+        if (inFreq) {
+            row1Items.push(`<div class="badge-item freq"><span class="badge-icon">🎯</span> “${keyword}” 属于1200高频词</div>`);
+        }
+        
+        // 第二行：初中/高中/四级/六级 只显示属于的
+        const row2Items = [];
+        if (inMiddle) {
+            row2Items.push(`<div class="badge-item level"><span class="badge-icon">🎯</span> 属于初中单词</div>`);
+        }
+        if (inHigh) {
+            row2Items.push(`<div class="badge-item level"><span class="badge-icon">🎯</span> 属于高中单词</div>`);
+        }
+        if (inCet4) {
+            row2Items.push(`<div class="badge-item level"><span class="badge-icon">🎯</span> 属于四级单词</div>`);
+        }
+        if (inCet6) {
+            row2Items.push(`<div class="badge-item level"><span class="badge-icon">🎯</span> 属于六级单词</div>`);
+        }
+
+        // 如果没有任何属于的单词类别，则整个卡片不显示（保持界面简洁）
+        if (row1Items.length === 0 && row2Items.length === 0) {
+            return '';
+        }
+
+        let html = `<div class="word-status-area">`;
+        if (row1Items.length > 0) {
+            html += `<div class="badge-row">${row1Items.join('')}</div>`;
+        }
+        if (row2Items.length > 0) {
+            html += `<div class="badge-row">${row2Items.join('')}</div>`;
+        }
+        html += `</div>`;
+        return html;
+    }
+
+    // 加载所有语料库
+    async function loadAllData() {
+        corpus = [];
+        for (const file of JSON_FILES) {
+            try {
+                const response = await fetch(file.name);
+                if (!response.ok) { console.warn(`⚠️ ${file.name} 加载失败`); continue; }
+                const data = await response.json();
+                const items = Array.isArray(data) ? data : [data];
+                items.forEach(item => {
+                    item._sourceTag = file.tag;
+                    item._sourceClass = file.tagClass;
+                    item._wordCount = extractWordCount(item.en || '');
+                });
+                corpus = corpus.concat(items);
+                console.log(`✅ 已加载 ${file.name} (${items.length} 条)`);
+            } catch (error) { console.error(`${file.name} 加载失败:`, error); }
+        }
+        document.getElementById('count').innerText = `共加载 ${corpus.length} 条记录`;
+    }
+
     // ---------- 加载所有单词库 ----------
     async function loadVocabulary() {
         try {
@@ -180,7 +246,6 @@
                 let count = 0;
                 text.split(/\r?\n/).forEach(line => {
                     let word = line.trim().toLowerCase();
-                    // 过滤空行、注释及包含特殊符号的（去除简单杂音）
                     if (word && !word.includes('/') && !word.startsWith('#') && !word.includes(' ')) {
                         targetSet.add(word);
                         count++;
@@ -195,109 +260,29 @@
         }
     }
 
-    // 检查各级别包含关系
-    function isInMiddleSchool(word) { return word ? middleSchoolSet.has(word.toLowerCase()) : false; }
-    function isInHighSchool(word)   { return word ? highSchoolSet.has(word.toLowerCase()) : false; }
-    function isInCet4(word)         { return word ? cet4Set.has(word.toLowerCase()) : false; }
-    function isInCet6(word)         { return word ? cet6Set.has(word.toLowerCase()) : false; }
-    function isInVocabulary(word)   { return word ? vocabularySet.has(word.toLowerCase()) : false; }
-    function isInFreq(word)         { return word ? freqSet.has(word.toLowerCase()) : false; }
-
-    // 核心：渲染两行单词状态卡片 (行1: 考研大纲 & 1200高频词；行2: 初中·高中·四级·六级)
-    function getWordStatusCards(keyword) {
-        if (!keyword || keyword.length < 1) return '';
-
-        const lowerKeyword = keyword.toLowerCase();
-        const inVocab = isInVocabulary(lowerKeyword);
-        const inFreq = isInFreq(lowerKeyword);
-        const inMiddle = isInMiddleSchool(lowerKeyword);
-        const inHigh = isInHighSchool(lowerKeyword);
-        const inCet4 = isInCet4(lowerKeyword);
-        const inCet6 = isInCet6(lowerKeyword);
-        
-        // ----- 第一行：考研大纲单词 + 1200高频词 (并排显示，顺序固定) -----
-        let row1Html = `<div class="badge-row">`;
-        row1Html += `<span class="row-label">📖 考纲 & 高频</span>`;
-        // 考研大纲单词状态
-        if (inVocab) {
-            row1Html += `<div class="badge-item in"><span class="badge-icon">✅</span> “${keyword}” 属于考研大纲单词</div>`;
-        } else {
-            row1Html += `<div class="badge-item out"><span class="badge-icon">📚</span> “${keyword}” 不在考研大纲单词表中</div>`;
+    // 异步启动所有词库加载，并支持刷新搜索
+    let vocabLoaded = false, freqLoaded = false, middleLoaded = false, highLoaded = false, cet4Loaded = false, cet6Loaded = false;
+    
+    function tryRefreshSearch() {
+        const query = searchBox.value.trim();
+        if (query.length >= 2) {
+            performSearch();
         }
-        // 1200高频词状态
-        if (inFreq) {
-            row1Html += `<div class="badge-item freq"><span class="badge-icon">🔵</span> “${keyword}” 属于1200高频词</div>`;
-        } else {
-            row1Html += `<div class="badge-item out"><span class="badge-icon">⚪</span> “${keyword}” 不属于1200高频词</div>`;
-        }
-        row1Html += `</div>`;
-
-        // ----- 第二行：初中·高中·四级·六级 (顺序固定) -----
-        let row2Html = `<div class="badge-row">`;
-        row2Html += `<span class="row-label">🎯 学段词库</span>`;
-        
-        // 初中单词
-        if (inMiddle) {
-            row2Html += `<div class="badge-item level"><span class="badge-icon">📘</span> 属于初中单词</div>`;
-        } else {
-            row2Html += `<div class="badge-item out"><span class="badge-icon">📘</span> 不属于初中单词</div>`;
-        }
-        // 高中单词
-        if (inHigh) {
-            row2Html += `<div class="badge-item level"><span class="badge-icon">📙</span> 属于高中单词</div>`;
-        } else {
-            row2Html += `<div class="badge-item out"><span class="badge-icon">📙</span> 不属于高中单词</div>`;
-        }
-        // 四级单词
-        if (inCet4) {
-            row2Html += `<div class="badge-item level"><span class="badge-icon">🔹</span> 属于四级单词</div>`;
-        } else {
-            row2Html += `<div class="badge-item out"><span class="badge-icon">🔹</span> 不属于四级单词</div>`;
-        }
-        // 六级单词
-        if (inCet6) {
-            row2Html += `<div class="badge-item level"><span class="badge-icon">🔸</span> 属于六级单词</div>`;
-        } else {
-            row2Html += `<div class="badge-item out"><span class="badge-icon">🔸</span> 不属于六级单词</div>`;
-        }
-        row2Html += `</div>`;
-        
-        return `<div class="word-status-area">${row1Html}${row2Html}</div>`;
     }
 
-    // 加载所有语料库
-    async function loadAllData() {
-        corpus = [];
-        for (const file of JSON_FILES) {
-            try {
-                const response = await fetch(file.name);
-                if (!response.ok) { console.warn(`⚠️ ${file.name} 加载失败`); continue; }
-                const data = await response.json();
-                const items = Array.isArray(data) ? data : [data];
-                items.forEach(item => {
-                    item._sourceTag = file.tag;
-                    item._sourceClass = file.tagClass;
-                    item._wordCount = extractWordCount(item.en || '');
-                });
-                corpus = corpus.concat(items);
-                console.log(`✅ 已加载 ${file.name} (${items.length} 条)`);
-            } catch (error) { console.error(`${file.name} 加载失败:`, error); }
-        }
-        document.getElementById('count').innerText = `共加载 ${corpus.length} 条记录`;
+    async function initWordListsAndMonitor() {
+        // 并行加载所有词库
+        const p1 = loadVocabulary().then(() => { vocabLoaded = true; tryRefreshSearch(); });
+        const p2 = loadFreqWords().then(() => { freqLoaded = true; tryRefreshSearch(); });
+        const p3 = loadLevelFile('初中单词.txt', middleSchoolSet, '初中单词').then(() => { middleLoaded = true; tryRefreshSearch(); });
+        const p4 = loadLevelFile('高中单词.txt', highSchoolSet, '高中单词').then(() => { highLoaded = true; tryRefreshSearch(); });
+        const p5 = loadLevelFile('四级.txt', cet4Set, '四级单词').then(() => { cet4Loaded = true; tryRefreshSearch(); });
+        const p6 = loadLevelFile('六级.txt', cet6Set, '六级单词').then(() => { cet6Loaded = true; tryRefreshSearch(); });
+        await Promise.all([p1, p2, p3, p4, p5, p6]);
+        console.log('所有词库加载完毕');
     }
 
-    // 并行加载所有词库（考研大纲，1200高频，初中，高中，四级，六级）
-    function initAllWordLists() {
-        loadVocabulary();            // 大纲.txt
-        loadFreqWords();            // 1200.txt
-        loadLevelFile('初中单词.txt', middleSchoolSet, '初中单词');
-        loadLevelFile('高中单词.txt', highSchoolSet, '高中单词');
-        loadLevelFile('四级.txt', cet4Set, '四级单词');
-        loadLevelFile('六级.txt', cet6Set, '六级单词');
-    }
-
-    // 启动词库加载
-    initAllWordLists();
+    initWordListsAndMonitor();
     loadAllData();
 
     const searchBox = document.getElementById('searchBox');
@@ -342,7 +327,7 @@
 
         document.getElementById('count').innerText = `找到 ${filtered.length} 个匹配结果`;
 
-        // 1) 先添加单词状态卡片 (考研+1200 一行；初中高中四六级一行)
+        // 1) 获取单词状态卡片 (只显示属于的类别)
         let allHtml = getWordStatusCards(query);
         
         if (filtered.length === 0) {
@@ -394,85 +379,13 @@
         resultsDiv.innerHTML = allHtml;
     }
 
-    // 监听输入事件 (防抖可选，直接调用)
+    // 输入监听
     searchBox.addEventListener('input', () => {
         performSearch();
     });
-    // 初次完成后，如果用户搜索框内容为空则不做额外动作，但保证初始化后无状态卡片
-    // 为了页面美观，可以在没有搜索时只显示提示，但保留卡片逻辑只在有词时显示。
-    // 附加：确保词库动态加载完成后重新渲染？减少异步显示延迟，用户输入时，因为词库可能还在加载，但是我们会在加载完成后再次尝试刷新当前搜索？
-    // 优化：如果词库晚于输入加载，那么可能初次“不属于” 后面变成“属于”，因此监听词库加载完成时可轻微刷新当前搜索。
-    // 提供一个简单重新渲染当前关键词的方法。
-    let vocabLoaded = false, freqLoaded = false, middleLoaded = false, highLoaded = false, cet4Loaded = false, cet6Loaded = false;
-    function checkAllReadyAndRefresh() {
-        if (vocabLoaded && freqLoaded && middleLoaded && highLoaded && cet4Loaded && cet6Loaded) {
-            if (searchBox.value.trim().length >= 2) {
-                performSearch();
-            }
-        }
-    }
-    // 包装异步加载函数，添加完成标记
-    const originalLoadVocab = loadVocabulary;
-    window.loadVocabulary = async function() {
-        await originalLoadVocab();
-        vocabLoaded = true;
-        checkAllReadyAndRefresh();
-    };
-    const originalFreq = loadFreqWords;
-    window.loadFreqWords = async function() {
-        await originalFreq();
-        freqLoaded = true;
-        checkAllReadyAndRefresh();
-    };
-    function wrapLevelLoad(fileName, targetSet, levelFlagSetter) {
-        return async function() {
-            await loadLevelFile(fileName, targetSet, fileName);
-            levelFlagSetter(true);
-            checkAllReadyAndRefresh();
-        };
-    }
-    // 重新绑定需要用到新的加载函数
-    // 为防止冲突，直接替换全局变量加载方式: 重新声明init.
-    // 最简单: 保留原有load但用Promise all监听，改造start
-    (async function initCompleteMonitoring() {
-        // 重置所有标记
-        let loadedVocab = false, loadedFreq = false, loadedMiddle = false, loadedHigh = false, loadedCet4 = false, loadedCet6 = false;
-        const updateFlag = () => {
-            if (loadedVocab && loadedFreq && loadedMiddle && loadedHigh && loadedCet4 && loadedCet6) {
-                if (searchBox.value.trim().length >= 2) performSearch();
-            }
-        };
-        try {
-            const respVocab = fetch('大纲.txt').then(r => r.ok ? r.text() : null).then(t => {
-                if (t) t.split(/\r?\n/).forEach(l => { let w = l.trim().toLowerCase(); if(w && !w.includes('/') && !w.startsWith('#')) vocabularySet.add(w); });
-                loadedVocab = true; updateFlag();
-            }).catch(()=>{ loadedVocab=true; updateFlag(); });
-            const respFreq = fetch('1200.txt').then(r => r.ok ? r.text() : null).then(t => {
-                if (t) t.split(/\r?\n/).forEach(l => { let w = l.trim().toLowerCase(); if(w && !w.includes('/') && !w.startsWith('#')) freqSet.add(w); });
-                loadedFreq = true; updateFlag();
-            }).catch(()=>{ loadedFreq=true; updateFlag(); });
-            const respMid = fetch('初中单词.txt').then(r => r.ok ? r.text() : null).then(t => {
-                if (t) t.split(/\r?\n/).forEach(l => { let w = l.trim().toLowerCase(); if(w && !w.includes('/') && !w.startsWith('#') && !w.includes(' ')) middleSchoolSet.add(w); });
-                loadedMiddle = true; updateFlag();
-            }).catch(()=>{ loadedMiddle=true; updateFlag(); });
-            const respHigh = fetch('高中单词.txt').then(r => r.ok ? r.text() : null).then(t => {
-                if (t) t.split(/\r?\n/).forEach(l => { let w = l.trim().toLowerCase(); if(w && !w.includes('/') && !w.startsWith('#') && !w.includes(' ')) highSchoolSet.add(w); });
-                loadedHigh = true; updateFlag();
-            }).catch(()=>{ loadedHigh=true; updateFlag(); });
-            const respCet4 = fetch('四级.txt').then(r => r.ok ? r.text() : null).then(t => {
-                if (t) t.split(/\r?\n/).forEach(l => { let w = l.trim().toLowerCase(); if(w && !w.includes('/') && !w.startsWith('#') && !w.includes(' ')) cet4Set.add(w); });
-                loadedCet4 = true; updateFlag();
-            }).catch(()=>{ loadedCet4=true; updateFlag(); });
-            const respCet6 = fetch('六级.txt').then(r => r.ok ? r.text() : null).then(t => {
-                if (t) t.split(/\r?\n/).forEach(l => { let w = l.trim().toLowerCase(); if(w && !w.includes('/') && !w.startsWith('#') && !w.includes(' ')) cet6Set.add(w); });
-                loadedCet6 = true; updateFlag();
-            }).catch(()=>{ loadedCet6=true; updateFlag(); });
-            await Promise.all([respVocab, respFreq, respMid, respHigh, respCet4, respCet6]);
-        } catch(e) { console.warn(e); }
-    })();
-
-    // 确保原有loadAllData继续可用，但不干扰单词卡片刷新。
-    // 页面完全启动后再触发预加载语料提示，单词卡在搜索时才显示，完美适配。
+    
+    // 若词库晚于首次输入加载完成后，自动刷新一次当前搜索结果
+    // 此逻辑已内嵌于各个加载完成后的 tryRefreshSearch 调用中
 </script>
 </body>
 </html>
