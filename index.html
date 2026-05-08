@@ -64,26 +64,38 @@
             color: #0c4a6e;
             border-left: 3px solid #0ea5e9;
         }
-        /* 不同级别用不同颜色的左边框和浅色背景区分 */
+        /* 不同级别用不同颜色的书籍图标和边框 - 统一使用📘，用颜色区分 */
         .badge-item.level-middle {
             background: #e8f5e9;
             color: #2e7d32;
             border-left: 3px solid #4caf50;
+        }
+        .badge-item.level-middle .badge-icon {
+            color: #4caf50;
         }
         .badge-item.level-high {
             background: #fff3e0;
             color: #ef6c00;
             border-left: 3px solid #ff9800;
         }
+        .badge-item.level-high .badge-icon {
+            color: #ff9800;
+        }
         .badge-item.level-cet4 {
             background: #e3f2fd;
             color: #1565c0;
             border-left: 3px solid #2196f3;
         }
+        .badge-item.level-cet4 .badge-icon {
+            color: #2196f3;
+        }
         .badge-item.level-cet6 {
             background: #f3e5f5;
             color: #7b1fa2;
             border-left: 3px solid #9c27b0;
+        }
+        .badge-item.level-cet6 .badge-icon {
+            color: #9c27b0;
         }
         .badge-icon {
             font-size: 14px;
@@ -173,7 +185,7 @@
             row1Items.push(`<div class="badge-item freq"><span class="badge-icon">🔵</span> “${keyword}” 属于1200高频词</div>`);
         }
         
-        // 第二行：初中/高中/四级/六级 —— 统一用📘书籍图标，用不同样式类区分颜色
+        // 第二行：初中/高中/四级/六级 —— 统一用📘书籍图标，不同颜色区分
         const row2Items = [];
         if (inMiddle) {
             row2Items.push(`<div class="badge-item level-middle"><span class="badge-icon">📘</span> 属于初中单词</div>`);
