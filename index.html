@@ -60,7 +60,7 @@
 <body>
 <div class="header">
     <h1>唐静考研</h1>
-    <p>输入任意词，在05年至今的考研试卷中检索（✨ 点击结果中任意单词可快速检索）</p>
+    <p>输入任意单词，在05年至今的考研试卷中搜索句子（✨ 点击结果中任意单词可快速搜索）</p>
     <input type="text" id="searchBox" placeholder="搜索单词或中文关键词..." autofocus>
     <div id="count" class="result-count">正在加载数据库...</div>
 </div>
@@ -189,13 +189,15 @@
                 return stem.slice(0, -1);
             }
         }
-        if (word.endsWith('s') && word.length > 2) {
+        if (word.endsWith('ies') && word.length > 3) {
+            return word.slice(0, -3) + 'y';
+        }
+        if (word.endsWith('ves') && word.length > 3) {
+            return word.slice(0, -3) + 'f';
+        }
+        if (word.endsWith('s') && word.length > 2 && !word.endsWith('ss') && !word.endsWith('us') && !word.endsWith('is')) {
             let stem = word.slice(0, -1);
-            if (stem.endsWith('e')) return stem;
-            if (word.endsWith('ies')) return word.slice(0, -3) + 'y';
-            if (word.endsWith('ves')) {
-                return word.slice(0, -3) + 'f';
-            }
+            if (stem.length > 2) return stem;
         }
         return word;
     }
@@ -422,15 +424,16 @@
             expandedSet.add(query);
         }
         
-        // 修复：只匹配完整的单词，不使用 [a-z]* 通配符
-        let enRegex = null;
+        // 构建用于精确匹配的正则表达式
+        let wordBoundaryRegex = null;
         if (!isChinese) {
             const escapedTerms = searchTermsForFilter.map(term => term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
             const pattern = escapedTerms.map(term => `\\b${term}\\b`).join('|');
-            enRegex = new RegExp(`(${pattern})`, 'gi');
+            wordBoundaryRegex = new RegExp(pattern, 'i');
         }
         const cnRegex = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
 
+        // 过滤语料：使用精确单词边界匹配，而不是简单的 includes
         const filtered = corpus.filter(item => {
             const cnTexts = [];
             if (item.cn) cnTexts.push(item.cn);
@@ -440,13 +443,12 @@
             if (item.en) enTexts.push(cleanEnglish(item.en));
             if (item.en_q) enTexts.push(item.en_q);
             if (item.en_opts) enTexts.push(...item.en_opts);
+            
             if (isChinese) {
                 return cnTexts.some(text => cnRegex.test(text));
             } else {
-                return enTexts.some(text => {
-                    const lowerText = text.toLowerCase();
-                    return searchTermsForFilter.some(term => lowerText.includes(term));
-                });
+                if (!wordBoundaryRegex) return false;
+                return enTexts.some(text => wordBoundaryRegex.test(text));
             }
         });
 
@@ -459,14 +461,17 @@
             return;
         }
 
+        // 渲染时也使用相同的高亮正则
+        const highlightRegex = !isChinese ? wordBoundaryRegex : cnRegex;
+
         filtered.forEach(item => {
             if (item.en_q && item.en_opts) {
                 const clickableEnQ = makeWordsClickableWithHighlight(item.en_q, expandedSet);
-                const highlightedCnQ = highlightText(item.cn_q, cnRegex);
+                const highlightedCnQ = highlightText(item.cn_q, highlightRegex);
                 let optsHtml = '';
                 for (let i = 0; i < item.en_opts.length; i++) {
                     const clickableEnOpt = makeWordsClickableWithHighlight(item.en_opts[i], expandedSet);
-                    const highlightedCnOpt = highlightText(item.cn_opts[i] || '', cnRegex);
+                    const highlightedCnOpt = highlightText(item.cn_opts[i] || '', highlightRegex);
                     optsHtml += `<div><span class="opt-en">${clickableEnOpt}</span>　<span class="opt-cn">${highlightedCnOpt}</span></div>`;
                 }
                 allHtml += `
@@ -483,7 +488,7 @@
             } else {
                 const cleanEn = cleanEnglish(item.en || '');
                 const clickableEn = makeWordsClickableWithHighlight(cleanEn, expandedSet);
-                const highlightedCn = item.cn ? highlightText(item.cn, cnRegex) : '';
+                const highlightedCn = item.cn ? highlightText(item.cn, highlightRegex) : '';
                 const wordCountHtml = item._wordCount ? `<span class="word-count">(${item._wordCount} words)</span>` : '';
                 allHtml += `
                     <div class="card">
