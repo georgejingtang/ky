@@ -64,10 +64,26 @@
             color: #0c4a6e;
             border-left: 3px solid #0ea5e9;
         }
-        .badge-item.level {
-            background: #f3e8ff;
-            color: #5b21b6;
-            border-left: 3px solid #a855f7;
+        /* 不同级别用不同颜色的左边框和浅色背景区分 */
+        .badge-item.level-middle {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-left: 3px solid #4caf50;
+        }
+        .badge-item.level-high {
+            background: #fff3e0;
+            color: #ef6c00;
+            border-left: 3px solid #ff9800;
+        }
+        .badge-item.level-cet4 {
+            background: #e3f2fd;
+            color: #1565c0;
+            border-left: 3px solid #2196f3;
+        }
+        .badge-item.level-cet6 {
+            background: #f3e5f5;
+            color: #7b1fa2;
+            border-left: 3px solid #9c27b0;
         }
         .badge-icon {
             font-size: 14px;
@@ -136,8 +152,7 @@
     function isInVocabulary(word)   { return word ? vocabularySet.has(word.toLowerCase()) : false; }
     function isInFreq(word)         { return word ? freqSet.has(word.toLowerCase()) : false; }
 
-    // 核心：只显示“属于”的类别，不显示“不属于”；第一行: 考研大纲 & 1200高频词；第二行: 初中·高中·四级·六级
-    // 图标：考研大纲用🎯，1200高频词用🔵，初中📘，高中📙，四级🔹，六级🔸
+    // 核心：只显示“属于”的类别，统一使用书籍图标📘，不同级别用不同颜色区分
     function getWordStatusCards(keyword) {
         if (!keyword || keyword.length < 1) return '';
 
@@ -149,7 +164,7 @@
         const inCet4 = isInCet4(lowerKeyword);
         const inCet6 = isInCet6(lowerKeyword);
         
-        // 收集第一行中属于的项目
+        // 第一行：考研大纲 & 1200高频词
         const row1Items = [];
         if (inVocab) {
             row1Items.push(`<div class="badge-item in"><span class="badge-icon">🎯</span> “${keyword}” 属于考研大纲单词</div>`);
@@ -158,22 +173,22 @@
             row1Items.push(`<div class="badge-item freq"><span class="badge-icon">🔵</span> “${keyword}” 属于1200高频词</div>`);
         }
         
-        // 第二行：初中/高中/四级/六级 只显示属于的，保留原有好看图标
+        // 第二行：初中/高中/四级/六级 —— 统一用📘书籍图标，用不同样式类区分颜色
         const row2Items = [];
         if (inMiddle) {
-            row2Items.push(`<div class="badge-item level"><span class="badge-icon">📘</span> 属于初中单词</div>`);
+            row2Items.push(`<div class="badge-item level-middle"><span class="badge-icon">📘</span> 属于初中单词</div>`);
         }
         if (inHigh) {
-            row2Items.push(`<div class="badge-item level"><span class="badge-icon">📙</span> 属于高中单词</div>`);
+            row2Items.push(`<div class="badge-item level-high"><span class="badge-icon">📘</span> 属于高中单词</div>`);
         }
         if (inCet4) {
-            row2Items.push(`<div class="badge-item level"><span class="badge-icon">🔹</span> 属于四级单词</div>`);
+            row2Items.push(`<div class="badge-item level-cet4"><span class="badge-icon">📘</span> 属于四级单词</div>`);
         }
         if (inCet6) {
-            row2Items.push(`<div class="badge-item level"><span class="badge-icon">🔸</span> 属于六级单词</div>`);
+            row2Items.push(`<div class="badge-item level-cet6"><span class="badge-icon">📘</span> 属于六级单词</div>`);
         }
 
-        // 如果没有任何属于的单词类别，则整个卡片不显示（保持界面简洁）
+        // 如果没有任何属于的单词类别，则整个卡片不显示
         if (row1Items.length === 0 && row2Items.length === 0) {
             return '';
         }
