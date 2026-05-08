@@ -60,7 +60,7 @@
 <body>
 <div class="header">
     <h1>唐静考研</h1>
-    <p>输入任意词，在05年至今的考研试卷中检索（✨ 点击结果中任意单词可快速检索）</p>
+    <p>输入任意词，在考研试卷中检索句子（✨ 点击搜索结果中任意单词可快速搜索）</p>
     <input type="text" id="searchBox" placeholder="搜索单词或中文关键词..." autofocus>
     <div id="count" class="result-count">正在加载数据库...</div>
 </div>
@@ -141,27 +141,17 @@
         irregularPlurals.set(plural, singular);
     }
 
-    // ==================== 核心：词形处理函数 ====================
-    
-    // 修复：正确处理去 ing 后补回 e 的情况（providing -> provide）
+    // ==================== 核心：词干提取（修复版）====================
     function extractStem(word) {
         const lowerWord = word.toLowerCase();
         
-        // 处理 ing 形式
+        // 处理 ing 形式（如 considering -> consider）
         if (lowerWord.endsWith('ing') && lowerWord.length > 4) {
             let stem = lowerWord.slice(0, -3);
-            // 常见规则：去掉 ing 后，如果词干以辅音结尾，可能需要补回 e（如 providing -> provid -> provide）
-            // 检查是否常见动词模式
-            if (stem.length > 2) {
-                // 尝试常见的补 e 规则
-                const possibleWithE = stem + 'e';
-                // 如果补 e 后是常见形式，返回补 e 的结果
-                if (possibleWithE.length > 3) {
-                    // 不依赖词库，直接返回补 e 的版本，因为很多动词是这样
-                    // 但为了避免过度补 e，只在一定条件下
-                    return possibleWithE;
-                }
-                return stem;
+            // 如果去掉 ing 后以辅音结尾，尝试补回 e
+            if (stem.length >= 4 && !stem.endsWith('e') && !stem.endsWith('a') && !stem.endsWith('i') && !stem.endsWith('o') && !stem.endsWith('u')) {
+                // 常见规则：providing -> provide, considering -> consider
+                return stem + 'e';
             }
             return stem;
         }
@@ -179,12 +169,12 @@
             return stem;
         }
         
-        // 处理 ies 形式
+        // 处理 ies 形式（如 studies -> study）
         if (lowerWord.endsWith('ies') && lowerWord.length > 3) {
             return lowerWord.slice(0, -3) + 'y';
         }
         
-        // 处理 ves 形式
+        // 处理 ves 形式（如 knives -> knife）
         if (lowerWord.endsWith('ves') && lowerWord.length > 3) {
             return lowerWord.slice(0, -3) + 'f';
         }
@@ -198,6 +188,7 @@
         return lowerWord;
     }
 
+    // 正向生成规则变体
     function generateForwardVariants(root) {
         const variants = new Set();
         variants.add(root);
@@ -216,7 +207,6 @@
             variants.add(root + 'd');
         } else {
             variants.add(root + 'ed');
-            // 处理重读闭音节双写
             if (/[^aeiou][aeiou][^aeiou]$/.test(root) && !root.endsWith('w') && !root.endsWith('x') && !root.endsWith('y')) {
                 variants.add(root + root.slice(-1) + 'ed');
             }
@@ -264,7 +254,7 @@
         return lowerWord;
     }
 
-    // 核心：获取完整词族
+    // 核心：获取完整词族（统一入口）
     function getWordFamily(word) {
         const lowerWord = word.toLowerCase();
         const family = new Set();
