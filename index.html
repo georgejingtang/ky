@@ -189,7 +189,6 @@
         // 3. 规则变化：去 s（复数或三单）
         if (lowerWord.endsWith('s') && lowerWord.length > 3 && !lowerWord.endsWith('ss') && !lowerWord.endsWith('us') && !lowerWord.endsWith('is')) {
             let stem = lowerWord.slice(0, -1);
-            // 处理 ies -> y
             if (stem.endsWith('ie')) {
                 return stem.slice(0, -2) + 'y';
             }
@@ -203,7 +202,6 @@
             let stem = lowerWord.slice(0, -3);
             // 处理去掉 ing 后需要补 e 的情况（如 making -> make）
             if (stem.endsWith('k') || stem.endsWith('t') || stem.endsWith('v') || stem.endsWith('d') || stem.endsWith('m')) {
-                // 常见情况，尝试补 e
                 const withE = stem + 'e';
                 if (withE.length > 3) {
                     return withE;
@@ -218,7 +216,6 @@
             if (stem.endsWith('e')) {
                 return stem;
             }
-            // 尝试补 e（如 provided -> provide）
             const withE = stem + 'e';
             if (withE.length > 3) {
                 return withE;
@@ -244,11 +241,10 @@
         return text.replace(regex, match => `<mark>${match}</mark>`);
     }
 
-    // 归属判定（支持扩展查找）
+    // 归属判定
     function checkBelonging(word, targetSet) {
         if (!word) return false;
         if (targetSet.has(word.toLowerCase())) return true;
-        // 扩展到原形再查
         const baseForm = getBaseForm(word);
         if (baseForm !== word.toLowerCase() && targetSet.has(baseForm)) return true;
         return false;
@@ -417,7 +413,7 @@
 
         const isChinese = hasChinese(query);
         
-        // ========== 简化核心：无论输入什么，都还原为原形进行搜索 ==========
+        // 核心：无论输入什么，都还原为原形进行搜索
         let searchBaseForm = query;
         if (!isChinese && query.match(/^[a-zA-Z]+$/)) {
             searchBaseForm = getBaseForm(query);
@@ -425,7 +421,8 @@
         }
         
         const escapedQuery = searchBaseForm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        const enRegex = isChinese ? null : new RegExp(`\\b${escapedQuery}[a-z]*\\b`, 'gi');
+        // 修复：精确匹配单词边界，不使用 [a-z]* 通配符
+        const enRegex = isChinese ? null : new RegExp(`\\b${escapedQuery}\\b`, 'gi');
         const cnRegex = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
 
         // 过滤语料
@@ -497,7 +494,6 @@
         });
         resultsDiv.innerHTML = allHtml;
         
-        // 绑定点击事件
         document.querySelectorAll('.clickable-word').forEach(el => {
             el.removeEventListener('click', wordClickHandler);
             el.addEventListener('click', wordClickHandler);
