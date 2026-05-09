@@ -99,10 +99,8 @@
         usUkSpellingMap.set(uk, us);
     }
 
-    // ==================== 不规则动词映射（完整版）====================
+    // ==================== 不规则动词映射 ====================
     const irregularVerbMap = new Map();
-    
-    // 不规则动词
     const irregulars = [
         ['lead', 'led', 'led'], ['bear', 'bore', 'borne'], ['begin', 'began', 'begun'],
         ['break', 'broke', 'broken'], ['choose', 'chose', 'chosen'], ['speak', 'spoke', 'spoken'],
@@ -118,26 +116,14 @@
         ['sow', 'sowed', 'sown'], ['tear', 'tore', 'torn'], ['swear', 'swore', 'sworn'],
         ['go', 'went', 'gone'], ['do', 'did', 'done']
     ];
-    
     for (const [base, past, pastPart] of irregulars) {
         irregularVerbMap.set(base, base);
         irregularVerbMap.set(past, base);
         irregularVerbMap.set(pastPart, base);
     }
-    
-    // 常见规则动词的 -ing 和 -ed 形式映射（解决错误补 e 的问题）
-    const specialMappings = {
-        // 以 e 结尾的动词
-        'providing': 'provide', 'provided': 'provide',
-        'considering': 'consider', 'considered': 'consider',
-        'creating': 'create', 'created': 'create',
-        'continuing': 'continue', 'continued': 'continue',
-        'including': 'include', 'included': 'include',
-        'involving': 'involve', 'involved': 'involve',
-        'producing': 'produce', 'produced': 'produce',
-        'developing': 'develop', 'developed': 'develop',
-        'requiring': 'require', 'required': 'require',
-        // 不以 e 结尾的动词（但之前被错误补了 e）
+
+    // ==================== 规则动词变体映射（过去式、现在分词）====================
+    const regularMappings = {
         'looking': 'look', 'looked': 'look',
         'talking': 'talk', 'talked': 'talk',
         'walking': 'walk', 'walked': 'walk',
@@ -145,15 +131,26 @@
         'asking': 'ask', 'asked': 'ask',
         'helping': 'help', 'helped': 'help',
         'watching': 'watch', 'watched': 'watch',
-        'reading': 'read', 'readed': 'read',
-        'writing': 'write', 'written': 'write',
-        'giving': 'give', 'given': 'give',
+        'reading': 'read', 'reading': 'read',
+        'considering': 'consider', 'considered': 'consider',
+        'providing': 'provide', 'provided': 'provide',
+        'creating': 'create', 'created': 'create',
+        'continuing': 'continue', 'continued': 'continue',
+        'including': 'include', 'included': 'include',
+        'involving': 'involve', 'involved': 'involve',
+        'producing': 'produce', 'produced': 'produce',
+        'developing': 'develop', 'developed': 'develop',
+        'requiring': 'require', 'required': 'require',
+        'using': 'use', 'used': 'use',
+        'making': 'make', 'made': 'make',
         'taking': 'take', 'taken': 'take',
-        'making': 'make', 'made': 'make'
+        'giving': 'give', 'given': 'give',
+        'writing': 'write', 'written': 'write'
     };
-    
-    for (const [form, base] of Object.entries(specialMappings)) {
-        irregularVerbMap.set(form, base);
+    for (const [form, base] of Object.entries(regularMappings)) {
+        if (!irregularVerbMap.has(form)) {
+            irregularVerbMap.set(form, base);
+        }
     }
 
     // ==================== 不规则名词复数 ====================
@@ -175,11 +172,11 @@
         irregularPluralMap.set(plural, singular);
     }
 
-    // ==================== 获取标准原形（核心函数）====================
+    // ==================== 核心简化函数：还原为原形 ====================
     function getBaseForm(word) {
         const lowerWord = word.toLowerCase();
         
-        // 1. 优先从映射表获取（包含不规则动词、规则动词的变体）
+        // 1. 不规则动词/规则动词变体映射
         if (irregularVerbMap.has(lowerWord)) {
             return irregularVerbMap.get(lowerWord);
         }
@@ -189,96 +186,47 @@
             return irregularPluralMap.get(lowerWord);
         }
         
-        // 3. 规则变化：去 s
+        // 3. 规则变化：去 s（复数或三单）
         if (lowerWord.endsWith('s') && lowerWord.length > 3 && !lowerWord.endsWith('ss') && !lowerWord.endsWith('us') && !lowerWord.endsWith('is')) {
             let stem = lowerWord.slice(0, -1);
-            if (stem.length > 2 && /[a-z]/i.test(stem)) {
+            // 处理 ies -> y
+            if (stem.endsWith('ie')) {
+                return stem.slice(0, -2) + 'y';
+            }
+            if (stem.length > 2) {
                 return stem;
             }
         }
         
-        return lowerWord;
-    }
-
-    // 正向生成规则变体
-    function generateForwardVariants(root) {
-        const variants = new Set();
-        variants.add(root);
-        
-        // 加 s
-        if (root.endsWith('y') && !/[aeiou]y$/.test(root)) {
-            variants.add(root.slice(0, -1) + 'ies');
-        } else if (root.endsWith('s') || root.endsWith('sh') || root.endsWith('ch') || root.endsWith('x') || root.endsWith('z')) {
-            variants.add(root + 'es');
-        } else {
-            variants.add(root + 's');
-        }
-        
-        // 加 ed
-        if (root.endsWith('e')) {
-            variants.add(root + 'd');
-        } else {
-            variants.add(root + 'ed');
-        }
-        
-        // 加 ing
-        if (root.endsWith('e')) {
-            variants.add(root.slice(0, -1) + 'ing');
-        } else {
-            variants.add(root + 'ing');
-        }
-        
-        // 加 er
-        if (root.endsWith('e')) {
-            variants.add(root + 'r');
-        } else {
-            variants.add(root + 'er');
-        }
-        
-        return Array.from(variants);
-    }
-
-    // 获取完整词族
-    function getWordFamily(word) {
-        const lowerWord = word.toLowerCase();
-        const family = new Set();
-        
-        // 第一步：获取标准原形
-        const baseForm = getBaseForm(lowerWord);
-        
-        // 第二步：添加原形
-        family.add(baseForm);
-        
-        // 第三步：从原形正向生成所有规则变体
-        const forward = generateForwardVariants(baseForm);
-        forward.forEach(f => family.add(f));
-        
-        // 第四步：添加不规则动词的所有形式
-        for (const [form, base] of irregularVerbMap.entries()) {
-            if (base === baseForm) {
-                family.add(form);
+        // 4. 规则变化：去 ing
+        if (lowerWord.endsWith('ing') && lowerWord.length > 4) {
+            let stem = lowerWord.slice(0, -3);
+            // 处理去掉 ing 后需要补 e 的情况（如 making -> make）
+            if (stem.endsWith('k') || stem.endsWith('t') || stem.endsWith('v') || stem.endsWith('d') || stem.endsWith('m')) {
+                // 常见情况，尝试补 e
+                const withE = stem + 'e';
+                if (withE.length > 3) {
+                    return withE;
+                }
             }
+            return stem;
         }
         
-        // 第五步：处理复数名词
-        for (const [singular, plural] of pluralPairs) {
-            if (singular === baseForm) family.add(plural);
-            if (plural === baseForm) family.add(singular);
+        // 5. 规则变化：去 ed
+        if (lowerWord.endsWith('ed') && lowerWord.length > 3) {
+            let stem = lowerWord.slice(0, -2);
+            if (stem.endsWith('e')) {
+                return stem;
+            }
+            // 尝试补 e（如 provided -> provide）
+            const withE = stem + 'e';
+            if (withE.length > 3) {
+                return withE;
+            }
+            return stem;
         }
         
-        // 第六步：英美拼写变体
-        if (usUkSpellingMap.has(baseForm)) {
-            family.add(usUkSpellingMap.get(baseForm));
-        }
-        
-        // 第七步：确保原输入词在集合中
-        family.add(lowerWord);
-        
-        return Array.from(family);
-    }
-
-    function expandSearchWord(word) {
-        return getWordFamily(word);
+        return lowerWord;
     }
 
     // ==================== 辅助函数 ====================
@@ -296,13 +244,13 @@
         return text.replace(regex, match => `<mark>${match}</mark>`);
     }
 
+    // 归属判定（支持扩展查找）
     function checkBelonging(word, targetSet) {
         if (!word) return false;
         if (targetSet.has(word.toLowerCase())) return true;
-        const expanded = getWordFamily(word);
-        for (const w of expanded) {
-            if (targetSet.has(w)) return true;
-        }
+        // 扩展到原形再查
+        const baseForm = getBaseForm(word);
+        if (baseForm !== word.toLowerCase() && targetSet.has(baseForm)) return true;
         return false;
     }
 
@@ -340,12 +288,20 @@
         return html;
     }
 
-    function makeWordsClickableWithHighlight(text, highlightSet) {
+    // 生成可点击的单词（同时高亮匹配的单词）
+    function makeWordsClickableWithHighlight(text, baseForm) {
         if (!text) return '';
-        if (!highlightSet || highlightSet.size === 0) return text;
+        if (!baseForm) return text;
+        
+        const lowerBase = baseForm.toLowerCase();
+        
         return text.replace(/([a-zA-Z]+(?:'[a-zA-Z]+)?(?:-[a-zA-Z]+)?)/g, function(match) {
             const lowerMatch = match.toLowerCase();
-            const isMatch = highlightSet.has(lowerMatch);
+            // 检查是否匹配原形（或通过 getBaseForm 还原后匹配）
+            let isMatch = (lowerMatch === lowerBase);
+            if (!isMatch && getBaseForm(lowerMatch) === lowerBase) {
+                isMatch = true;
+            }
             let displayText = match;
             if (isMatch) {
                 displayText = `<mark>${match}</mark>`;
@@ -460,25 +416,16 @@
         }
 
         const isChinese = hasChinese(query);
-        let wordFamily = [];
-        let expandedSet = new Set();
         
+        // ========== 简化核心：无论输入什么，都还原为原形进行搜索 ==========
+        let searchBaseForm = query;
         if (!isChinese && query.match(/^[a-zA-Z]+$/)) {
-            wordFamily = getWordFamily(query);
-            wordFamily.forEach(term => expandedSet.add(term));
-            console.log(`搜索 "${query}" → 扩展词族: [${wordFamily.join(', ')}]`);
-        } else {
-            wordFamily = [query];
-            expandedSet.add(query);
+            searchBaseForm = getBaseForm(query);
+            console.log(`搜索 "${query}" → 还原为原形: "${searchBaseForm}"`);
         }
         
-        // 构建精确匹配的正则表达式
-        let wordBoundaryRegex = null;
-        if (!isChinese) {
-            const escapedTerms = wordFamily.map(term => term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
-            const pattern = escapedTerms.map(term => `\\b${term}\\b`).join('|');
-            wordBoundaryRegex = new RegExp(pattern, 'i');
-        }
+        const escapedQuery = searchBaseForm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const enRegex = isChinese ? null : new RegExp(`\\b${escapedQuery}[a-z]*\\b`, 'gi');
         const cnRegex = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
 
         // 过滤语料
@@ -495,13 +442,13 @@
             if (isChinese) {
                 return cnTexts.some(text => cnRegex.test(text));
             } else {
-                if (!wordBoundaryRegex) return false;
-                return enTexts.some(text => wordBoundaryRegex.test(text));
+                if (!enRegex) return false;
+                return enTexts.some(text => enRegex.test(text));
             }
         });
 
         document.getElementById('count').innerText = `找到 ${filtered.length} 个匹配结果`;
-        let allHtml = getWordStatusCards(query);
+        let allHtml = getWordStatusCards(searchBaseForm);
         
         if (filtered.length === 0) {
             allHtml += '<div class="no-result">未找到相关句子，换个词试试？</div>';
@@ -509,15 +456,14 @@
             return;
         }
 
-        const highlightSet = expandedSet;
-
+        // 渲染每个句子卡片
         filtered.forEach(item => {
             if (item.en_q && item.en_opts) {
-                const clickableEnQ = makeWordsClickableWithHighlight(item.en_q, highlightSet);
+                const clickableEnQ = makeWordsClickableWithHighlight(item.en_q, searchBaseForm);
                 const highlightedCnQ = highlightText(item.cn_q, cnRegex);
                 let optsHtml = '';
                 for (let i = 0; i < item.en_opts.length; i++) {
-                    const clickableEnOpt = makeWordsClickableWithHighlight(item.en_opts[i], highlightSet);
+                    const clickableEnOpt = makeWordsClickableWithHighlight(item.en_opts[i], searchBaseForm);
                     const highlightedCnOpt = highlightText(item.cn_opts[i] || '', cnRegex);
                     optsHtml += `<div><span class="opt-en">${clickableEnOpt}</span>　<span class="opt-cn">${highlightedCnOpt}</span></div>`;
                 }
@@ -534,7 +480,7 @@
                 `;
             } else {
                 const cleanEn = cleanEnglish(item.en || '');
-                const clickableEn = makeWordsClickableWithHighlight(cleanEn, highlightSet);
+                const clickableEn = makeWordsClickableWithHighlight(cleanEn, searchBaseForm);
                 const highlightedCn = item.cn ? highlightText(item.cn, cnRegex) : '';
                 const wordCountHtml = item._wordCount ? `<span class="word-count">(${item._wordCount} words)</span>` : '';
                 allHtml += `
@@ -551,6 +497,7 @@
         });
         resultsDiv.innerHTML = allHtml;
         
+        // 绑定点击事件
         document.querySelectorAll('.clickable-word').forEach(el => {
             el.removeEventListener('click', wordClickHandler);
             el.addEventListener('click', wordClickHandler);
