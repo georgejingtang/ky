@@ -50,7 +50,7 @@
 <body>
 <div class="header">
     <h1>唐静考研英语</h1>
-    <p>🔍 搜索任意单词，在05年至今的考研试卷中检索，结果中的单词也可以交互检索</p>
+    <p>🔍 任意单词，可以在05年至今的考研试卷中检索，结果中的任意单词可以交互检索</p>
     <input type="text" id="searchBox" placeholder="正在加载词库..." disabled autofocus>
     <div id="count" class="result-count">初始化中...</div>
 </div>
@@ -58,11 +58,11 @@
 
 <script>
     const JSON_FILES = [
-        { name: '1reading.json', tag: '阅读', tagClass: 'reading' },
-        { name: '2fanyi.json', tag: '翻译', tagClass: 'fanyi' },
-        { name: '3wanxing.json', tag: '完型', tagClass: 'wanxing' },
-        { name: '5xintixing.json', tag: '新题型', tagClass: 'xintixing' },
-        { name: '4tiganxuanxiang.json', tag: '题干选项', tagClass: 'tigang' }
+        { name: '1reading.json', tag: '阅读', tagClass: 'reading', order: 1 },
+        { name: '2fanyi.json', tag: '翻译', tagClass: 'fanyi', order: 2 },
+        { name: '3wanxing.json', tag: '完型', tagClass: 'wanxing', order: 3 },
+        { name: '5xintixing.json', tag: '新题型', tagClass: 'xintixing', order: 4 },
+        { name: '4tiganxuanxiang.json', tag: '题干选项', tagClass: 'tigang', order: 5 }
     ];
 
     let corpus = [];
@@ -191,10 +191,8 @@
         if (!isChinese && /^[a-zA-Z'-]+$/.test(query)) {
             const family = getWordFamily(query);
             family.forEach(f => highlightFamily.add(f));
-            // 按长度降序排列，防止短词拦截长词匹配
             const pattern = family.sort((a,b) => b.length - a.length).map(f => `\\b${escapeRegExp(f)}\\b`).join('|');
             enRegex = new RegExp(pattern, 'gi');
-            console.log(`搜索 "${query}" → 词族: [${family.join(', ')}]`);
         }
 
         const cnRegex = new RegExp(escapeRegExp(query), 'gi');
@@ -202,6 +200,17 @@
         const filtered = corpus.filter(item => {
             const target = [item.en, item.cn, item.en_q, item.cn_q, ...(item.en_opts || []), ...(item.cn_opts || [])].join(' ');
             return isChinese ? cnRegex.test(target) : (enRegex && enRegex.test(target));
+        });
+
+        // ==================== 关键修复：按照指定顺序排序 ====================
+        // 顺序：阅读(1) → 翻译(2) → 完型(3) → 新题型(4) → 题干选项(5)
+        const orderMap = { 'reading': 1, 'fanyi': 2, 'wanxing': 3, 'xintixing': 4, 'tigang': 5 };
+        filtered.sort((a, b) => {
+            const orderA = orderMap[a._sourceClass] || 999;
+            const orderB = orderMap[b._sourceClass] || 999;
+            if (orderA !== orderB) return orderA - orderB;
+            // 同一类型内保持原始顺序（按 id）
+            return (a.id || '').localeCompare(b.id || '');
         });
 
         document.getElementById('count').innerText = `找到 ${filtered.length} 个结果`;
