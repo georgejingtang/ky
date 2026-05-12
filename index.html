@@ -50,7 +50,7 @@
 <body>
 <div class="header">
     <h1>唐静考研英语</h1>
-    <p>🔍 智能词形还原：精准关联 account/accounted, deny/denied, study/studied</p>
+    <p>🔍 智能词形还原,精准关联真题 </p>
     <input type="text" id="searchBox" placeholder="正在加载词库..." disabled autofocus>
     <div id="count" class="result-count">初始化中...</div>
 </div>
@@ -174,6 +174,12 @@
         }
         if (lower.endsWith('es')) { roots.add(lower.slice(0, -1)); roots.add(lower.slice(0, -2)); }
         if (lower.endsWith('s') && !lower.endsWith('ss') && !lower.endsWith('us') && !lower.endsWith('is')) roots.add(lower.slice(0, -1));
+
+        // ── 修复：把美英拼写的对应词也加入 roots，让它也参与完整展开 ──
+        // 否则搜 "behavior" 时只有 "behaviour" 单词本身入族，"behaviours/behavioured" 等变形不会被生成
+        const spellAlts = new Set();
+        roots.forEach(r => { if (usUkSpellingMap.has(r)) spellAlts.add(usUkSpellingMap.get(r)); });
+        spellAlts.forEach(r => roots.add(r));
 
         const finalFamily = new Set();
         roots.forEach(r => {
