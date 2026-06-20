@@ -21,6 +21,9 @@
         .cn { font-size: 17px; color: #334155; border-left: 4px solid #cbd5e1; padding-left: 15px; margin-top: 10px; line-height: 1.5; }
         .opts { margin-top: 8px; padding-left: 15px; font-size: 15px; color: #475569; line-height: 1.8; }
         mark { background: #fef08a; color: #854d0e; padding: 0 2px; border-radius: 2px; font-weight: bold; }
+        mark.cn-mark { background: #bbf7d0; color: #14532d; }
+        .cn-hint { font-size: 12px; color: #64748b; margin-top: 6px; padding: 4px 10px; background: #f0fdf4; border-radius: 6px; display: inline-block; }
+        .cn-hint.loading { color: #94a3b8; background: #f8fafc; }
         .no-result { text-align: center; color: var(--text-muted); margin-top: 50px; }
         .word-status-area { background: #ffffff; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); border: 1px solid #eef2ff; overflow: hidden; }
         .badge-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 12px 16px; background: #fcfdff; border-bottom: 1px solid #f0f2f5; }
@@ -50,7 +53,7 @@
 <body>
 <div class="header">
     <h1>唐静考研英语</h1>
-    <p>🔍 智能词形还原：精准关联真题</p>
+    <p>🔍 智能词形还原;精准关联;双语对照</p>
     <input type="text" id="searchBox" placeholder="正在加载词库..." disabled autofocus>
     <div id="count" class="result-count">初始化中...</div>
 </div>
@@ -253,6 +256,79 @@
     }
 
     function hasChinese(text) { return /[\u4e00-\u9fa5]/.test(text); }
+
+    // ── 中文译词高亮：缓存 + API调用 ──
+    const cnTranslationCache = new Map(); // word -> [译词列表] 或 null(加载中)
+    let currentSearchWord = '';
+
+    async function fetchChineseTranslations(word) {
+        if (cnTranslationCache.has(word)) return cnTranslationCache.get(word);
+        try {
+            const response = await fetch('https://api.anthropic.com/v1/messages', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    model: 'claude-sonnet-4-6',
+                    max_tokens: 200,
+                    system: '你是一个英汉词典。用户给你一个英文单词，你只返回一个JSON数组，包含这个词在中文语境中最常见的5-10个对应译词（含不同词性和常见搭配），不要解释，不要markdown，只输出纯JSON数组，例如：["措施","衡量","测量","标准","尺度"]',
+                    messages: [{ role: 'user', content: word }]
+                })
+            });
+            const data = await response.json();
+            const text = data.content?.[0]?.text || '[]';
+            const clean = text.replace(/```json|```/g, '').trim();
+            const translations = JSON.parse(clean);
+            cnTranslationCache.set(word, translations);
+            return translations;
+        } catch (e) {
+            cnTranslationCache.set(word, []);
+            return [];
+        }
+    }
+
+    function buildCnHighlightRegex(translations) {
+        if (!translations || translations.length === 0) return null;
+        const pattern = translations.map(t => escapeRegExp(t)).join('|');
+        return new RegExp(pattern, 'g');
+    }
+
+    function highlightCnText(rawText, regex) {
+        if (!rawText) return '';
+        if (!regex) return escapeHtml(rawText);
+        const marked = rawText.replace(regex, m => `\x00${m}\x01`);
+        return escapeHtml(marked)
+            .replace(/\x00/g, '<mark class="cn-mark">')
+            .replace(/\x01/g, '</mark>');
+    }
+
+    // 异步更新页面中所有中文高亮
+    async function updateCnHighlights(word) {
+        const translations = await fetchChineseTranslations(word);
+        // 如果用户已经换词了，不更新
+        if (currentSearchWord !== word) return;
+
+        const regex = buildCnHighlightRegex(translations);
+        const hintEl = document.getElementById('cn-hint-area');
+
+        if (hintEl) {
+            if (translations.length > 0) {
+                hintEl.textContent = `✦ 中文对应词：${translations.join('、')}`;
+                hintEl.className = 'cn-hint';
+            } else {
+                hintEl.style.display = 'none';
+            }
+        }
+
+        // 更新所有中文译文高亮
+        if (regex) {
+            document.querySelectorAll('.cn[data-raw-cn]').forEach(el => {
+                el.innerHTML = highlightCnText(el.getAttribute('data-raw-cn'), regex);
+            });
+            document.querySelectorAll('.opt-cn[data-raw-cn]').forEach(el => {
+                el.innerHTML = highlightCnText(el.getAttribute('data-raw-cn'), regex);
+            });
+        }
+    }
     function cleanEnglish(enText) { return (enText || '').replace(/\(\s*\d+\s*words\s*\)/gi, '').trim(); }
 
     // ── [修复6] 仅在有高亮词族或需要点击功能时才包裹 span，减少无效 DOM ──
@@ -299,6 +375,9 @@
         // ── [修复5] 统一用 escapeRegExp 函数，不再内联重复 ──
         const escapedQuery = escapeRegExp(query);
         const highlightFamily = new Set();
+
+        // 记录当前搜索词（用于异步回调校验）
+        if (!isChinese) currentSearchWord = query.toLowerCase();
 
         let enHighlightRegex = null;
         // ── [修复1] 英文搜索：纯字母时走词族逻辑，否则回退到简单子串匹配 ──
@@ -384,6 +463,11 @@
 
         const cnHighlight = isChinese ? cnHighlightRegex : null;
 
+        // 英文搜索时，加一个"加载中"提示，异步获取并高亮中文对应词
+        if (!isChinese && isPureAlpha) {
+            html += `<div id="cn-hint-area" class="cn-hint loading">⏳ 正在识别中文对应词…</div>`;
+        }
+
         filtered.forEach(item => {
             // ── [修复3] isComplex 同时检查 en_opts 非空数组 ──
             const isComplex = !!(item.en_q && Array.isArray(item.en_opts) && item.en_opts.length > 0);
@@ -399,16 +483,22 @@
                 const enOpts = item.en_opts || [];
                 const cnOpts = item.cn_opts || [];
                 for (let i = 0; i < enOpts.length; i++) {
-                    // ── [修复4] cn_opts[i] 越界时安全回退为空字符串 ──
                     const cnOpt = (i < cnOpts.length) ? cnOpts[i] : '';
+                    // 英文搜索时，中文部分存入 data-raw-cn 等待异步高亮；中文搜索直接高亮
+                    const cnOptHtml = isChinese
+                        ? highlightText(cnOpt, cnHighlight)
+                        : escapeHtml(cnOpt);
+                    const dataAttr = !isChinese ? ` data-raw-cn="${escapeHtml(cnOpt)}"` : '';
                     optsHtml += `<div>`
                         + `<span>${makeWordsClickable(enOpts[i], highlightFamily, isChinese)}</span>`
-                        + `　<span class="opt-cn">${highlightText(cnOpt, cnHighlight)}</span>`
+                        + `　<span class="opt-cn"${dataAttr}>${cnOptHtml}</span>`
                         + `</div>`;
                 }
+                const cnQHtml = isChinese ? highlightText(item.cn_q, cnHighlight) : escapeHtml(item.cn_q || '');
+                const cnQDataAttr = !isChinese ? ` data-raw-cn="${escapeHtml(item.cn_q || '')}"` : '';
                 html += `<div class="card">${sourceHtml}`
                     + `<div class="en">${makeWordsClickable(item.en_q, highlightFamily, isChinese)}</div>`
-                    + `<div class="cn">${highlightText(item.cn_q, cnHighlight)}</div>`
+                    + `<div class="cn"${cnQDataAttr}>${cnQHtml}</div>`
                     + `<div class="opts">${optsHtml}</div>`
                     + `</div>`;
             } else {
@@ -416,13 +506,22 @@
                 const countStr = item._wordCount
                     ? `<span class="word-count">(${escapeHtml(item._wordCount)} words)</span>`
                     : '';
+                const rawCn = item.cn || '';
+                const cnHtml = isChinese ? highlightText(rawCn, cnHighlight) : escapeHtml(rawCn);
+                const cnDataAttr = !isChinese ? ` data-raw-cn="${escapeHtml(rawCn)}"` : '';
                 html += `<div class="card">${sourceHtml}`
                     + `<div class="en">${makeWordsClickable(cleanEn, highlightFamily, isChinese)} ${countStr}</div>`
-                    + `<div class="cn">${highlightText(item.cn || '', cnHighlight)}</div>`
+                    + `<div class="cn"${cnDataAttr}>${cnHtml}</div>`
                     + `</div>`;
             }
         });
         resultsDiv.innerHTML = html;
+
+        // 英文搜索：异步获取中文对应词并高亮
+        if (!isChinese && isPureAlpha) {
+            const wordForCn = query.toLowerCase();
+            updateCnHighlights(wordForCn);
+        }
     }
 
     async function loadTxt(file, set) {
