@@ -12,6 +12,7 @@
   var hideAnswers = false;
   var fullOpen = false;
   try { hideAnswers = localStorage.getItem("jiexi-hide") === "1"; } catch (e) {}
+  if (hideAnswers) fullOpen = true; // 先做题时需要读全文
 
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
@@ -102,7 +103,9 @@
     var wrong = q.wrong.map(function (w) {
       return '<li><span class="k">' + esc(w.k) + '</span><span><span class="tag">' + esc(w.tag) + "</span>" + rich(w.text) + "</span></li>";
     }).join("");
-    return '<section class="row" id="' + esc(p.year + "-" + p.exam + "-" + q.num) + '">' +
+    // 先做题：定位段落本身就暴露答案位置，和分析一起隐藏，点“显示答案与分析”后才出现
+    var ps = q.context.map(function (c) { return c.p; }).join(",");
+    return '<section class="row' + (hideAnswers ? " quiz" : "") + '" id="' + esc(p.year + "-" + p.exam + "-" + q.num) + '" data-ps="' + ps + '">' +
       '<div class="src">' + ctx +
         '<div class="q' + (hideAnswers ? " hide-ans" : "") + '"><p class="stem">' + q.num + ". " + esc(q.stem) + "</p><ol>" + opts + "</ol></div>" +
       "</div>" +
@@ -118,9 +121,9 @@
     var p = passages[pid];
     // 题目定位到的段落，在全文里加左边线
     var located = {};
-    qs.forEach(function (q) { q.context.forEach(function (c) { located[c.p] = true; }); });
+    if (!hideAnswers) qs.forEach(function (q) { q.context.forEach(function (c) { located[c.p] = true; }); });
     var full = p.paragraphs.map(function (t, i) {
-      return '<p' + (located[i + 1] ? ' class="located"' : "") + '><span class="pn">P' + (i + 1) + "</span>" + esc(t) + "</p>";
+      return '<p data-p="' + (i + 1) + '"' + (located[i + 1] ? ' class="located"' : "") + '><span class="pn">P' + (i + 1) + "</span>" + esc(t) + "</p>";
     }).join("");
     // 展开全文时：左边全文，右边逐题（定位段落 → 试题 → 分析）上下排列
     return '<div class="group"><h2><span class="eyebrow">' + p.year + " 考研英语（" + p.exam.slice(2) + "）· Text " + p.text + "</span>" +
@@ -179,7 +182,7 @@
   }
 
   function toolbar() {
-    return '<div class="toolbar"><label><input type="checkbox" id="hide"' + (hideAnswers ? " checked" : "") + "> 先做题（隐藏答案与分析）</label></div>";
+    return '<div class="toolbar"><label><input type="checkbox" id="hide"' + (hideAnswers ? " checked" : "") + "> 先做题（隐藏原文定位、答案与分析）</label></div>";
   }
 
   function render() {
@@ -224,7 +227,14 @@
     if (btn) {
       var ana = btn.parentNode;
       ana.classList.remove("hidden");
-      ana.parentNode.querySelector(".q").classList.remove("hide-ans");
+      var row = btn.closest(".row");
+      row.classList.remove("quiz");
+      row.querySelector(".q").classList.remove("hide-ans");
+      var full = row.closest(".body").querySelector("details.full");
+      row.getAttribute("data-ps").split(",").forEach(function (n) {
+        var para = full.querySelector('p[data-p="' + n + '"]');
+        if (para) para.classList.add("located");
+      });
       btn.remove();
     }
   });
@@ -237,6 +247,7 @@
   document.addEventListener("change", function (e) {
     if (e.target.id !== "hide") return;
     hideAnswers = e.target.checked;
+    if (hideAnswers) fullOpen = true;
     try { localStorage.setItem("jiexi-hide", hideAnswers ? "1" : "0"); } catch (err) {}
     render();
   });
