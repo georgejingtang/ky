@@ -163,7 +163,8 @@
         '<div class="q' + (quiz ? " hide-ans" : "") + '"><p class="stem">' + q.num + ". " + esc(q.stem) + "</p>" + (qz ? '<p class="zh stem-zh">' + esc(qz.stem) + "</p>" : "") + "<ol>" + opts + "</ol></div>" +
       "</div>" +
       '<div class="ana' + (quiz ? " hidden" : "") + '">' +
-        '<div class="btns">' + (quiz ? '<button class="reveal" type="button">显示答案与分析</button>' : "") + zhBtn + "</div>" +
+        // 顺序：先做题 → 再检查（译文）→ 最后看答案与分析
+        '<div class="btns">' + zhBtn + (quiz ? '<button class="reveal" type="button">显示答案与分析</button>' : "") + "</div>" +
         '<div class="ans"><span class="badge">答案 ' + esc(q.answer) + "</span><strong>" + esc(q.answerZh) + "</strong></div>" +
         "<div><h3>定位与依据</h3>" + basis + map + note + "</div>" +
         '<div><h3>排除</h3><ul class="wrong">' + wrong + "</ul></div>" +
