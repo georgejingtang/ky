@@ -53,6 +53,17 @@ h1 { font-size: 26px; line-height: 1.3; margin: 0; text-wrap: balance; }
 details.full { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; }
 details.full summary { cursor: pointer; font-weight: 500; color: var(--accent); }
 details.full p { font-family: var(--f-en); font-size: 16px; line-height: 1.75; margin: 12px 0 0; max-width: 72ch; }
+details.full p { border-left: 3px solid transparent; padding-left: 10px; }
+details.full p.located { border-left-color: var(--mark); }
+details.full[open] .when-closed, details.full:not([open]) .when-open { display: none; }
+/* 展开全文：左边全文（滚动时固定），右边逐题上下排列 */
+.body.open { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+.body.open > * { min-width: 0; }
+.body.open details.full { position: sticky; top: 12px; max-height: calc(100vh - 24px); overflow: auto; margin-bottom: 0; }
+.body.open .colhead { display: none; }
+.body.open .row { grid-template-columns: 1fr; gap: 16px; }
+.body.open .row:first-of-type { padding-top: 0; }
+.body.open .ana { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
 .pn { font-family: var(--f-mono); font-size: 11px; color: var(--muted); margin-right: 6px; }
 .colhead { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; font-size: 12px; letter-spacing: .1em; color: var(--muted); padding: 0 4px 8px; border-bottom: 2px solid var(--ink); }
 .row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding-block: 22px; border-bottom: 1px solid var(--line); scroll-margin-top: 12px; }
@@ -92,6 +103,8 @@ ul.wrong li .k { font-family: var(--f-mono); font-size: 13px; color: var(--wrong
 .toolbar label { display: inline-flex; gap: 6px; align-items: center; cursor: pointer; }
 footer { margin-top: 28px; color: var(--muted); font-size: 13px; display: flex; flex-wrap: wrap; gap: 8px 20px; }
 @media (max-width: 860px) {
+  .body.open { display: block; }
+  .body.open details.full { position: static; max-height: none; margin-bottom: 20px; }
   .colhead { display: none; }
   .row { grid-template-columns: 1fr; gap: 16px; }
   .ana { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
