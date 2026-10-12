@@ -10,9 +10,7 @@
   var passages = {};
   var questions = [];
   var hideAnswers = false;
-  var fullOpen = false;
   try { hideAnswers = localStorage.getItem("jiexi-hide") === "1"; } catch (e) {}
-  if (hideAnswers) fullOpen = true; // 先做题时需要读全文
 
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
@@ -128,11 +126,9 @@
     // 展开全文时：左边全文，右边逐题（定位段落 → 试题 → 分析）上下排列
     return '<div class="group"><h2><span class="eyebrow">' + p.year + " 考研英语（" + p.exam.slice(2) + "）· Text " + p.text + "</span>" +
       qs.map(function (q) { return q.num; }).join("、") + " 题</h2>" +
-      '<div class="body' + (fullOpen ? " open" : "") + '">' +
-        '<details class="full"' + (fullOpen ? " open" : "") + "><summary>" +
-          '<span class="when-closed">展开 Text ' + p.text + " 全文（共 " + p.paragraphs.length + " 段），题目会排到全文右边</span>" +
-          '<span class="when-open">收起 Text ' + p.text + " 全文</span></summary>" + full + "</details>" +
-        '<div class="rows"><div class="colhead"><div>原文 · 试题</div><div>分析</div></div>' +
+      '<div class="body">' +
+        '<div class="full"><h3>Text ' + p.text + " 全文</h3>" + full + "</div>" +
+        '<div class="rows">' +
         qs.map(rowHTML).join("") + "</div>" +
       "</div></div>";
   }
@@ -230,7 +226,7 @@
       var row = btn.closest(".row");
       row.classList.remove("quiz");
       row.querySelector(".q").classList.remove("hide-ans");
-      var full = row.closest(".body").querySelector("details.full");
+      var full = row.closest(".body").querySelector(".full");
       row.getAttribute("data-ps").split(",").forEach(function (n) {
         var para = full.querySelector('p[data-p="' + n + '"]');
         if (para) para.classList.add("located");
@@ -238,16 +234,9 @@
       btn.remove();
     }
   });
-  // 全文展开/收起：切换左右布局，并记住状态供下次搜索沿用
-  document.addEventListener("toggle", function (e) {
-    if (!e.target.matches || !e.target.matches("details.full")) return;
-    fullOpen = e.target.open;
-    e.target.parentNode.classList.toggle("open", fullOpen);
-  }, true);
   document.addEventListener("change", function (e) {
     if (e.target.id !== "hide") return;
     hideAnswers = e.target.checked;
-    if (hideAnswers) fullOpen = true;
     try { localStorage.setItem("jiexi-hide", hideAnswers ? "1" : "0"); } catch (err) {}
     render();
   });
