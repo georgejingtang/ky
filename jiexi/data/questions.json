@@ -1,0 +1,163 @@
+{
+  "passages": [
+    {
+      "id": "2023-英语一-Text1",
+      "exam": "英语一",
+      "year": 2023,
+      "text": 1,
+      "paragraphs": [
+        "The weather in Texas may have cooled since the recent extreme heat, but the temperature will be high at the State Board of Education meeting in Austin this month as officials debate how climate change is taught in Texas schools.",
+        "Pat Hardy, who sympathises with the views of the energy sector, is resisting proposed changes to science standards for pre-teen pupils. “There are as many scientists working against all the panic of global climate change as there are those who are pushing it,” she claims. “Texas is an energy state and we need to recognise that. You need to remember where your bread is buttered.”",
+        "Most scientists and experts sharply dispute Hardy’s views. Board members like her “casually dismiss the career work of scholars and scientists as just another misguided opinion,” says Dan Quinn, senior communications strategist at the Texas Freedom Network, a non-profit group that monitors public education.",
+        "Such debates reflect fierce discussions across the US, as researchers, policymakers, teachers and students step up demands for a greater focus on teaching about the facts of climate change in schools.",
+        "A study last year by the National Center for Science Education, a non-profit group of scientists and teachers, looking at how state public schools across the country address climate change in science classes, gave barely half of US states a grade B+ or higher. Among the 10 worst performers were some of the most populous states, including Texas, which was given the lowest grade (F) and has a disproportionate influence because its textbooks are widely sold elsewhere.",
+        "Glenn Branch, the centre’s deputy director, cautions that setting state-level science standards is only one limited benchmark in a country that decentralises decisions to local school boards. Even if a state is considered a high performer in its science standards, “that does not mean it will be taught”, he says.",
+        "Another issue is that, while climate change is well integrated into some subjects and at some ages—such as earth and space sciences in high schools—it is not as well represented in curricula for younger children and in subjects that are more widely taught, such as biology and chemistry. It is also less prominent in many social studies courses.",
+        "Branch points out that, even if a growing number of official guidelines and textbooks reflect scientific consensus on climate change, unofficial educational materials that convey more biased perspectives are being distributed to teachers. They include materials sponsored by energy industry associations."
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "passage": "2023-英语一-Text1",
+      "num": 21,
+      "context": [
+        { "p": 1, "text": "The weather in Texas may have cooled since the recent extreme heat, ==but **the temperature will be high at the State Board of Education meeting** in Austin this month as officials **debate** how climate change is taught in Texas schools.==" }
+      ],
+      "stem": "In Paragraph 1, the weather in Texas is mentioned to ______.",
+      "options": {
+        "A": "forecast a policy shift in Texas schools",
+        "B": "stress the consequences of climate change",
+        "C": "indicate the atmosphere at the board meeting",
+        "D": "draw the public’s attention to energy shortages"
+      },
+      "answer": "C",
+      "answerZh": "引出会议上的紧张气氛",
+      "basis": [
+        "前半句说天气“已经降温”(may have cooled)，but 一转，说会议上的 temperature 会很高。会议室不会真的热，这里的 temperature 是比喻，指争论的激烈程度；as officials debate 交代了“热”的原因：官员们要辩论气候变化怎么教。"
+      ],
+      "map": [
+        ["the temperature … at the … meeting", "the atmosphere at the board meeting"]
+      ],
+      "note": "天气只是铺垫，but 后面才是作者真正想说的。后文 Hardy 与 Quinn 针锋相对，也印证了会议的火药味。",
+      "wrong": [
+        { "k": "A", "tag": "过度推断", "text": "原文只说要“辩论”，没说政策会转变。" },
+        { "k": "B", "tag": "偏离主题", "text": "文章讲气候变化“教育”之争，不讨论气候变化的后果。" },
+        { "k": "D", "tag": "无中生有", "text": "通篇没有提能源短缺；能源行业只出现在 Hardy 的立场里。" }
+      ]
+    },
+    {
+      "passage": "2023-英语一-Text1",
+      "num": 22,
+      "context": [
+        { "p": 2, "text": "Pat Hardy, who sympathises with the views of the energy sector, is resisting proposed changes to science standards for pre-teen pupils. “There are as many scientists working against all the panic of global climate change as there are those who are pushing it,” she claims. …" },
+        { "p": 3, "text": "Most scientists and experts sharply dispute Hardy’s views. ==Board members like her “casually **dismiss** **the career work of scholars and scientists** as just another misguided opinion,” says Dan Quinn==, senior communications strategist at the Texas Freedom Network, …" }
+      ],
+      "stem": "What does Quinn think of Hardy?",
+      "options": {
+        "A": "She exaggerates the existing panic.",
+        "B": "She denies the value of scientific work.",
+        "C": "She shows no concern for pre-teens.",
+        "D": "She expresses self-contradictory views."
+      },
+      "answer": "B",
+      "answerZh": "她否定科学研究的价值",
+      "basis": [
+        "题干问 Quinn 的看法，直接找 says Dan Quinn 那句引语。dismiss 意为“不屑一顾、轻视否定”，casually 加强了“随随便便”的意味；把科学家毕生的研究当成“又一个被误导的观点”打发掉，就是否定其价值。"
+      ],
+      "map": [
+        ["casually dismiss", "denies"],
+        ["the career work of scholars and scientists", "the value of scientific work"]
+      ],
+      "wrong": [
+        { "k": "A", "tag": "偷换说话人", "text": "panic 出自 Hardy 自己的话，是她批评别人制造恐慌，不是 Quinn 说她夸大恐慌。" },
+        { "k": "C", "tag": "原词干扰", "text": "pre-teen pupils 只是第二段交代她反对哪部分标准，Quinn 没这样评价她。" },
+        { "k": "D", "tag": "无中生有", "text": "文中没有任何地方说 Hardy 前后矛盾。" }
+      ]
+    },
+    {
+      "passage": "2023-英语一-Text1",
+      "num": 23,
+      "context": [
+        { "p": 5, "text": "A study last year by the National Center for Science Education, … looking at how state public schools across the country address climate change in science classes, ==gave **barely half** of US states a grade B+ or higher.== Among the 10 worst performers were some of the most populous states, including Texas, which was given the lowest grade (F) and has a disproportionate influence because its textbooks are widely sold elsewhere." }
+      ],
+      "stem": "The study mentioned in Paragraph 5 shows that ______.",
+      "options": {
+        "A": "climate education is insufficient at state public schools",
+        "B": "policymakers have little drive for science education",
+        "C": "Texas is reluctant to rewrite its science textbooks",
+        "D": "environmental teaching in some states lacks supervision"
+      },
+      "answer": "A",
+      "answerZh": "州立公立学校的气候教育不足",
+      "basis": [
+        "研究对象是 state public schools 在科学课上如何讲气候变化，结论是“勉强一半”的州拿到 B+ 以上，十个最差的州里还有人口大州，德州得了 F。barely half 本身就是“不够好”的评价。"
+      ],
+      "map": [
+        ["barely half … B+ or higher", "insufficient"],
+        ["how state public schools … address climate change", "climate education at state public schools"]
+      ],
+      "wrong": [
+        { "k": "B", "tag": "无中生有", "text": "研究评的是学校教学，没涉及决策者的动力。" },
+        { "k": "C", "tag": "曲解细节", "text": "textbooks 只用来说明德州影响大，没说它不愿改教材。" },
+        { "k": "D", "tag": "无中生有", "text": "原文没有提“监管 / 监督”。" }
+      ]
+    },
+    {
+      "passage": "2023-英语一-Text1",
+      "num": 24,
+      "context": [
+        { "p": 6, "text": "Glenn Branch, the centre’s deputy director, cautions that ==setting state-level science standards is only **one limited benchmark**== in a country that decentralises decisions to local school boards. ==Even if a state is considered a high performer in its science standards, “that **does not mean it will be taught**”==, he says." }
+      ],
+      "stem": "According to Branch, state-level science standards in the US ______.",
+      "options": {
+        "A": "call for regular revision",
+        "B": "require urgent application",
+        "C": "have limited influence",
+        "D": "cater to local needs"
+      },
+      "answer": "C",
+      "answerZh": "州级科学标准影响有限",
+      "basis": [
+        "Branch 说州级标准“只是一个有限的衡量基准”，因为决定权下放到地方学区；而且标准再好也“不代表会被教”。两句都在说州级标准管不了多少事。"
+      ],
+      "map": [
+        ["only one limited benchmark", "limited"],
+        ["does not mean it will be taught", "limited influence"]
+      ],
+      "wrong": [
+        { "k": "A", "tag": "无中生有", "text": "没提定期修订。" },
+        { "k": "B", "tag": "无中生有", "text": "没提紧急实施。" },
+        { "k": "D", "tag": "曲解细节", "text": "local school boards 说的是决策权下放，不是标准迎合地方需求。" }
+      ]
+    },
+    {
+      "passage": "2023-英语一-Text1",
+      "num": 25,
+      "context": [
+        { "p": 8, "text": "Branch points out that, even if a growing number of official guidelines and textbooks reflect scientific consensus on climate change, ==unofficial educational materials that convey more **biased perspectives** are being distributed to teachers. They include materials **sponsored by energy industry associations**.==" }
+      ],
+      "stem": "It is implied in the last paragraph that climate change teaching in some schools ______.",
+      "options": {
+        "A": "agrees to major public demands",
+        "B": "reflects teachers’ personal biases",
+        "C": "may misrepresent the energy sector",
+        "D": "can be swayed by external forces"
+      },
+      "answer": "D",
+      "answerZh": "可能受外部力量左右",
+      "basis": [
+        "带偏见的非官方教材被发到老师手里，其中包括能源行业协会赞助的材料。官方之外的行业团体在影响课堂内容，这就是题干说的 implied（暗示）。"
+      ],
+      "map": [
+        ["materials sponsored by energy industry associations", "external forces"],
+        ["are being distributed to teachers", "can be swayed"]
+      ],
+      "wrong": [
+        { "k": "A", "tag": "无中生有", "text": "最后一段没提公众诉求。" },
+        { "k": "B", "tag": "偷换主体", "text": "biased 修饰的是教材，不是老师个人的偏见。" },
+        { "k": "C", "tag": "关系颠倒", "text": "材料是能源行业赞助的，是替它说话，不是歪曲它。" }
+      ]
+    }
+  ]
+}
