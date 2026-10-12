@@ -79,9 +79,11 @@ mark b { font-weight: 600; text-decoration: underline; text-decoration-thickness
 .q.hide-ans li.ok { background: none; }
 .q.hide-ans li.ok .k { color: var(--muted); font-weight: 400; }
 .ana { display: grid; gap: 14px; align-content: start; }
-.ana.hidden > :not(.reveal) { display: none; }
+.ana.hidden > :not(.btns) { display: none; }
 .row.quiz .para { display: none; }
-.reveal { font: inherit; justify-self: start; border: 1px solid var(--accent); color: var(--accent); background: var(--paper); border-radius: 6px; padding: 4px 14px; cursor: pointer; }
+.btns { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.zh-all .zh-btn { display: none; }
+.reveal, .zh-btn { font: inherit; justify-self: start; border: 1px solid var(--accent); color: var(--accent); background: var(--paper); border-radius: 6px; padding: 4px 14px; cursor: pointer; }
 .ans { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
 .badge { font-family: var(--f-mono); font-size: 13px; background: var(--right); color: var(--paper); padding: 2px 10px; border-radius: 4px; }
 .ans strong { font-size: 17px; }
@@ -96,10 +98,20 @@ ul.wrong { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
 ul.wrong li { display: grid; grid-template-columns: 2em 1fr; }
 ul.wrong li .k { font-family: var(--f-mono); font-size: 13px; color: var(--wrong); padding-top: 2px; }
 .tag { display: inline-block; font-size: 12px; color: var(--wrong); border: 1px solid currentColor; border-radius: 3px; padding: 0 5px; margin-right: 6px; line-height: 1.5; }
-.toolbar { display: flex; justify-content: flex-end; font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+.toolbar { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; font-size: 13px; color: var(--muted); margin-bottom: 8px; }
 .toolbar label { display: inline-flex; gap: 6px; align-items: center; cursor: pointer; }
 footer { margin-top: 28px; color: var(--muted); font-size: 13px; display: flex; flex-wrap: wrap; gap: 8px 20px; }
 @media (max-width: 860px) {
   .body { display: block; }
   .body .full { position: static; max-height: none; margin-bottom: 20px; }
 }
+
+/* 英汉对照译文：默认隐藏；“再检查”打开全部，或单题按钮打开本题 */
+.zh { display: none; font-family: var(--f-zh); font-size: 14px; font-weight: 400; font-style: normal; line-height: 1.6; color: var(--muted); }
+.zh-all .zh, .row.zh-on .zh { display: block; }
+.zh-all .full .s { display: block; }
+.full .zh { margin: 2px 0 10px; }
+.stem-zh { margin: -4px 0 8px; }
+.para-zh { padding-left: 17px; margin: -8px 0 0; }
+.row.quiz .para-zh { display: none !important; }
+.warn { color: var(--wrong); }
