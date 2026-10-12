@@ -10,6 +10,7 @@
   var passages = {};
   var questions = [];
   var hideAnswers = false;
+  var fullOpen = false;
   try { hideAnswers = localStorage.getItem("jiexi-hide") === "1"; } catch (e) {}
 
   function esc(s) {
@@ -115,14 +116,22 @@
 
   function groupHTML(pid, qs) {
     var p = passages[pid];
+    // 题目定位到的段落，在全文里加左边线
+    var located = {};
+    qs.forEach(function (q) { q.context.forEach(function (c) { located[c.p] = true; }); });
     var full = p.paragraphs.map(function (t, i) {
-      return '<p><span class="pn">P' + (i + 1) + "</span>" + esc(t) + "</p>";
+      return '<p' + (located[i + 1] ? ' class="located"' : "") + '><span class="pn">P' + (i + 1) + "</span>" + esc(t) + "</p>";
     }).join("");
+    // 展开全文时：左边全文，右边逐题（定位段落 → 试题 → 分析）上下排列
     return '<div class="group"><h2><span class="eyebrow">' + p.year + " 考研英语（" + p.exam.slice(2) + "）· Text " + p.text + "</span>" +
       qs.map(function (q) { return q.num; }).join("、") + " 题</h2>" +
-      '<details class="full"><summary>展开 Text ' + p.text + " 全文（共 " + p.paragraphs.length + " 段）</summary>" + full + "</details>" +
-      '<div class="colhead"><div>原文 · 试题</div><div>分析</div></div>' +
-      qs.map(rowHTML).join("") + "</div>";
+      '<div class="body' + (fullOpen ? " open" : "") + '">' +
+        '<details class="full"' + (fullOpen ? " open" : "") + "><summary>" +
+          '<span class="when-closed">展开 Text ' + p.text + " 全文（共 " + p.paragraphs.length + " 段），题目会排到全文右边</span>" +
+          '<span class="when-open">收起 Text ' + p.text + " 全文</span></summary>" + full + "</details>" +
+        '<div class="rows"><div class="colhead"><div>原文 · 试题</div><div>分析</div></div>' +
+        qs.map(rowHTML).join("") + "</div>" +
+      "</div></div>";
   }
 
   function highlight(root, words, selector) {
@@ -219,6 +228,12 @@
       btn.remove();
     }
   });
+  // 全文展开/收起：切换左右布局，并记住状态供下次搜索沿用
+  document.addEventListener("toggle", function (e) {
+    if (!e.target.matches || !e.target.matches("details.full")) return;
+    fullOpen = e.target.open;
+    e.target.parentNode.classList.toggle("open", fullOpen);
+  }, true);
   document.addEventListener("change", function (e) {
     if (e.target.id !== "hide") return;
     hideAnswers = e.target.checked;
