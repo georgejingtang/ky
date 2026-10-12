@@ -11,6 +11,12 @@
   var questions = [];
   var hideAnswers = false;
   try { hideAnswers = localStorage.getItem("jiexi-hide") === "1"; } catch (e) {}
+  var zhAll = false;   // 再检查：全部显示英汉对照
+  try { zhAll = localStorage.getItem("jiexi-zh") === "1"; } catch (e) {}
+  var zhRows = {};     // 单题打开了英汉对照的题
+  var zh = null;       // 译文：来自仓库根目录的 1reading.json（原文）和 4tiganxuanxiang.json（题干选项）
+  var zhFailed = false;
+  var revealed = {};   // 先做题时已点开答案的题
 
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
@@ -84,15 +90,64 @@
     return res;
   }
 
+  // ---------- 英汉对照译文 ----------
+  // 原文按句对齐：1reading.json 里每条是一句（末尾带“(N words)”），按顺序在各段里找到对应位置
+  function norm(s) { return s.replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\u00a0/g, " "); }
+  function passageZh(p) {
+    if (!zh) return null;
+    if (p._zh !== undefined) return p._zh;
+    var key = p.exam + " " + p.year + "年第" + p.text + "篇";
+    var sents = zh.reading.filter(function (x) { return x.id === key; }).map(function (x) {
+      return { en: norm(x.en.replace(/\s*\(\d+ words?\)\s*$/, "").trim()), cn: x.cn };
+    });
+    var k = 0;
+    p._zh = p.paragraphs.map(function (para) {
+      var np = norm(para), at = 0, out = [];
+      while (k < sents.length) {
+        var i = np.indexOf(sents[k].en, at);
+        if (i < 0) break;
+        out.push({ start: i, end: i + sents[k].en.length, cn: sents[k].cn });
+        at = i + sents[k].en.length; k++;
+      }
+      return out.length ? out : null;
+    });
+    return p._zh;
+  }
+  function questionZh(p, q) {
+    if (!zh) return null;
+    var x = zh.qs[p.exam + "_" + p.year + "_" + p.text + "_" + q.num];
+    if (!x) return null;
+    var opts = {};
+    x.cn_opts.forEach(function (o) { var m = o.match(/^\[([A-D])\]\s*(.*)$/); if (m) opts[m[1]] = m[2]; });
+    return { stem: x.cn_q.replace(/^\d+\.\s*/, ""), opts: opts };
+  }
+  // 全文一段：有译文时拆成句子，每句后面跟一行中文（默认隐藏，打开英汉对照才显示）
+  function paraHTML(text, sents) {
+    if (!sents) return esc(text);
+    var html = "", last = 0;
+    sents.forEach(function (s) {
+      html += esc(text.slice(last, s.start)) + '<span class="s">' + esc(text.slice(s.start, s.end)) + '</span><span class="zh">' + esc(s.cn) + "</span>";
+      last = s.end;
+    });
+    return html + esc(text.slice(last));
+  }
+
   // ---------- rendering ----------
   function rowHTML(q) {
     var p = passages[q.passage];
+    var qz = questionZh(p, q), pz = passageZh(p);
     var opts = ["A", "B", "C", "D"].filter(function (k) { return q.options[k] != null; }).map(function (k) {
-      return '<li class="opt' + (k === q.answer ? " ok" : "") + '"><span class="k">[' + k + ']</span><span>' + esc(q.options[k]) + "</span></li>";
+      var cn = qz && qz.opts[k] ? '<span class="zh">' + esc(qz.opts[k]) + "</span>" : "";
+      return '<li class="opt' + (k === q.answer ? " ok" : "") + '"><span class="k">[' + k + ']</span><span>' + esc(q.options[k]) + cn + "</span></li>";
     }).join("");
     var ctx = q.context.map(function (c) {
-      return '<p class="para"><span class="pn">P' + c.p + "</span>" + rich(c.text) + "</p>";
+      var ps = pz && pz[c.p - 1];
+      var cn = ps ? '<p class="zh para-zh">' + esc(ps.map(function (s) { return s.cn; }).join("")) + "</p>" : "";
+      return '<p class="para"><span class="pn">P' + c.p + "</span>" + rich(c.text) + "</p>" + cn;
     }).join("");
+    var rowId = p.year + "-" + p.exam + "-" + q.num;
+    var quiz = hideAnswers && !revealed[rowId];
+    var zhBtn = '<button class="zh-btn" type="button">' + (zhRows[rowId] ? "隐藏英汉对照译文" : "显示英汉对照译文") + "</button>";
     var map = (q.map || []).length ? '<div class="map">' + q.map.map(function (m) {
       return "<div><code>" + esc(m[0]) + "</code><span>≈</span><code>" + esc(m[1]) + "</code></div>";
     }).join("") + "</div>" : "";
@@ -103,12 +158,12 @@
     }).join("");
     // 先做题：定位段落本身就暴露答案位置，和分析一起隐藏，点“显示答案与分析”后才出现
     var ps = q.context.map(function (c) { return c.p; }).join(",");
-    return '<section class="row' + (hideAnswers ? " quiz" : "") + '" id="' + esc(p.year + "-" + p.exam + "-" + q.num) + '" data-ps="' + ps + '">' +
+    return '<section class="row' + (quiz ? " quiz" : "") + (zhRows[rowId] ? " zh-on" : "") + '" id="' + esc(rowId) + '" data-ps="' + ps + '">' +
       '<div class="src">' + ctx +
-        '<div class="q' + (hideAnswers ? " hide-ans" : "") + '"><p class="stem">' + q.num + ". " + esc(q.stem) + "</p><ol>" + opts + "</ol></div>" +
+        '<div class="q' + (quiz ? " hide-ans" : "") + '"><p class="stem">' + q.num + ". " + esc(q.stem) + "</p>" + (qz ? '<p class="zh stem-zh">' + esc(qz.stem) + "</p>" : "") + "<ol>" + opts + "</ol></div>" +
       "</div>" +
-      '<div class="ana' + (hideAnswers ? " hidden" : "") + '">' +
-        (hideAnswers ? '<button class="reveal" type="button">显示答案与分析</button>' : "") +
+      '<div class="ana' + (quiz ? " hidden" : "") + '">' +
+        '<div class="btns">' + (quiz ? '<button class="reveal" type="button">显示答案与分析</button>' : "") + zhBtn + "</div>" +
         '<div class="ans"><span class="badge">答案 ' + esc(q.answer) + "</span><strong>" + esc(q.answerZh) + "</strong></div>" +
         "<div><h3>定位与依据</h3>" + basis + map + note + "</div>" +
         '<div><h3>排除</h3><ul class="wrong">' + wrong + "</ul></div>" +
@@ -119,9 +174,13 @@
     var p = passages[pid];
     // 题目定位到的段落，在全文里加左边线
     var located = {};
-    if (!hideAnswers) qs.forEach(function (q) { q.context.forEach(function (c) { located[c.p] = true; }); });
+    qs.forEach(function (q) {
+      if (hideAnswers && !revealed[p.year + "-" + p.exam + "-" + q.num]) return;
+      q.context.forEach(function (c) { located[c.p] = true; });
+    });
+    var pz = passageZh(p);
     var full = p.paragraphs.map(function (t, i) {
-      return '<p data-p="' + (i + 1) + '"' + (located[i + 1] ? ' class="located"' : "") + '><span class="pn">P' + (i + 1) + "</span>" + esc(t) + "</p>";
+      return '<p data-p="' + (i + 1) + '"' + (located[i + 1] ? ' class="located"' : "") + '><span class="pn">P' + (i + 1) + "</span>" + paraHTML(t, pz && pz[i]) + "</p>";
     }).join("");
     // 展开全文时：左边全文，右边逐题（定位段落 → 试题 → 分析）上下排列
     return '<div class="group"><h2><span class="eyebrow">' + p.year + " 考研英语（" + p.exam.slice(2) + "）· Text " + p.text + "</span>" +
@@ -178,7 +237,9 @@
   }
 
   function toolbar() {
-    return '<div class="toolbar"><label><input type="checkbox" id="hide"' + (hideAnswers ? " checked" : "") + "> 先做题（隐藏原文定位、答案与分析）</label></div>";
+    return '<div class="toolbar"><label><input type="checkbox" id="hide"' + (hideAnswers ? " checked" : "") + "> 先做题（隐藏原文定位、答案与分析）</label>" +
+      '<label><input type="checkbox" id="zh"' + (zhAll ? " checked" : "") + "> 再检查（显示原文、题干和选项英汉对照）</label>" +
+      (zhFailed ? '<span class="warn">译文加载失败，请刷新重试</span>' : "") + "</div>";
   }
 
   function render() {
@@ -209,6 +270,7 @@
       if (!seen[q.passage]) { seen[q.passage] = []; groups.push(q.passage); }
       seen[q.passage].push(q);
     });
+    $results.classList.toggle("zh-all", zhAll);
     $results.innerHTML = toolbar() + groups.map(function (g) { return groupHTML(g, seen[g]); }).join("");
     highlight($results, r.filters.words, r.where === "context" ? ".para" : ".stem, .opt");
   }
@@ -219,12 +281,22 @@
   document.addEventListener("click", function (e) {
     var chip = e.target.closest(".chip");
     if (chip) { $q.value = chip.getAttribute("data-q"); render(); window.scrollTo({ top: 0 }); return; }
+    var zb = e.target.closest(".zh-btn");
+    if (zb) {
+      var zrow = zb.closest(".row");
+      var on = !zrow.classList.contains("zh-on");
+      zrow.classList.toggle("zh-on", on);
+      if (on) zhRows[zrow.id] = true; else delete zhRows[zrow.id];
+      zb.textContent = on ? "隐藏英汉对照译文" : "显示英汉对照译文";
+      return;
+    }
     var btn = e.target.closest(".reveal");
     if (btn) {
-      var ana = btn.parentNode;
+      var ana = btn.closest(".ana");
       ana.classList.remove("hidden");
       var row = btn.closest(".row");
       row.classList.remove("quiz");
+      revealed[row.id] = true;
       row.querySelector(".q").classList.remove("hide-ans");
       var full = row.closest(".body").querySelector(".full");
       row.getAttribute("data-ps").split(",").forEach(function (n) {
@@ -235,8 +307,15 @@
     }
   });
   document.addEventListener("change", function (e) {
+    if (e.target.id === "zh") {
+      zhAll = e.target.checked;
+      try { localStorage.setItem("jiexi-zh", zhAll ? "1" : "0"); } catch (err) {}
+      $results.classList.toggle("zh-all", zhAll);
+      return;
+    }
     if (e.target.id !== "hide") return;
     hideAnswers = e.target.checked;
+    revealed = {};
     try { localStorage.setItem("jiexi-hide", hideAnswers ? "1" : "0"); } catch (err) {}
     render();
   });
@@ -257,6 +336,14 @@
       });
       $q.value = new URL(location.href).searchParams.get("q") || "";
       render();
+      return Promise.all(["../1reading.json", "../4tiganxuanxiang.json"].map(function (u) {
+        return fetch(u).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+      })).then(function (res) {
+        var qs = {};
+        res[1].forEach(function (x) { qs[x.id] = x; });
+        zh = { reading: res[0], qs: qs };
+        render();
+      }, function () { zhFailed = true; render(); });
     })
     .catch(function () {
       $status.textContent = "题库加载失败。如果是直接双击打开的本地文件，请改用 GitHub Pages 网址访问。";
