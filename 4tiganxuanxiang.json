@@ -13276,7 +13276,7 @@
       "[A] 要求政策调整的呼声",
       "[B] 经济复苏的迹象",
       "[C] 医疗工作者的短缺",
-      "[D] 招聘实践的变化"
+      "[D] 招聘做法的变化"
     ]
   },
   {
@@ -13296,7 +13296,7 @@
       "[A] 重新培训客舱员工以提供更好的服务",
       "[B] 为失业者创造职位空缺",
       "[C] 资助员工的大学教育",
-      "[D] 为被裁员的员工准备其他工作"
+      "[D] 培训被裁员工从事其他工作"
     ]
   },
   {
@@ -13456,7 +13456,7 @@
       "[A] 损害国民经济",
       "[B] 削弱大型科技公司",
       "[C] 打击初创企业投资者的积极性",
-      "[D] 加剧市场竞争"
+      "[D] 使市场竞争环境恶化"
     ]
   },
   {
@@ -13486,10 +13486,10 @@
     "source": "英语二",
     "en_q": "35. For the five biggest tech companies, their small acquisitions have ________.",
     "en_opts": [
-      "[A] few management challenges",
-      "[B] considerable profits",
-      "[C] little financial pressure",
-      "[D] an example for future deals"
+      "[A] raised few management challenges",
+      "[B] generated considerable profits",
+      "[C] brought little financial pressure",
+      "[D] set an example for future deals"
     ],
     "cn_q": "35. 对于五家最大的科技公司来说，它们的小型收购已经 ________。",
     "cn_opts": [
@@ -13511,7 +13511,7 @@
       "[C] the power of people's memory",
       "[D] instructor-student interaction"
     ],
-    "cn_q": "36. 纳里尼·安巴迪的研究涉及 _________。",
+    "cn_q": "36. 纳利尼·安巴迪的研究涉及 _________。",
     "cn_opts": [
       "[A] 人们影响他人的能力",
       "[B] 第一印象的可靠性",
