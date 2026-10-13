@@ -1,16 +1,21 @@
 # 阅读真题精析检索
 
-网页：开启 GitHub Pages 后访问 `https://georgejingtang.github.io/ky/jiexi/`
+网页：
+
+- 英语一：`https://georgejingtang.github.io/ky/jiexi/yingyu1/`
+- 英语二：`https://georgejingtang.github.io/ky/jiexi/yingyu2/`
+
+`/ky/jiexi/` 是入口页；以前分享的 `/ky/jiexi/?q=…` 链接会自动转到英语一。两个页面共用 `app.js` 和 `style.css`，只是题库不同。
 
 - 搜英文单词：在题干和选项里找；如果题干和选项里没有，会退到原文定位段落里找。多个词要同时出现。
-- 搜题号：`2023年22题`、`2023-22`、`2023 第22题`；还能加 `英语一` / `英语二`、`Text 1` / `第1篇` 缩小范围。
+- 搜题号：`2023年22题`、`2023-22`、`2023 第22题`；还能加 `Text 1` / `第1篇` 缩小范围。
 - 搜中文：在答案、分析和排错标签里找，如 `偷换说话人`。
-- 英汉对照译文直接读取仓库根目录的 `1reading.json`（原文逐句）和 `4tiganxuanxiang.json`（题干、选项），不用在 `questions.json` 里另写。
-- 搜索结果可以直接复制网址分享，例如 `.../jiexi/?q=2023年22题`。
+- 英汉对照译文直接读取仓库根目录的 `1reading.json`（原文逐句）和 `4tiganxuanxiang.json`（题干、选项），不用在题库里另写。
+- 搜索结果可以直接复制网址分享，例如 `.../jiexi/yingyu2/?q=2023年22题`。
 
 ## 新增一道题
 
-所有内容都在 `data/questions.json` 里，网页不用改。
+英语一的题在 `data/yingyu1.json`，英语二的题在 `data/yingyu2.json`，网页不用改。
 
 1. 如果这篇文章还没有，在 `passages` 里加一篇：
 
