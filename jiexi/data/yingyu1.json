@@ -293,6 +293,59 @@
         "Until now, many sellers that have a physical presence in only a single state or a few states have been able to avoid charging sales taxes when they ship to addresses outside those states. Sellers that use eBay and Etsy, which provide platforms for smaller sellers, also haven’t been collecting sales tax nationwide. Under the ruling Thursday, states can pass laws requiring out-of-state sellers to collect the state’s sales tax from customers and send it to the state.",
         "Retail trade groups praised the ruling, saying it levels the playing field for local and online businesses. The losers, said retail analyst Neil Saunders, are online-only retailers, especially smaller ones. Those retailers may face headaches complying with various state sales tax laws. The Small Business & Entrepreneurship Council advocacy group said in a statement, “Small businesses and internet entrepreneurs are not well served at all by this decision.”"
       ]
+    },
+    {
+      "id": "2018-英语一-Text1",
+      "exam": "英语一",
+      "year": 2018,
+      "text": 1,
+      "paragraphs": [
+        "Among the annoying challenges facing the middle class is one that will probably go unmentioned in the next presidential campaign: What happens when the robots come for their jobs?",
+        "Don’t dismiss that possibility entirely. About half of U.S. jobs are at high risk of being automated, according to a University of Oxford study, with the middle class disproportionately squeezed. Lower-income jobs like gardening or day care don’t appeal to robots. But many middle-class occupations—trucking, financial advice, software engineering—have aroused their interest, or soon will. The rich own the robots, so they will be fine.",
+        "This isn’t to be alarmist. Optimists point out that technological upheaval has benefited workers in the past. The Industrial Revolution didn’t go so well for Luddites whose jobs were displaced by mechanized looms, but it eventually raised living standards and created more jobs than it destroyed. Likewise, automation should eventually boost productivity, stimulate demand by driving down prices, and free workers from hard, boring work. But in the medium term, middle-class workers may need a lot of help adjusting.",
+        "The first step, as Erik Brynjolfsson and Andrew McAfee argue in The Second Machine Age, should be rethinking education and job training. Curriculums—from grammar school to college —should evolve to focus less on memorizing facts and more on creativity and complex communication. Vocational schools should do a better job of fostering problem-solving skills and helping students work alongside robots. Online education can supplement the traditional kind. It could make extra training and instruction affordable. Professionals trying to acquire new skills will be able to do so without going into debt.",
+        "The challenge of coping with automation underlines the need for the U.S. to revive its fading business dynamism: Starting new companies must be made easier. In previous eras of drastic technological change, entrepreneurs smoothed the transition by dreaming up ways to combine labor and machines. The best uses of 3D printers and virtual reality haven’t been invented yet. The U.S. needs the new companies that will invent them.",
+        "Finally, because automation threatens to widen the gap between capital income and labor income, taxes and the safety net will have to be rethought. Taxes on low-wage labor need to be cut, and wage subsidies such as the earned income tax credit should be expanded: This would boost incomes, encourage work, reward companies for job creation, and reduce inequality.",
+        "Technology will improve society in ways big and small over the next few years, yet this will be little comfort to those who find their lives and careers upended by automation. Destroying the machines that are coming for our jobs would be nuts. But policies to help workers adapt will be indispensable."
+      ]
+    },
+    {
+      "id": "2018-英语一-Text2",
+      "exam": "英语一",
+      "year": 2018,
+      "text": 2,
+      "paragraphs": [
+        "A new survey by Harvard University finds more than two-thirds of young Americans disapprove of President Trump’s use of Twitter. The implication is that Millennials prefer news from the White House to be filtered through other sources, not a president’s social media platform.",
+        "Most Americans rely on social media to check daily headlines. Yet as distrust has risen toward all media, people may be starting to beef up their media literacy skills. Such a trend is badly needed. During the 2016 presidential campaign, nearly a quarter of web content shared by Twitter users in the politically critical state of Michigan was fake news, according to the University of Oxford. And a survey conducted for BuzzFeed News found 44 percent of Facebook users rarely or never trust news from the media giant.",
+        "Young people who are digital natives are indeed becoming more skillful at separating fact from fiction in cyberspace. A Knight Foundation focus-group survey of young people between ages 14 and 24 found they use “distributed trust” to verify stories. They cross-check sources and prefer news from different perspectives—especially those that are open about any bias. “Many young people assume a great deal of personal responsibility for educating themselves and actively seeking out opposing viewpoints,” the survey concluded.",
+        "Such active research can have another effect. A 2014 survey conducted in Australia, Britain, and the United States by the University of Wisconsin-Madison found that young people’s reliance on social media led to greater political engagement.",
+        "Social media allows users to experience news events more intimately and immediately while also permitting them to re-share news as a projection of their values and interests. This forces users to be more conscious of their role in passing along information. A survey by Barna research group found the top reason given by Americans for the fake news phenomenon is “reader error,” more so than made-up stories or factual mistakes in reporting. About a third say the problem of fake news lies in “misinterpretation or exaggeration of actual news” via social media. In other words, the choice to share news on social media may be the heart of the issue. “This indicates there is a real personal responsibility in counteracting this problem,” says Roxanne Stone, editor in chief at Barna Group.",
+        "So when young people are critical of an over-tweeting president, they reveal a mental discipline in thinking skills—and in their choices on when to share on social media."
+      ]
+    },
+    {
+      "id": "2018-英语一-Text3",
+      "exam": "英语一",
+      "year": 2018,
+      "text": 3,
+      "paragraphs": [
+        "Any fair-minded assessment of the dangers of the deal between Britain’s National Health Service (NHS) and DeepMind must start by acknowledging that both sides mean well. DeepMind is one of the leading artificial intelligence (AI) companies in the world. The potential of this work applied to healthcare is very great, but it could also lead to further concentration of power in the tech giants. It is against that background that the information commissioner, Elizabeth Denham, has issued her damning verdict against the Royal Free hospital trust under the NHS, which handed over to DeepMind the records of 1.6 million patients in 2015 on the basis of a vague agreement which took far too little account of the patients’ rights and their expectations of privacy.",
+        "DeepMind has almost apologized. The NHS trust has mended its ways. Further arrangements —and there may be many—between the NHS and DeepMind will be carefully scrutinised to ensure that all necessary permissions have been asked of patients and all unnecessary data has been cleaned. There are lessons about informed patient consent to learn. But privacy is not the only angle in this case and not even the most important. Ms Denham chose to concentrate the blame on the NHS trust, since under existing law it “controlled” the data and DeepMind merely “processed” it. But this distinction misses the point that it is processing and aggregation, not the mere possession of bits, that gives the data value.",
+        "The great question is who should benefit from the analysis of all the data that our lives now generate. Privacy law builds on the concept of damage to an individual from identifiable knowledge about them. That misses the way the surveillance economy works. The data of an individual there gains its value only when it is compared with the data of countless millions more.",
+        "The use of privacy law to curb the tech giants in this instance feels slightly maladapted. This practice does not address the real worry. It is not enough to say that the algorithms DeepMind develops will benefit patients and save lives. What matters is that they will belong to a private monopoly which developed them using public resources. If software promises to save lives on the scale that drugs now can, big data may be expected to behave as a big pharma has done. We are still at the beginning of this revolution and small choices now may turn out to have gigantic consequences later. A long struggle will be needed to avoid a future of digital feudalism. Ms Denham’s report is a welcome start."
+      ]
+    },
+    {
+      "id": "2018-英语一-Text4",
+      "exam": "英语一",
+      "year": 2018,
+      "text": 4,
+      "paragraphs": [
+        "The U.S. Postal Service (USPS) continues to bleed red ink. It reported a net loss of $5.6 billion for fiscal 2016, the 10th straight year its expenses have exceeded revenue. Meanwhile, it has more than $120 billion in unfunded liabilities, mostly for employee health and retirement costs. There are many reasons this formerly stable federal institution finds itself on the verge of bankruptcy. Fundamentally, the USPS is in a historic squeeze between technological change that has permanently decreased demand for its bread-and-butter product, first-class mail, and a regulatory structure that denies management the flexibility to adjust its operations to the new reality.",
+        "And interest groups ranging from postal unions to greeting-card makers exert self-interested pressure on the USPS’s ultimate overseer—Congress—insisting that whatever else happens to the Postal Service, aspects of the status quo they depend on get protected. This is why repeated attempts at reform legislation have failed in recent years, leaving the Postal Service unable to pay its bills except by deferring vital modernization.",
+        "Now comes word that everyone involved—Democrats, Republicans, the Postal Service, the unions and the system’s heaviest users—has finally agreed on a plan to fix the system. Legislation is moving through the House that would save USPS an estimated $28.6 billion over five years, which could help pay for new vehicles, among other survival measures. Most of the money would come from a penny-per-letter permanent rate increase and from shifting postal retirees into Medicare. The latter step would largely offset the financial burden of annually pre-funding retiree health care, thus addressing a long-standing complaint by the USPS and its unions.",
+        "If it clears the House, this measure would still have to get through the Senate—where someone is bound to point out that it amounts to the bare, bare minimum necessary to keep the Postal Service afloat, not comprehensive reform. There’s no change to collective bargaining at the USPS, a major omission considering that personnel accounts for 80 percent of the agency’s costs. Also missing is any discussion of eliminating Saturday letter delivery. That common-sense change enjoys wide public support and would save the USPS $2 billion per year. But postal special-interest groups seem to have killed it, at least in the House. The emerging consensus around the bill is a sign that legislators are getting frightened about a politically embarrassing short-term collapse at the USPS. It is not, however, a sign that they’re getting serious about transforming the postal system for the 21st century."
+      ]
     }
   ],
   "questions": [
@@ -5005,6 +5058,926 @@
           "k": "D",
           "tag": "以偏概全",
           "text": "被推翻的旧判决只在第二、三段交代，作者没有分析它们的意义。"
+        }
+      ]
+    },
+    {
+      "passage": "2018-英语一-Text1",
+      "num": 21,
+      "context": [
+        {
+          "p": 2,
+          "text": "Don’t dismiss that possibility entirely. About half of U.S. jobs are at high risk of being automated, according to a University of Oxford study, ==with **the middle class disproportionately squeezed**==. Lower-income jobs like gardening or day care don’t appeal to robots. ==But many **middle-class occupations**==—trucking, financial advice, software engineering—have aroused their interest, or soon will. The rich own the robots, so they will be fine."
+        }
+      ],
+      "stem": "Who will be most threatened by automation?",
+      "options": {
+        "A": "Leading politicians.",
+        "B": "Low-wage laborers.",
+        "C": "Robot owners.",
+        "D": "Middle-class workers."
+      },
+      "answer": "D",
+      "answerZh": "中产阶级工人",
+      "basis": [
+        "第二段：牛津大学的研究说，美国约一半的工作很可能被自动化取代，中产阶级受到的挤压尤其大（disproportionately squeezed）。园艺、日托这类低收入工作机器人不感兴趣，但卡车运输、理财咨询、软件工程等中产阶级职业已经或很快会被机器人盯上；富人拥有机器人，他们没事。受威胁最大的是中产阶级工人。"
+      ],
+      "map": [
+        [
+          "the middle class disproportionately squeezed",
+          "Middle-class workers."
+        ]
+      ],
+      "wrong": [
+        {
+          "k": "A",
+          "tag": "无中生有",
+          "text": "原文只说这个问题在下届总统竞选中可能没人提，没说政治家会受威胁。"
+        },
+        {
+          "k": "B",
+          "tag": "正反颠倒",
+          "text": "原文说低收入工作机器人不感兴趣，低工资劳动者反而受影响较小。"
+        },
+        {
+          "k": "C",
+          "tag": "正反颠倒",
+          "text": "原文说富人拥有机器人，所以他们没事。"
+        }
+      ]
+    },
+    {
+      "passage": "2018-英语一-Text1",
+      "num": 22,
+      "context": [
+        {
+          "p": 3,
+          "text": "==This **isn’t to be alarmist**==. Optimists point out that technological upheaval has benefited workers in the past. The Industrial Revolution didn’t go so well for Luddites whose jobs were displaced by mechanized looms, but it eventually raised living standards and created more jobs than it destroyed. Likewise, automation should eventually boost productivity, stimulate demand by driving down prices, and free workers from hard, boring work. But in the medium term, ==middle-class workers may **need a lot of help adjusting**==."
+        },
+        {
+          "p": 7,
+          "text": "Technology will improve society in ways big and small over the next few years, yet this will be little comfort to those who find their lives and careers upended by automation. Destroying the machines that are coming for our jobs would be nuts. ==But policies to help workers adapt will be **indispensable**==."
+        }
+      ],
+      "stem": "Which of the following best represents the author’s view?",
+      "options": {
+        "A": "Worries about automation are in fact groundless.",
+        "B": "Optimists’ opinions on new tech find little support.",
+        "C": "Issues arising from automation need to be tackled.",
+        "D": "Negative consequences of new tech can be avoided."
+      },
+      "answer": "C",
+      "answerZh": "自动化带来的问题需要解决",
+      "basis": [
+        "第三段：作者说这不是危言耸听。乐观的人认为技术变革过去让劳动者受益，自动化最终也会提高生产力，但在中期，中产阶级工人可能需要很多帮助来调整。第四到六段提出具体办法，末段说帮助工人适应的政策不可或缺。作者的观点是：自动化带来的问题需要解决。"
+      ],
+      "map": [
+        [
+          "need a lot of help adjusting / policies to help workers adapt",
+          "Issues arising from automation need to be tackled."
+        ]
+      ],
+      "wrong": [
+        {
+          "k": "A",
+          "tag": "正反颠倒",
+          "text": "作者说这不是危言耸听，担忧是有根据的。"
+        },
+        {
+          "k": "B",
+          "tag": "无中生有",
+          "text": "作者承认乐观者说得有道理，没说他们的看法得不到支持。"
+        },
+        {
+          "k": "D",
+          "tag": "无中生有",
+          "text": "作者说需要帮工人调整和适应，没说负面后果可以避免。"
+        }
+      ]
+    },
+    {
+      "passage": "2018-英语一-Text1",
+      "num": 23,
+      "context": [
+        {
+          "p": 4,
+          "text": "… Curriculums—from grammar school to college —should evolve to ==focus less on memorizing facts and **more on creativity** and complex communication==. …"
+        }
+      ],
+      "stem": "Education in the age of automation should put more emphasis on ______.",
+      "options": {
+        "A": "creative potential",
+        "B": "job-hunting skills",
+        "C": "individual needs",
+        "D": "cooperative spirit"
+      },
+      "answer": "A",
+      "answerZh": "创造潜力",
+      "basis": [
+        "第四段：第一步是反思教育和职业培训。从小学到大学的课程，都应该少注重记忆事实，多注重创造力（creativity）和复杂的沟通能力。creative potential 是 creativity 的同义改写。"
+      ],
+      "map": [
+        [
+          "more on creativity",
+          "creative potential"
+        ]
+      ],
+      "wrong": [
+        {
+          "k": "B",
+          "tag": "无中生有",
+          "text": "原文没提求职技能。"
+        },
+        {
+          "k": "C",
+          "tag": "无中生有",
+          "text": "原文没提个人需求。"
+        },
+        {
+          "k": "D",
+          "tag": "偷换概念",
+          "text": "原文说的是复杂的沟通能力和与机器人协同工作，不是合作精神。"
+        }
+      ]
+    },
+    {
+      "passage": "2018-英语一-Text1",
+      "num": 24,
+      "context": [
+        {
+          "p": 6,
+          "text": "Finally, ==because automation threatens to **widen the gap** between capital income and labor income==, taxes and the safety net will have to be rethought. Taxes on low-wage labor need to be cut, and wage subsidies such as the earned income tax credit should be expanded: This would boost incomes, encourage work, reward companies for job creation, ==and **reduce inequality**==."
+        }
+      ],
+      "stem": "The author suggests that tax policies be aimed at ______.",
+      "options": {
+        "A": "encouraging the development of automation",
+        "B": "increasing the return on capital investment",
+        "C": "easing the hostility between rich and poor",
+        "D": "preventing the income gap from widening"
+      },
+      "answer": "D",
+      "answerZh": "防止收入差距扩大",
+      "basis": [
+        "第六段：因为自动化可能拉大资本收入和劳动收入之间的差距（widen the gap），所以要重新考虑税收和社会保障：减少对低收入劳动的征税，扩大工资补贴，这样能提高收入、鼓励工作，并减少不平等。税收政策的目的是防止收入差距扩大。"
+      ],
+      "map": [
+        [
+          "threatens to widen the gap / reduce inequality",
+          "preventing the income gap from widening"
+        ]
+      ],
+      "wrong": [
+        {
+          "k": "A",
+          "tag": "无中生有",
+          "text": "原文没说用税收鼓励自动化发展。"
+        },
+        {
+          "k": "B",
+          "tag": "正反颠倒",
+          "text": "作者主张减少低收入劳动的税、增加工资补贴，不是提高资本投资回报。"
+        },
+        {
+          "k": "C",
+          "tag": "偷换概念",
+          "text": "原文说的是减少收入不平等，没说贫富之间有敌意。"
+        }
+      ]
+    },
+    {
+      "passage": "2018-英语一-Text1",
+      "num": 25,
+      "context": [
+        {
+          "p": 4,
+          "text": "==**The first step**==, as Erik Brynjolfsson and Andrew McAfee argue in The Second Machine Age, should be rethinking education and job training. …"
+        },
+        {
+          "p": 6,
+          "text": "==**Finally**, because automation threatens== to widen the gap between capital income and labor income, taxes and the safety net will have to be rethought. …"
+        }
+      ],
+      "stem": "In this text, the author presents a problem with ______.",
+      "options": {
+        "A": "opposing views on it",
+        "B": "possible solutions to it",
+        "C": "its alarming impacts",
+        "D": "its major variations"
+      },
+      "answer": "B",
+      "answerZh": "给出了可能的解决方案",
+      "basis": [
+        "前三段提出问题：机器人要来抢中产阶级的工作，中产阶级工人需要很多帮助来调整。第四到六段用 The first step … Finally 依次提出办法：改革教育和职业培训，让创办新公司更容易，重新考虑税收和社会保障。末段强调帮助工人适应的政策必不可少。作者是提出问题，再给出可能的解决办法。"
+      ],
+      "map": [
+        [
+          "The first step … Finally",
+          "possible solutions to it"
+        ]
+      ],
+      "wrong": [
+        {
+          "k": "A",
+          "tag": "以偏概全",
+          "text": "第三段提到乐观者的看法，只是一笔带过，不是全文的写法。"
+        },
+        {
+          "k": "C",
+          "tag": "以偏概全",
+          "text": "自动化的影响只在前几段，全文重点在解决办法。"
+        },
+        {
+          "k": "D",
+          "tag": "无中生有",
+          "text": "原文没讲这个问题有哪些主要变化。"
+        }
+      ]
+    },
+    {
+      "passage": "2018-英语一-Text2",
+      "num": 26,
+      "context": [
+        {
+          "p": 1,
+          "text": "… The implication is that Millennials prefer news from the White House to be filtered through other sources, ==**not a president’s social media platform**==."
+        },
+        {
+          "p": 2,
+          "text": "Most Americans rely on social media to check daily headlines. Yet ==as **distrust has risen toward all media**==, people may be starting to beef up their media literacy skills. Such a trend is badly needed. During the 2016 presidential campaign, nearly a quarter of web content shared by Twitter users in the politically critical state of Michigan was fake news, according to the University of Oxford. And a survey conducted for BuzzFeed News found 44 percent of Facebook users ==**rarely or never trust** news from the media giant==."
+        }
+      ],
+      "stem": "According to Paragraphs 1 and 2, many young Americans cast doubts on ______.",
+      "options": {
+        "A": "the justification of the news-filtering practice",
+        "B": "people’s preference for social media platforms",
+        "C": "the administration’s ability to handle information",
+        "D": "social media as a reliable source of news"
+      },
+      "answer": "D",
+      "answerZh": "社交媒体作为可靠新闻来源",
+      "basis": [
+        "第一段：超过三分之二的美国年轻人不赞成特朗普用推特，说明他们更愿意白宫的消息经过其他渠道过滤，而不是来自总统的社交媒体。第二段：人们对所有媒体越来越不信任，密歇根州推特上近四分之一的内容是假新闻，44% 的脸书用户很少或从不相信脸书上的新闻。年轻人怀疑的是社交媒体作为新闻来源的可靠性。"
+      ],
+      "map": [
+        [
+          "not a president’s social media platform / rarely or never trust",
+          "social media as a reliable source of news"
+        ]
+      ],
+      "wrong": [
+        {
+          "k": "A",
+          "tag": "正反颠倒",
+          "text": "年轻人希望白宫的消息经过其他渠道过滤，是认可过滤，不是怀疑它。"
+        },
+        {
+          "k": "B",
+          "tag": "偷换概念",
+          "text": "原文说多数美国人靠社交媒体看新闻，年轻人怀疑的不是这种偏好，而是社交媒体新闻是否可信。"
+        },
+        {
+          "k": "C",
+          "tag": "无中生有",
+          "text": "年轻人不赞成的是总统用推特，原文没说政府处理信息的能力。"
+        }
+      ]
+    },
+    {
+      "passage": "2018-英语一-Text2",
+      "num": 27,
+      "context": [
+        {
+          "p": 2,
+          "text": "… Yet as distrust has risen toward all media, ==people may be starting to **beef up** their media literacy skills==. ==Such a trend is **badly needed**==. …"
+        }
+      ],
+      "stem": "The phrase “beef up” (Para. 2) is closest in meaning to ______.",
+      "options": {
+        "A": "sharpen",
+        "B": "define",
+        "C": "boast",
+        "D": "share"
+      },
+      "answer": "A",
+      "answerZh": "使敏锐；加强",
+      "basis": [
+        "第二段：随着人们对所有媒体越来越不信任，人们可能开始 beef up 自己的媒体素养；这种趋势非常必要，因为社交媒体上假新闻很多。对媒体不信任，自然要加强辨别能力，beef up 意思是加强、提高，与 sharpen（使敏锐、提高）最接近。"
+      ],
+      "map": [
+        [
+          "beef up their media literacy skills",
+          "sharpen"
+        ]
+      ],
+      "wrong": [
+        {
+          "k": "B",
+          "tag": "曲解原文",
+          "text": "define 是定义，放进原句说不通。"
+        },
+        {
+          "k": "C",
+          "tag": "曲解原文",
+          "text": "boast 是夸耀，与“这种趋势非常必要”的语气不符。"
+        },
+        {
+          "k": "D",
+          "tag": "曲解原文",
+          "text": "share 是分享，原文说的是提高自己的能力，不是分享。"
+        }
+      ]
+    },
+    {
+      "passage": "2018-英语一-Text2",
+      "num": 28,
+      "context": [
+        {
+          "p": 3,
+          "text": "… A Knight Foundation focus-group survey of young people between ages 14 and 24 found ==they use “distributed trust” to **verify stories**==. ==They **cross-check sources** and prefer news from **different perspectives**==—especially those that are open about any bias. …"
+        }
+      ],
+      "stem": "According to the Knight Foundation survey, young people ______.",
+      "options": {
+        "A": "tend to voice their opinions in cyberspace",
+        "B": "verify news by referring to diverse sources",
+        "C": "have a strong sense of responsibility",
+        "D": "like to exchange views on “distributed trust”"
+      },
+      "answer": "B",
+      "answerZh": "通过参考多种来源核实新闻",
+      "basis": [
+        "第三段：奈特基金会的调查发现，14 到 24 岁的年轻人用“分布式信任”来核实新闻（verify stories）：他们交叉核对信息来源（cross-check sources），喜欢来自不同视角的新闻。也就是参考多种来源来核实新闻。"
+      ],
+      "map": [
+        [
+          "cross-check sources / verify stories",
+          "verify news by referring to diverse sources"
+        ]
+      ],
+      "wrong": [
+        {
+          "k": "A",
+          "tag": "无中生有",
+          "text": "原文没说年轻人喜欢在网上发表意见。"
+        },
+        {
+          "k": "C",
+          "tag": "偷换概念",
+          "text": "调查结论说的是年轻人对自我教育、主动寻找对立观点负有责任，是为了说明他们怎样核实信息，不是泛泛说他们责任感强。"
+        },
+        {
+          "k": "D",
+          "tag": "偷换概念",
+          "text": "“分布式信任”是年轻人核实新闻的方法，不是他们讨论的话题。"
+        }
+      ]
+    },
+    {
+      "passage": "2018-英语一-Text2",
+      "num": 29,
+      "context": [
+        {
+          "p": 5,
+          "text": "… A survey by Barna research group found ==the top reason given by Americans for the fake news phenomenon is **“reader error,”**== more so than made-up stories or factual mistakes in reporting. About a third say the problem of fake news ==lies in “**misinterpretation** or exaggeration of actual news”== via social media. …"
+        }
+      ],
+      "stem": "The Barna survey found that a main cause for the fake news problem is ______.",
+      "options": {
+        "A": "readers’ outdated values",
+        "B": "journalists’ biased reporting",
+        "C": "readers’ misinterpretation",
+        "D": "journalists’ made-up stories"
+      },
+      "answer": "C",
+      "answerZh": "读者的误解",
+      "basis": [
+        "第五段：巴纳的调查发现，美国人认为假新闻现象的首要原因是“读者失误”（reader error），比编造的故事和报道失实更重要；约三分之一的人说问题在于通过社交媒体“误读或夸大真实新闻”。主要原因是读者的误读。"
+      ],
+      "map": [
+        [
+          "“reader error” / misinterpretation",
+          "readers’ misinterpretation"
+        ]
+      ],
+      "wrong": [
+        {
+          "k": "A",
+          "tag": "无中生有",
+          "text": "原文提到用户转发新闻是在表达自己的价值观，没说读者的价值观过时。"
+        },
+        {
+          "k": "B",
+          "tag": "无中生有",
+          "text": "原文没说记者的报道有偏见。"
+        },
+        {
+          "k": "D",
+          "tag": "正反颠倒",
+          "text": "原文说读者失误比编造的故事更是主要原因。"
+        }
+      ]
+    },
+    {
+      "passage": "2018-英语一-Text2",
+      "num": 30,
+      "context": [
+        {
+          "p": 3,
+          "text": "Young people who are digital natives ==are indeed becoming **more skillful** at separating fact from fiction in cyberspace==. …"
+        },
+        {
+          "p": 6,
+          "text": "So when young people are critical of an over-tweeting president, ==they reveal a mental discipline in **thinking skills**—and in their choices on **when to share on social media**==."
+        }
+      ],
+      "stem": "Which of the following would be the best title for the text?",
+      "options": {
+        "A": "A Rise in Critical Skills for Sharing News Online",
+        "B": "A Counteraction Against the Over-tweeting Trend",
+        "C": "The Accumulation of Mutual Trust on Social Media",
+        "D": "The Platforms for Projection of Personal Interests"
+      },
+      "answer": "A",
+      "answerZh": "在线分享新闻的关键技能的提高",
+      "basis": [
+        "全文从年轻人不赞成总统用推特说起，指出人们开始提高媒体素养（第二段），年轻人越来越善于在网上分辨真假（第三段），社交媒体让用户更注意自己转发信息的作用，假新闻的关键在于读者是否转发（第五段），最后说年轻人在思维能力和何时在社交媒体上分享方面表现出自律。中心是网上分享新闻的辨别能力在提高。"
+      ],
+      "map": [
+        [
+          "more skillful / thinking skills … when to share",
+          "A Rise in Critical Skills for Sharing News Online"
+        ]
+      ],
+      "wrong": [
+        {
+          "k": "B",
+          "tag": "以偏概全",
+          "text": "批评总统发推太多只是开头和结尾的例子，不是全文中心。"
+        },
+        {
+          "k": "C",
+          "tag": "偷换概念",
+          "text": "“分布式信任”是核实新闻的方法，原文没说社交媒体上互信在积累。"
+        },
+        {
+          "k": "D",
+          "tag": "以偏概全",
+          "text": "转发新闻表达个人价值观和兴趣只是第五段的一句话。"
+        }
+      ]
+    },
+    {
+      "passage": "2018-英语一-Text3",
+      "num": 31,
+      "context": [
+        {
+          "p": 1,
+          "text": "… It is against that background that the information commissioner, Elizabeth Denham, has issued her damning verdict against the Royal Free hospital trust under the NHS, which handed over to DeepMind the records of 1.6 million patients in 2015 ==on the basis of a vague agreement which **took far too little account of the patients’ rights**== and their expectations of privacy."
+        }
+      ],
+      "stem": "What is true of the agreement between the NHS and DeepMind?",
+      "options": {
+        "A": "It caused conflicts among tech giants.",
+        "B": "It failed to pay due attention to patients’ rights.",
+        "C": "It fell short of the latter’s expectations.",
+        "D": "It put both sides into a dangerous situation."
+      },
+      "answer": "B",
+      "answerZh": "它未能对患者权利给予应有的关注",
+      "basis": [
+        "第一段末：信息专员德纳姆对皇家自由医院信托作出严厉裁决，因为它在 2015 年依据一份模糊的协议，把 160 万名患者的病历交给了 DeepMind，而这份协议对患者的权利和隐私期望考虑得太少（took far too little account of）。也就是没有充分重视患者的权利。"
+      ],
+      "map": [
+        [
+          "took far too little account of the patients’ rights",
+          "It failed to pay due attention to patients’ rights."
+        ]
+      ],
+      "wrong": [
+        {
+          "k": "A",
+          "tag": "偷换概念",
+          "text": "原文说可能让权力进一步集中到科技巨头手中，不是在科技巨头之间引发冲突。"
+        },
+        {
+          "k": "C",
+          "tag": "偷换概念",
+          "text": "协议没顾及的是患者的期望，不是 DeepMind 的期望。"
+        },
+        {
+          "k": "D",
+          "tag": "夸大其词",
+          "text": "原文说要先承认双方本意是好的，没说协议让双方陷入危险。"
+        }
+      ]
+    },
+    {
+      "passage": "2018-英语一-Text3",
+      "num": 32,
+      "context": [
+        {
+          "p": 2,
+          "text": "DeepMind has almost apologized. ==The NHS trust has **mended its ways**==. Further arrangements —and there may be many—between the NHS and DeepMind ==will be **carefully scrutinised**== to ensure that all necessary permissions have been asked of patients and all unnecessary data has been cleaned. …"
+        }
+      ],
+      "stem": "The NHS trust responded to Denham’s verdict with ______.",
+      "options": {
+        "A": "empty promises",
+        "B": "tough resistance",
+        "C": "necessary adjustments",
+        "D": "sincere apologies"
+      },
+      "answer": "C",
+      "answerZh": "必要的调整",
+      "basis": [
+        "第二段：DeepMind 差不多已经道歉，NHS 的这个信托已经改正了做法（mended its ways）。今后双方的合作都会受到仔细审查，确保征得患者的必要许可，删除不必要的数据。信托对裁决的回应是作出必要的调整。"
+      ],
+      "map": [
+        [
+          "has mended its ways",
+          "necessary adjustments"
+        ]
+      ],
+      "wrong": [
+        {
+          "k": "A",
+          "tag": "正反颠倒",
+          "text": "信托已经改正了做法，不是空口许诺。"
+        },
+        {
+          "k": "B",
+          "tag": "正反颠倒",
+          "text": "信托接受了裁决并改正，没有强硬抵制。"
+        },
+        {
+          "k": "D",
+          "tag": "张冠李戴",
+          "text": "差不多道了歉的是 DeepMind，不是 NHS 信托。"
+        }
+      ]
+    },
+    {
+      "passage": "2018-英语一-Text3",
+      "num": 33,
+      "context": [
+        {
+          "p": 2,
+          "text": "… But privacy is not the only angle in this case and not even the most important. Ms Denham chose to concentrate the blame on the NHS trust, since under existing law it “controlled” the data and DeepMind merely “processed” it. But this distinction misses the point that ==it is **processing and aggregation**, not the mere possession of bits, that **gives the data value**==."
+        }
+      ],
+      "stem": "The author argues in Paragraph 2 that ______.",
+      "options": {
+        "A": "privacy protection must be secured at all costs",
+        "B": "leaking patients’ data is worse than selling it",
+        "C": "making profits from patients’ data is illegal",
+        "D": "the value of data comes from the processing of it"
+      },
+      "answer": "D",
+      "answerZh": "数据的价值来自于对它的处理",
+      "basis": [
+        "第二段后半：隐私不是本案唯一的角度，甚至不是最重要的。德纳姆把责任集中在 NHS 信托上，因为按现行法律，信托“控制”数据，DeepMind 只是“处理”数据。作者认为这种区分没有抓住要点：让数据有价值的，是处理和汇总数据，而不是单纯拥有数据。"
+      ],
+      "map": [
+        [
+          "processing and aggregation … gives the data value",
+          "the value of data comes from the processing of it"
+        ]
+      ],
+      "wrong": [
+        {
+          "k": "A",
+          "tag": "正反颠倒",
+          "text": "作者说隐私不是唯一的角度，甚至不是最重要的。"
+        },
+        {
+          "k": "B",
+          "tag": "无中生有",
+          "text": "原文没有比较泄露和出售患者数据。"
+        },
+        {
+          "k": "C",
+          "tag": "无中生有",
+          "text": "原文没说用患者数据赚钱是违法的。"
+        }
+      ]
+    },
+    {
+      "passage": "2018-英语一-Text3",
+      "num": 34,
+      "context": [
+        {
+          "p": 4,
+          "text": "… ==This practice does not address **the real worry**==. It is not enough to say that the algorithms DeepMind develops will benefit patients and save lives. What matters is that ==they will belong to **a private monopoly** which developed them using public resources==. If software promises to save lives on the scale that drugs now can, big data may be expected to behave as a big pharma has done. We are still at the beginning of this revolution and small choices now may turn out to have gigantic consequences later. A long struggle will be needed ==to avoid a future of **digital feudalism**==. …"
+        }
+      ],
+      "stem": "According to the last paragraph, the real worry arising from this deal is ______.",
+      "options": {
+        "A": "the vicious rivalry among big pharmas",
+        "B": "the ineffective enforcement of privacy law",
+        "C": "the uncontrolled use of new software",
+        "D": "the monopoly of big data by tech giants"
+      },
+      "answer": "D",
+      "answerZh": "科技巨头对大数据的垄断",
+      "basis": [
+        "最后一段：用隐私法约束科技巨头不太对路，解决不了真正的担忧（the real worry）。重要的是，DeepMind 开发的算法将属于一家私人垄断企业，而它是用公共资源开发出来的；作者还警告要避免“数字封建主义”的未来。真正的担忧是科技巨头垄断大数据。"
+      ],
+      "map": [
+        [
+          "belong to a private monopoly / digital feudalism",
+          "the monopoly of big data by tech giants"
+        ]
+      ],
+      "wrong": [
+        {
+          "k": "A",
+          "tag": "偷换概念",
+          "text": "big pharma 只是类比，说大数据可能像大药企那样行事，不是说药企之间恶性竞争。"
+        },
+        {
+          "k": "B",
+          "tag": "偷换概念",
+          "text": "作者说用隐私法约束科技巨头不太对路，不是说隐私法执行不力。"
+        },
+        {
+          "k": "C",
+          "tag": "偷换概念",
+          "text": "作者担心的是算法被私人垄断，不是新软件被滥用。"
+        }
+      ]
+    },
+    {
+      "passage": "2018-英语一-Text3",
+      "num": 35,
+      "context": [
+        {
+          "p": 1,
+          "text": "… ==The potential of this work applied to healthcare is **very great**, but it could also lead to **further concentration of power** in the tech giants==. …"
+        },
+        {
+          "p": 4,
+          "text": "… We are still at the beginning of this revolution and ==small choices now may turn out to have **gigantic consequences** later==. …"
+        }
+      ],
+      "stem": "The author’s attitude toward the application of AI to healthcare is ______.",
+      "options": {
+        "A": "ambiguous",
+        "B": "cautious",
+        "C": "appreciative",
+        "D": "contemptuous"
+      },
+      "answer": "B",
+      "answerZh": "谨慎的",
+      "basis": [
+        "第一段：人工智能用于医疗潜力很大，但也可能让权力进一步集中到科技巨头手中。最后一段：这场革命才刚开始，现在的小选择以后可能产生巨大后果，要经过长期斗争才能避免数字封建主义。作者既看到好处，也提醒风险，态度是谨慎的。"
+      ],
+      "map": [
+        [
+          "very great, but … / small choices … gigantic consequences",
+          "cautious"
+        ]
+      ],
+      "wrong": [
+        {
+          "k": "A",
+          "tag": "偷换概念",
+          "text": "作者立场很清楚：肯定潜力，也警惕垄断，并不含糊。"
+        },
+        {
+          "k": "C",
+          "tag": "以偏概全",
+          "text": "作者只在开头肯定了潜力，全文重点在提醒风险。"
+        },
+        {
+          "k": "D",
+          "tag": "正反颠倒",
+          "text": "作者承认潜力巨大，没有轻视。"
+        }
+      ]
+    },
+    {
+      "passage": "2018-英语一-Text4",
+      "num": 36,
+      "context": [
+        {
+          "p": 1,
+          "text": "… Fundamentally, the USPS is in a historic squeeze between technological change that has permanently decreased demand for its bread-and-butter product, first-class mail, and ==a regulatory structure that **denies management the flexibility** to adjust its operations to the new reality==."
+        }
+      ],
+      "stem": "The financial problem with the USPS is caused partly by ______.",
+      "options": {
+        "A": "its unbalanced budget",
+        "B": "its rigid management",
+        "C": "the cost for technical upgrading",
+        "D": "the withdrawal of bank support"
+      },
+      "answer": "B",
+      "answerZh": "其僵化的管理",
+      "basis": [
+        "第一段末：从根本上说，美国邮政夹在两者之间：一是技术变化永久减少了对其主打产品一类邮件的需求，二是监管体制不给管理层灵活调整经营、适应新现实的余地（denies management the flexibility）。管理缺乏灵活性，就是管理僵化。"
+      ],
+      "map": [
+        [
+          "denies management the flexibility",
+          "its rigid management"
+        ]
+      ],
+      "wrong": [
+        {
+          "k": "A",
+          "tag": "偷换概念",
+          "text": "连续多年支出大于收入是财务问题本身，不是造成问题的原因。"
+        },
+        {
+          "k": "C",
+          "tag": "无中生有",
+          "text": "原文说技术变化减少了对一类邮件的需求，没说技术升级花了很多钱。"
+        },
+        {
+          "k": "D",
+          "tag": "无中生有",
+          "text": "原文没提银行停止支持。"
+        }
+      ]
+    },
+    {
+      "passage": "2018-英语一-Text4",
+      "num": 37,
+      "context": [
+        {
+          "p": 2,
+          "text": "And ==interest groups ranging from postal unions to greeting-card makers **exert self-interested pressure**== on the USPS’s ultimate overseer—Congress—insisting that whatever else happens to the Postal Service, aspects of the status quo they depend on get protected. ==**This is why** repeated attempts at reform legislation have failed== in recent years, leaving the Postal Service unable to pay its bills ==except by **deferring vital modernization**==."
+        }
+      ],
+      "stem": "According to Paragraph 2, the USPS fails to modernize itself due to ______.",
+      "options": {
+        "A": "the interference from interest groups",
+        "B": "the inadequate funding from Congress",
+        "C": "the shrinking demand for postal service",
+        "D": "the incompetence of postal unions"
+      },
+      "answer": "A",
+      "answerZh": "利益集团的干预",
+      "basis": [
+        "第二段：从邮政工会到贺卡制造商的各种利益集团，出于私利向国会施压，坚持要保护它们依赖的现状。这就是（This is why）近年来改革立法屡屡失败的原因，结果邮政只能靠推迟至关重要的现代化来支付账单。无法现代化是因为利益集团的干预。"
+      ],
+      "map": [
+        [
+          "exert self-interested pressure … This is why",
+          "the interference from interest groups"
+        ]
+      ],
+      "wrong": [
+        {
+          "k": "B",
+          "tag": "无中生有",
+          "text": "原文说利益集团向国会施压，没说国会拨款不足。"
+        },
+        {
+          "k": "C",
+          "tag": "张冠李戴",
+          "text": "需求萎缩是第一段讲的财务困境原因，不是第二段说的无法现代化的原因。"
+        },
+        {
+          "k": "D",
+          "tag": "以偏概全",
+          "text": "邮政工会只是利益集团之一，原文也没说它无能。"
+        }
+      ]
+    },
+    {
+      "passage": "2018-英语一-Text4",
+      "num": 38,
+      "context": [
+        {
+          "p": 3,
+          "text": "… Most of the money would come from a penny-per-letter permanent rate increase and from shifting postal retirees into Medicare. ==The latter step would largely **offset the financial burden of annually pre-funding retiree health care**, thus **addressing a long-standing complaint**== by the USPS and its unions."
+        }
+      ],
+      "stem": "The long-standing complaint by the USPS and its unions can be addressed by ______.",
+      "options": {
+        "A": "removing its burden of retiree health care",
+        "B": "making more investment in new vehicles",
+        "C": "adopting a new rate-increase mechanism",
+        "D": "attracting more first-class mail users"
+      },
+      "answer": "A",
+      "answerZh": "减轻其退休人员医疗保健的负担",
+      "basis": [
+        "第三段：省下的钱主要来自两处，一是每封信永久涨价一美分，二是把邮政退休人员转入联邦医疗保险（Medicare）。后一项能大大抵消每年预先支付退休人员医保的财务负担，从而解决（addressing）美国邮政及其工会长期以来的抱怨。"
+      ],
+      "map": [
+        [
+          "offset the financial burden of … retiree health care",
+          "removing its burden of retiree health care"
+        ]
+      ],
+      "wrong": [
+        {
+          "k": "B",
+          "tag": "张冠李戴",
+          "text": "买新车是省下的钱的用途之一，与长期抱怨无关。"
+        },
+        {
+          "k": "C",
+          "tag": "张冠李戴",
+          "text": "涨价是钱的另一个来源，解决长期抱怨的是后一项措施。"
+        },
+        {
+          "k": "D",
+          "tag": "无中生有",
+          "text": "原文没说要吸引更多一类邮件用户。"
+        }
+      ]
+    },
+    {
+      "passage": "2018-英语一-Text4",
+      "num": 39,
+      "context": [
+        {
+          "p": 4,
+          "text": "… The emerging consensus around the bill is a sign that ==legislators are **getting frightened** about a politically embarrassing short-term collapse== at the USPS. ==It is not, however, a sign that they’re **getting serious** about transforming the postal system== for the 21st century."
+        }
+      ],
+      "stem": "In the last paragraph, the author seems to view legislators with ______.",
+      "options": {
+        "A": "respect",
+        "B": "tolerance",
+        "C": "discontent",
+        "D": "gratitude"
+      },
+      "answer": "C",
+      "answerZh": "不满",
+      "basis": [
+        "最后一段末：围绕法案形成的共识，说明立法者害怕邮政在短期内崩溃让他们在政治上难堪；然而这并不说明他们开始认真考虑让邮政系统面向 21 世纪转型。只顾眼前、不想长远，作者对立法者是不满的。"
+      ],
+      "map": [
+        [
+          "It is not, however, a sign that they’re getting serious",
+          "discontent"
+        ]
+      ],
+      "wrong": [
+        {
+          "k": "A",
+          "tag": "正反颠倒",
+          "text": "作者批评立法者只怕难堪、不认真改革，谈不上尊重。"
+        },
+        {
+          "k": "B",
+          "tag": "正反颠倒",
+          "text": "作者对立法者的做法是批评，不是宽容。"
+        },
+        {
+          "k": "D",
+          "tag": "正反颠倒",
+          "text": "作者没有感激立法者。"
+        }
+      ]
+    },
+    {
+      "passage": "2018-英语一-Text4",
+      "num": 40,
+      "context": [
+        {
+          "p": 4,
+          "text": "If it clears the House, this measure would still have to get through the Senate—where someone is bound to point out that ==it amounts to the **bare, bare minimum** necessary to keep the Postal Service afloat, **not comprehensive reform**==. …"
+        }
+      ],
+      "stem": "Which of the following would be the best title for the text?",
+      "options": {
+        "A": "The USPS Starts to Miss Its Good Old Days",
+        "B": "The Postal Service: Keep Away from My Cheese",
+        "C": "The USPS: Chronic Illness Requires a Quick Cure",
+        "D": "The Postal Service Needs More Than a Band-Aid"
+      },
+      "answer": "D",
+      "answerZh": "邮政服务需要的不仅仅是创可贴",
+      "basis": [
+        "全文先说美国邮政连年亏损、濒临破产，根源在需求下降和僵化的监管；利益集团阻挠改革。现在各方终于就法案达成一致，但最后一段说它只是让邮政勉强维持下去的最低限度措施，不是全面改革。Band-Aid（创可贴）比喻权宜之计，邮政需要的不只是创可贴，而是真正的改革。"
+      ],
+      "map": [
+        [
+          "the bare, bare minimum … not comprehensive reform",
+          "The Postal Service Needs More Than a Band-Aid"
+        ]
+      ],
+      "wrong": [
+        {
+          "k": "A",
+          "tag": "无中生有",
+          "text": "原文没说邮政怀念过去的好日子。"
+        },
+        {
+          "k": "B",
+          "tag": "以偏概全",
+          "text": "利益集团保护自己的“奶酪”只是第二段的内容，不是全文中心。"
+        },
+        {
+          "k": "C",
+          "tag": "偷换概念",
+          "text": "作者批评的正是眼下的快速补救，主张全面改革，不是要快速治疗。"
         }
       ]
     }
