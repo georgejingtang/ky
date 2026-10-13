@@ -124,3 +124,4 @@ footer { margin-top: 28px; color: var(--muted); font-size: 13px; display: flex; 
 a.item { text-decoration: none; color: var(--ink); }
 a.item:hover { border-color: var(--accent); }
 a.item span { color: var(--muted); font-size: 13px; }
+.zh.miss, .para-zh .miss { font-style: italic; opacity: .7; }
