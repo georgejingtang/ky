@@ -123,6 +123,11 @@
     if (p.slice(st).trim()) out.push([st, p.replace(/\s+$/, "").length]);
     return out;
   }
+  function contained(a, b) {
+    var n = 0, t = 0;
+    for (var x in a) { t++; if (b[x]) n++; }
+    return t > 0 && n / t >= 0.8;
+  }
   function passageZh(p) {
     if (!zh) return null;
     if (p._zh !== undefined) return p._zh;
@@ -133,15 +138,19 @@
     if (!sents.length) return (p._zh = null);
     var k = 0;
     p._zh = p.paragraphs.map(function (para) {
-      return splitSentences(para).map(function (r) {
+      var out = [], prev = -1;
+      splitSentences(para).forEach(function (r) {
         var w = wordSet(para.slice(r[0], r[1])), best = -1, bs = 0;
         for (var j = k; j < Math.min(k + 12, sents.length); j++) {
           var v = overlap(w, sents[j].w);
           if (v > bs) { bs = v; best = j; }
         }
-        if (best >= 0 && bs >= 0.5) { k = best + 1; return { start: r[0], end: r[1], cn: sents[best].cn }; }
-        return { start: r[0], end: r[1], cn: null };
+        if (best >= 0 && bs >= 0.5) { k = best + 1; prev = best; out.push({ start: r[0], end: r[1], cn: sents[best].cn }); return; }
+        // 译文库把几个短问句算作一句时（如 “…village of culture? Suburb of culture?”），并入上一句
+        if (out.length && prev >= 0 && contained(w, sents[prev].w)) { out[out.length - 1].end = r[1]; return; }
+        out.push({ start: r[0], end: r[1], cn: null });
       });
+      return out;
     });
     return p._zh;
   }
