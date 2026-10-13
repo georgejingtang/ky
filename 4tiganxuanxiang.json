@@ -3454,7 +3454,7 @@
     "cn_q": "33. 根据第五段，以下哪项是正确的？",
     "cn_opts": [
       "[A] 对科幻小说的兴趣正在上升。",
-      "[B] Arc（未来学研究中心）有助于限制未来学研究的范围。",
+      "[B] 《弧》杂志有助于限定未来学研究的范围。",
       "[C] 技术为社会问题提供解决方案。",
       "[D] 我们的近期未来难以设想。"
     ]
@@ -3544,14 +3544,14 @@
     "display_id": "英语一 2013年第4篇 第38题",
     "year": "2013",
     "source": "英语一",
-    "en_q": "38. It can be inferred from Paragraph 5 that the Alien and Sedition Acts .",
+    "en_q": "38. It can be inferred from Paragraph 5 that the Alien and Sedition Acts _______.",
     "en_opts": [
       "[A] violated the Constitution",
       "[B] stood in favor of the states",
       "[C] supported the federal statute",
       "[D] undermined the states' interests"
     ],
-    "cn_q": "38. 从第五段可以推断出，《客籍法和镇压叛乱法》。",
+    "cn_q": "38. 从第五段可以推断出，《客籍法和镇压叛乱法》_______。",
     "cn_opts": [
       "[A] 违反了宪法",
       "[B] 支持各州",
@@ -3634,7 +3634,7 @@
     "cn_q": "22. “to sign on”一词（第二段）最可能的意思是 _______。",
     "cn_opts": [
       "[A] 登记领取政府的津贴",
-      "[B] 接受政府对准予的限制",
+      "[B] 接受政府对津贴的限制",
       "[C] 在就业中心查询工作机会",
       "[D] 参加政府的就业培训项目"
     ]
@@ -3911,7 +3911,7 @@
       "[C] Contemptuous.",
       "[D] Tolerant."
     ],
-    "cn_q": "36. 根据第一段，作者对美国科学促进会报告的态度是什么？",
+    "cn_q": "36. 根据第一段，作者对美国人文与科学院报告的态度是什么？",
     "cn_opts": [
       "[A] 批评的。",
       "[B] 欣赏的。",
@@ -3931,7 +3931,7 @@
       "[C] retain people's interest in liberal education",
       "[D] keep a leading position in liberal education"
     ],
-    "cn_q": "37. 国会中有影响力的人物要求美国科学促进会报告如何 _______。",
+    "cn_q": "37. 国会中有影响力的人物要求美国人文与科学院报告如何 _______。",
     "cn_opts": [
       "[A] 保障个人的教育权利",
       "[B] 界定政府在教育中的角色",
@@ -3994,7 +3994,7 @@
     "cn_q": "40. 以下哪项是本文的最佳标题？",
     "cn_opts": [
       "[A] 非自由教育与“问题的核心”",
-      "[B] 美国科学促进会对人文教育的贡献",
+      "[B] 美国人文与科学院对人文教育的贡献",
       "[C] 把握“问题的核心”的方法",
       "[D] 进步政策与人文教育"
     ]
@@ -4104,17 +4104,17 @@
     "display_id": "英语一 2015年第2篇 第26题",
     "year": "2015",
     "source": "英语一",
-    "en_q": "26. The Supreme Court will work out whether, during an arrest, it is legitimate to .",
+    "en_q": "26. The Supreme Court will work out whether, during an arrest, it is legitimate to _______.",
     "en_opts": [
       "[A] prevent suspects from deleting their phone contents",
       "[B] search for suspects' mobile phones without a warrant",
       "[C] check suspects' phone contents without being authorized",
       "[D] prohibit suspects from using their mobile phones"
     ],
-    "cn_q": "26. 最高法院将确定在逮捕过程中， 是否合法。",
+    "cn_q": "26. 最高法院将确定，在逮捕过程中 _______ 是否合法。",
     "cn_opts": [
       "[A] 阻止嫌疑人删除手机内容",
-      "[B] 在没有搜查令的情况下搜查嫌疑人的手机",
+      "[B] 在没有搜查令的情况下寻找嫌疑人的手机",
       "[C] 在未经授权的情况下检查嫌疑人的手机内容",
       "[D] 禁止嫌疑人使用手机"
     ]
@@ -4471,7 +4471,7 @@
       "[C] showing little concern for health factors",
       "[D] pursuing perfect physical conditions"
     ],
-    "cn_q": "24. 设计师最有可能因为 ________ 被法国时装周拒绝。",
+    "cn_q": "24. 设计师最有可能因为 ________ 被哥本哈根时装周拒绝。",
     "cn_opts": [
       "[A] 为模特设定较高的年龄门槛",
       "[B] 过分关注模特的品格",
@@ -4744,14 +4744,14 @@
     "display_id": "英语一 2016年第4篇 第38题",
     "year": "2016",
     "source": "英语一",
-    "en_q": "38. It can be inferred from Paragraphs 5 and 6 that a \"legacy product\" .",
+    "en_q": "38. It can be inferred from Paragraphs 5 and 6 that a \"legacy product\" ________.",
     "en_opts": [
       "[A] helps restore the glory of former times",
       "[B] is meant for the most loyal customers",
       "[C] will have the cost of printing reduced",
       "[D] expands the popularity of the paper"
     ],
-    "cn_q": "38. 从第五段和第六段可以推断出，“legacy product”（传统产品）。",
+    "cn_q": "38. 从第五段和第六段可以推断出，“传承产品”（legacy product）________。",
     "cn_opts": [
       "[A] 有助于恢复昔日的辉煌",
       "[B] 是为最忠实的顾客准备的",
@@ -4764,14 +4764,14 @@
     "display_id": "英语一 2016年第4篇 第39题",
     "year": "2016",
     "source": "英语一",
-    "en_q": "39. Peretti believes that, in a changing world, .",
+    "en_q": "39. Peretti believes that, in a changing world, ________.",
     "en_opts": [
       "[A] traditional luxuries can stay unaffected",
       "[B] cautiousness facilitates problem-solving",
       "[C] aggressiveness better meets challenges",
       "[D] legacy businesses are becoming outdated"
     ],
-    "cn_q": "39. 佩雷蒂认为，在一个不断变化的世界中，。",
+    "cn_q": "39. 佩雷蒂认为，在一个不断变化的世界中，________。",
     "cn_opts": [
       "[A] 传统奢侈品可以不受影响",
       "[B] 谨慎有助于解决问题",
@@ -5174,7 +5174,7 @@
     "cn_q": "39. 需要严格执行政府透明度的法律，以 ________。",
     "cn_opts": [
       "[A] 唤醒官员的良知",
-      "[B] 保障官员接触方面的公平竞争",
+      "[B] 保证接触官员机会上的公平",
       "[C] 允许某些类型的游说",
       "[D] 激发普通人的希望"
     ]
