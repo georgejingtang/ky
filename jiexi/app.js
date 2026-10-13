@@ -96,25 +96,52 @@
   }
 
   // ---------- 英汉对照译文 ----------
-  // 原文按句对齐：1reading.json 里每条是一句（末尾带“(N words)”），按顺序在各段里找到对应位置
+  // 原文按句对齐：1reading.json 里每条是一句（末尾带“(N words)”）。把各段拆成句子，按顺序找词语重合最多的那条译文；
+  // 译文库的英文和真题措辞略有出入（改编过）也能对上，找不到的句子标出“译文库里没有”
   function norm(s) { return s.replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\u00a0/g, " "); }
+  function wordSet(s) {
+    var set = {};
+    (norm(s).toLowerCase().match(/[a-z0-9]+/g) || []).forEach(function (w) { set[w] = 1; });
+    return set;
+  }
+  function overlap(a, b) {
+    var inter = 0, union = 0, w;
+    for (w in a) { union++; if (b[w]) inter++; }
+    for (w in b) if (!a[w]) union++;
+    return union ? inter / union : 0;
+  }
+  var ABBR = /(?:\b[A-Z]|\bU\.S|\bU\.K|\bMrs?|\bMs|\bDr|\bSt|\bProf|\bvs|\be\.g|\bi\.e|\bNo)$/;
+  var SAID = /^[A-Z][A-Za-z.\s]{0,40}?\b(?:said|says|asks|asked|notes|noted|adds|added|writes|wrote|explains|explained)\b/;
+  function splitSentences(p) {
+    var out = [], st = 0, re = /[.?!…](?:["”’)]*)\s+(?=["“‘(]?[A-Z0-9])/g, m;
+    while ((m = re.exec(p))) {
+      if (ABBR.test(p.slice(st, m.index))) continue;                      // U.S. / J. Simons 之类不断句
+      if (/["”’]\s*$/.test(m[0]) && SAID.test(p.slice(m.index + m[0].length))) continue;  // “…?” Horn said.
+      out.push([st, m.index + m[0].replace(/\s+$/, "").length]);
+      st = m.index + m[0].length;
+    }
+    if (p.slice(st).trim()) out.push([st, p.replace(/\s+$/, "").length]);
+    return out;
+  }
   function passageZh(p) {
     if (!zh) return null;
     if (p._zh !== undefined) return p._zh;
     var key = p.exam + " " + p.year + "年第" + p.text + "篇";
     var sents = zh.reading.filter(function (x) { return x.id === key; }).map(function (x) {
-      return { en: norm(x.en.replace(/\s*\(\d+ words?\)\s*$/, "").trim()), cn: x.cn };
+      return { w: wordSet(x.en.replace(/\s*\(\d+ words?\)\s*$/, "")), cn: x.cn };
     });
+    if (!sents.length) return (p._zh = null);
     var k = 0;
     p._zh = p.paragraphs.map(function (para) {
-      var np = norm(para), at = 0, out = [];
-      while (k < sents.length) {
-        var i = np.indexOf(sents[k].en, at);
-        if (i < 0) break;
-        out.push({ start: i, end: i + sents[k].en.length, cn: sents[k].cn });
-        at = i + sents[k].en.length; k++;
-      }
-      return out.length ? out : null;
+      return splitSentences(para).map(function (r) {
+        var w = wordSet(para.slice(r[0], r[1])), best = -1, bs = 0;
+        for (var j = k; j < Math.min(k + 12, sents.length); j++) {
+          var v = overlap(w, sents[j].w);
+          if (v > bs) { bs = v; best = j; }
+        }
+        if (best >= 0 && bs >= 0.5) { k = best + 1; return { start: r[0], end: r[1], cn: sents[best].cn }; }
+        return { start: r[0], end: r[1], cn: null };
+      });
     });
     return p._zh;
   }
@@ -131,7 +158,8 @@
     if (!sents) return esc(text);
     var html = "", last = 0;
     sents.forEach(function (s) {
-      html += esc(text.slice(last, s.start)) + '<span class="s">' + esc(text.slice(s.start, s.end)) + '</span><span class="zh">' + esc(s.cn) + "</span>";
+      html += esc(text.slice(last, s.start)) + '<span class="s">' + esc(text.slice(s.start, s.end)) + "</span>" +
+        (s.cn ? '<span class="zh">' + esc(s.cn) + "</span>" : '<span class="zh miss">（译文库里没有这一句）</span>');
       last = s.end;
     });
     return html + esc(text.slice(last));
@@ -147,7 +175,8 @@
     }).join("");
     var ctx = q.context.map(function (c) {
       var ps = pz && pz[c.p - 1];
-      var cn = ps ? '<p class="zh para-zh">' + esc(ps.map(function (s) { return s.cn; }).join("")) + "</p>" : "";
+      var cn = ps ? '<p class="zh para-zh">' + esc(ps.map(function (s) { return s.cn || ""; }).join("")) +
+        (ps.some(function (s) { return !s.cn; }) ? '<span class="miss">（本段有句子在译文库里没有译文）</span>' : "") + "</p>" : "";
       return '<p class="para"><span class="pn">P' + c.p + "</span>" + rich(c.text) + "</p>" + cn;
     }).join("");
     var rowId = p.year + "-" + p.exam + "-" + q.num;
