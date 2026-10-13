@@ -110,7 +110,7 @@
     for (w in b) if (!a[w]) union++;
     return union ? inter / union : 0;
   }
-  var ABBR = /(?:\b[A-Z]|\bU\.S|\bU\.K|\bMrs?|\bMs|\bDr|\bSt|\bProf|\bvs|\be\.g|\bi\.e|\bNo)$/;
+  var ABBR = /(?:\b[A-Z]|\bU\.S|\bU\.K|\bMrs?|\bMs|\bDr|\bSt|\bProf|\bvs|\bv|\be\.g|\bi\.e|\bNo)$/;
   var SAID = /^[A-Z][A-Za-z.\s]{0,40}?\b(?:said|says|asks|asked|notes|noted|adds|added|writes|wrote|explains|explained)\b/;
   function splitSentences(p) {
     var out = [], st = 0, re = /[.?!…](?:["”’)]*)\s+(?=["“‘(]?[A-Z0-9])/g, m;
