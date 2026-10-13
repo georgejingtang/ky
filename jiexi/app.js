@@ -1,6 +1,11 @@
-// 考研阅读精析检索：读取 data/questions.json，在浏览器里本地搜索并按“左原文·右分析”渲染。
+// 考研阅读精析检索：读取题库 JSON，在浏览器里本地搜索并按“左原文·右分析”渲染。
+// yingyu1/、yingyu2/ 两个页面共用这份代码，各自在 window.JIEXI 里指定题库和示例。
 (function () {
   "use strict";
+
+  var CFG = window.JIEXI || {};
+  var DATA = CFG.data || "data/yingyu1.json";
+  var ROOT = CFG.root || "../";   // 仓库根目录（1reading.json、4tiganxuanxiang.json 所在）
 
   var MAX_ROWS = 30;
   var $q = document.getElementById("q");
@@ -321,12 +326,12 @@
     render();
   });
 
-  ["2023年22题", "swayed", "Quinn", "2023 英语一"].forEach(function (ex, i) {
+  (CFG.examples || ["2023年22题"]).forEach(function (ex, i) {
     if (i === 0) $examples.insertAdjacentHTML("beforeend", "<span>试试：</span>");
     $examples.insertAdjacentHTML("beforeend", '<button class="chip" type="button" data-q="' + esc(ex) + '">' + esc(ex) + "</button>");
   });
 
-  fetch("data/questions.json")
+  fetch(DATA)
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(function (d) {
       d.passages.forEach(function (p) { passages[p.id] = p; });
@@ -337,8 +342,8 @@
       });
       $q.value = new URL(location.href).searchParams.get("q") || "";
       render();
-      return Promise.all(["../1reading.json", "../4tiganxuanxiang.json"].map(function (u) {
-        return fetch(u).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+      return Promise.all(["1reading.json", "4tiganxuanxiang.json"].map(function (u) {
+        return fetch(ROOT + u).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
       })).then(function (res) {
         var qs = {};
         res[1].forEach(function (x) { qs[x.id] = x; });

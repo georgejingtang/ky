@@ -115,3 +115,12 @@ footer { margin-top: 28px; color: var(--muted); font-size: 13px; display: flex; 
 .para-zh { padding-left: 17px; margin: -8px 0 0; }
 .row.quiz .para-zh { display: none !important; }
 .warn { color: var(--wrong); }
+
+/* 英语一 / 英语二 切换 */
+.switch { display: flex; gap: 6px; }
+.switch a { font-size: 13px; text-decoration: none; border: 1px solid var(--line); background: var(--paper); color: var(--ink); border-radius: 999px; padding: 2px 14px; }
+.switch a:hover { border-color: var(--accent); color: var(--accent); }
+.switch a[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+a.item { text-decoration: none; color: var(--ink); }
+a.item:hover { border-color: var(--accent); }
+a.item span { color: var(--muted); font-size: 13px; }

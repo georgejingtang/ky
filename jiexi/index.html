@@ -4,8 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>考研阅读精析检索</title>
+<script>
+  // 旧链接 /jiexi/?q=… 都是英语一的题，直接转到 yingyu1/
+  if (location.search) location.replace("yingyu1/" + location.search + location.hash);
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,22 +17,13 @@
 <header>
   <div class="eyebrow">考研英语 · Reading Part A</div>
   <h1>阅读真题精析 · 左右对照检索</h1>
-  <p class="sub">输入题干或选项里的英文单词（如 <code>swayed</code>、<code>Quinn</code>），或输入“2023年22题”，即可看到该题的原文、试题与分析。</p>
-  <div class="search">
-    <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="搜索：单词 / 2023年22题 / 2023 英语一" aria-label="搜索">
-  </div>
-  <div class="examples" id="examples"></div>
-  <div class="legend"><span><mark>黄底</mark> 定位句</span><span><mark><b>加下划线</b></mark> 决定答案的关键词</span><span><span class="hit">蓝框</span> 你搜索的词</span></div>
+  <p class="sub">选择英语一或英语二。</p>
 </header>
-
-<p id="status" class="status" aria-live="polite">正在加载题库…</p>
-<div id="results"></div>
-
-<footer>
-  <a href="../">← 逐句翻译库</a>
-  <span>题库数据：<code>jiexi/data/questions.json</code></span>
-</footer>
+<div class="dir">
+  <a class="item" href="yingyu1/"><strong>英语一</strong><span>georgejingtang.github.io/ky/jiexi/yingyu1</span></a>
+  <a class="item" href="yingyu2/"><strong>英语二</strong><span>georgejingtang.github.io/ky/jiexi/yingyu2</span></a>
 </div>
-<script src="app.js"></script>
+<footer><a href="../">← 逐句翻译库</a></footer>
+</div>
 </body>
 </html>
