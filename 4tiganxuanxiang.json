@@ -2454,7 +2454,7 @@
     "cn_q": "23. 作者认为，忠实的音乐会听众 ________。",
     "cn_opts": [
       "[A] 忽略了现场演出的费用",
-      "[B] 拒绝大多数种类的录播演出",
+      "[B] 拒绝大多数种类的演出录音",
       "[C] 夸大了现场演出的多样性",
       "[D] 高估了现场演出的价值"
     ]
@@ -2493,10 +2493,10 @@
     ],
     "cn_q": "25. 关于吉尔伯特在重振爱乐乐团中的作用，作者感到 ________。",
     "cn_opts": [
-      "[A] 怀疑的",
-      "[B] 热情的",
-      "[C] 自信的",
-      "[D] 困惑的"
+      "[A] 怀疑",
+      "[B] 热情",
+      "[C] 有信心",
+      "[D] 困惑"
     ]
   },
   {
@@ -2656,7 +2656,7 @@
       "[A] 招致与热情消费者的持续冲突",
       "[B] 可能被用来在营销中产生负面影响",
       "[C] 可能是更激烈竞争的原因",
-      "[D] 理应得到关于它们的负面评论"
+      "[D] 理应受到所有关于它们的负面评论"
     ]
   },
   {
@@ -2675,7 +2675,7 @@
     "cn_opts": [
       "[A] 有效应对被劫持媒体",
       "[B] 说服消费者抵制产品",
-      "[C] 与支持性的消费者合作",
+      "[C] 与支持自己的消费者合作",
       "[D] 利用被劫持媒体"
     ]
   },
@@ -2715,7 +2715,7 @@
     "cn_opts": [
       "[A] 暂时的快乐",
       "[B] 过程中的享受",
-      "[C] 回顾中的幸福",
+      "[C] 回想起来的幸福",
       "[D] 持久的回报"
     ]
   },
@@ -2811,7 +2811,7 @@
       "[C] an obstacle to social progress",
       "[D] a cause of undesirable behaviors"
     ],
-    "cn_q": "21. 根据第一段，同伴压力常常表现为 _______。",
+    "cn_q": "21. 根据第一段，同辈压力常常表现为 _______。",
     "cn_opts": [
       "[A] 社会治疗的补充",
       "[B] 群体动力的刺激因素",
@@ -2855,7 +2855,7 @@
     "cn_opts": [
       "[A] 充分探究社会和生物因素",
       "[B] 有效规避社会治疗的缺陷",
-      "[C] 说明国家资助的功能",
+      "[C] 说明州政府资助的作用",
       "[D] 产生持久的社会效果"
     ]
   },
@@ -2891,7 +2891,7 @@
       "[C] profound",
       "[D] questionable"
     ],
-    "cn_q": "25. 作者在最后一段指出，同伴压力的影响是 _______。",
+    "cn_q": "25. 作者在最后一段指出，同辈压力的影响是 _______。",
     "cn_opts": [
       "[A] 有害的",
       "[B] 可取的",
@@ -2935,7 +2935,7 @@
     "cn_opts": [
       "[A] 获得佛蒙特州监管机构的保护",
       "[B] 寻求联邦立法机构的青睐",
-      "[C] 获得其营业执照的延期",
+      "[C] 获得经营许可证的延期",
       "[D] 获得购买发电厂的许可"
     ]
   },
@@ -3071,7 +3071,7 @@
       "[C] efforts to make discoveries are justified",
       "[D] scientific work calls for a critical mind"
     ],
-    "cn_q": "34. 阿尔伯特·圣捷尔吉最可能同意 _______。",
+    "cn_q": "34. 阿尔贝特·圣捷尔吉最可能同意 _______。",
     "cn_opts": [
       "[A] 科学主张将在挑战中幸存",
       "[B] 当今的发现激励未来的研究",
@@ -3086,10 +3086,10 @@
     "source": "英语一",
     "en_q": "35. Which of the following would be the best title of the text?",
     "en_opts": [
-      "[A] Novelty as an Engine of Scientific Development.",
-      "[B] Collective Scrutiny in Scientific Discovery.",
-      "[C] Evolution of Credibility in Doing Science.",
-      "[D] Challenge to Credibility at the Gate to Science."
+      "[A] Novelty as an Engine of Scientific Development",
+      "[B] Collective Scrutiny in Scientific Discovery",
+      "[C] Evolution of Credibility in Doing Science",
+      "[D] Challenge to Credibility at the Gate to Science"
     ],
     "cn_q": "35. 以下哪项是本文的最佳标题？",
     "cn_opts": [
@@ -3151,7 +3151,7 @@
       "[C] excessively increased",
       "[D] fairly adjusted"
     ],
-    "cn_q": "38. 从第四段可以了解到，国有部门的收入是 _______。",
+    "cn_q": "38. 从第四段可以了解到，公共部门的收入是 _______。",
     "cn_opts": [
       "[A] 非法获得的",
       "[B] 间接增加的",
@@ -3191,7 +3191,7 @@
       "[C] tolerance",
       "[D] indifference"
     ],
-    "cn_q": "40. 约翰·多纳休对公共部门系统的态度是 _______。",
+    "cn_q": "40. 约翰·唐纳修对公共部门系统的态度是 _______。",
     "cn_opts": [
       "[A] 不赞成",
       "[B] 欣赏",
