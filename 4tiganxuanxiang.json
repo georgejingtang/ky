@@ -12074,7 +12074,7 @@
     "cn_q": "24. 让所有人都去攻读学士学位的仓促推动 ________。",
     "cn_opts": [
       "[A] 有助于创造大量的中等技能工作岗位",
-      "[B] 可能会缩小工人阶级工作的差距",
+      "[B] 可能会缩小工人阶级岗位的缺口",
       "[C] 有望产生训练有素的劳动力",
       "[D] 表明高等教育被高估了"
     ]
@@ -12091,7 +12091,7 @@
       "[C] disappointed",
       "[D] cautious"
     ],
-    "cn_q": "25. 作者对科齐亚泰克学校的态度可以被描述为 ________。",
+    "cn_q": "25. 作者对科齐亚克学校的态度可以被描述为 ________。",
     "cn_opts": [
       "[A] 支持的",
       "[B] 宽容的",
@@ -12144,14 +12144,14 @@
     "display_id": "英语二 2018年第2篇 第28题",
     "year": "2018",
     "source": "英语二",
-    "en_q": "28. It can be learned that in Iowa, .",
+    "en_q": "28. It can be learned that in Iowa, ________.",
     "en_opts": [
       "[A] wind is a widely used energy source",
       "[B] wind energy has replaced fossil fuels",
       "[C] tech giants are investing in clean energy",
       "[D] there is a shortage of clean energy supply"
     ],
-    "cn_q": "28. 可以了解到，在爱荷华州，。",
+    "cn_q": "28. 可以了解到，在爱荷华州，________。",
     "cn_opts": [
       "[A] 风能是一种广泛使用的能源",
       "[B] 风能已经取代了化石燃料",
@@ -12166,10 +12166,10 @@
     "source": "英语二",
     "en_q": "29. Which of the following is true about clean energy according to Paragraphs 5&6?",
     "en_opts": [
-      "[A] Its application has boosted battery storage.",
-      "[B] It is commonly used in car manufacturing.",
-      "[C] Its continuous supply is becoming a reality.",
-      "[D] Its sustainable exploitation will remain difficult."
+      "[A] Its application has boosted battery storage",
+      "[B] It is commonly used in car manufacturing",
+      "[C] Its continuous supply is becoming a reality",
+      "[D] Its sustainable exploitation will remain difficult"
     ],
     "cn_q": "29. 根据第五段和第六段，关于清洁能源以下哪项是正确的？",
     "cn_opts": [
@@ -12193,7 +12193,7 @@
     ],
     "cn_q": "30. 从最后一段可以推断出，可再生能源 ________。",
     "cn_opts": [
-      "[A] 将使美国与其他国家更紧密",
+      "[A] 将拉近美国与其他国家的距离",
       "[B] 将加速全球环境变化",
       "[C] 并没有真正得到美国政府的鼓励",
       "[D] 在其成本方面不够有竞争力"
@@ -12273,7 +12273,7 @@
     ],
     "cn_q": "34. 当前解释下的竞争法难以保护脸书用户，因为 ________。",
     "cn_opts": [
-      "[A] 他们未被定义为消费者",
+      "[A] 他们没有被定义为客户",
       "[B] 他们在财务上不可靠",
       "[C] 这些服务通常是数字化的",
       "[D] 这些服务是由广告商付费的"
@@ -12329,7 +12329,7 @@
       "[A] distractions may actually increase efficiency",
       "[B] daily schedules are indispensable to studying",
       "[C] students are hardly motivated by monthly goals",
-      "[D] detailed plans many not be as fruitful as expected"
+      "[D] detailed plans may not be as fruitful as expected"
     ],
     "cn_q": "37. 哈福德引用的20世纪80年代初的研究表明 ________。",
     "cn_opts": [
@@ -12351,12 +12351,12 @@
       "[C] an effective way to save time and energy",
       "[D] an essential factor in accomplishing any work"
     ],
-    "cn_q": "38. 根据纽波特的观点，悠闲是 ________。",
+    "cn_q": "38. 根据纽波特的观点，无所事事是 ________。",
     "cn_opts": [
       "[A] 对忙碌的人来说一种理想的精神状态",
       "[B] 身体健康的主要因素",
       "[C] 节省时间和精力的有效方法",
-      "[D] 完成任何工作的基本因素"
+      "[D] 完成任何工作必不可少的因素"
     ]
   },
   {

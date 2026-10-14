@@ -5551,7 +5551,7 @@
         "D": "the services are paid for by advertisers"
       },
       "answer": "A",
-      "answerZh": "他们未被定义为消费者",
+      "answerZh": "他们没有被定义为客户",
       "basis": [
         "根据题干 Competition law as presently interpreted 定位到第三段后半部分：按现在的解释，竞争法处理的是消费者（consumers）所受的经济损失，而当用户不为服务付费时，这一点就不明显了；这些服务的用户并不是它们的客户（not their customers）。用户不被视为客户，竞争法自然难以保护他们。"
       ],
@@ -5683,7 +5683,7 @@
         "A": "distractions may actually increase efficiency",
         "B": "daily schedules are indispensable to studying",
         "C": "students are hardly motivated by monthly goals",
-        "D": "detailed plans many not be as fruitful as expected"
+        "D": "detailed plans may not be as fruitful as expected"
       },
       "answer": "D",
       "answerZh": "详细的计划可能不如预期的那样富有成效",
@@ -5731,7 +5731,7 @@
         "D": "an essential factor in accomplishing any work"
       },
       "answer": "D",
-      "answerZh": "完成任何工作的基本因素",
+      "answerZh": "完成任何工作必不可少的因素",
       "basis": [
         "根据题干 Newport 和 idleness 定位到第七段：纽波特说，闲散不只是一次度假、一种放纵或一个恶习；它对大脑来说不可或缺（indispensable），就像维生素D对身体一样，而且矛盾的是，它是完成任何工作所必需的（necessary to getting any work done）。D 是对原文的同义改写。"
       ],
