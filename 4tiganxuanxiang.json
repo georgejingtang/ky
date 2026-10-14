@@ -2016,7 +2016,7 @@
       "[A] 艺术评论已经从大城市的报纸上消失了",
       "[B] 英文报纸过去刊登更多的艺术评论",
       "[C] 高质量的报纸保留了大量的读者",
-      "[D] 年轻读者怀疑日报上评论的适合性"
+      "[D] 年轻读者怀疑日报是否适合刊登评论"
     ]
   },
   {
@@ -2024,7 +2024,7 @@
     "display_id": "英语一 2010年第1篇 第22题",
     "year": "2010",
     "source": "英语一",
-    "en_q": "22. Newspaper reviews in England before World War Ⅱ were characterized by ________.",
+    "en_q": "22. Newspaper reviews in England before World War II were characterized by ________.",
     "en_opts": [
       "[A] free themes",
       "[B] casual style",
@@ -2051,7 +2051,7 @@
       "[C] Writers are likely to be tempted into journalism.",
       "[D] Not all writers are capable of journalistic writing."
     ],
-    "cn_q": "23. 肖和纽曼最可能同意以下哪一项？",
+    "cn_q": "23. 萧伯纳和纽曼最可能同意以下哪一项？",
     "cn_opts": [
       "[A] 实现新闻目标是作家的职责。",
       "[B] 作家当记者是可鄙的。",
@@ -2075,7 +2075,7 @@
     "cn_opts": [
       "[A] 他的音乐评论可能无法吸引今天的读者。",
       "[B] 他作为音乐评论家的声誉长期以来一直存在争议。",
-      "[C] 他的风格主要迎合现代专家。",
+      "[C] 他的风格主要迎合现代专业人士。",
       "[D] 他的作品未能遵循业余传统。"
     ]
   },
@@ -2093,7 +2093,7 @@
     ],
     "cn_q": "25. 本文的最佳标题是什么？",
     "cn_opts": [
-      "[A] 美好旧时光的报纸",
+      "[A] 往昔美好时光中的报纸",
       "[B] 报纸中迷失的视野",
       "[C] 新闻业的可悲衰落",
       "[D] 记忆中的杰出评论家"
@@ -2115,7 +2115,7 @@
     "cn_opts": [
       "[A] 它们对企业的有限价值",
       "[B] 它们与资产配置的联系",
-      "[C] 对它们授予可能存在的限制",
+      "[C] 它们的授予可能受到限制",
       "[D] 关于它们授权的争议"
     ]
   },
@@ -2144,14 +2144,14 @@
     "display_id": "英语一 2010年第2篇 第28题",
     "year": "2010",
     "source": "英语一",
-    "en_q": "28. The word \"about-face\" (Para. 3) most probably means ________.",
+    "en_q": "28. The word \"about-face\" (Line 1, Para. 3) most probably means ________.",
     "en_opts": [
-      "[A] loss of good will",
+      "[A] loss of goodwill",
       "[B] increase of hostility",
       "[C] change of attitude",
       "[D] enhancement of dignity"
     ],
-    "cn_q": "28. “about-face”一词（第三段）最可能的意思是 ________。",
+    "cn_q": "28. “about-face”一词（第三段第一行）最可能的意思是 ________。",
     "cn_opts": [
       "[A] 善意的丧失",
       "[B] 敌意的增加",
@@ -2164,7 +2164,7 @@
     "display_id": "英语一 2010年第2篇 第29题",
     "year": "2010",
     "source": "英语一",
-    "en_q": "29. We learn from the last two paragraphs that business method patents ________.",
+    "en_q": "29. We learn from the last two paragraphs that business-method patents ________.",
     "en_opts": [
       "[A] are immune to legal challenges",
       "[B] are often unnecessarily issued",
@@ -2213,10 +2213,10 @@
     ],
     "cn_q": "31. 通过引用《引爆点》一书，作者意图 ________。",
     "cn_opts": [
-      "[A] 分析社会流行病的后果",
-      "[B] 讨论有影响力者在传播思想中的功能",
-      "[C] 举例说明人们对社会流行病的直觉反应",
-      "[D] 描述有影响力者的基本特征"
+      "[A] 分析社会流行潮的后果",
+      "[B] 讨论有影响力的人在传播思想中的作用",
+      "[C] 举例说明人们对社会流行潮的直觉反应",
+      "[D] 描述有影响力的人的基本特征"
     ]
   },
   {
@@ -2231,11 +2231,11 @@
       "[C] has won support from influentials",
       "[D] requires solid evidence for its validity"
     ],
-    "cn_q": "32. 作者认为，“两级流动理论” ________。",
+    "cn_q": "32. 作者暗示，“两级传播理论” ________。",
     "cn_opts": [
       "[A] 作为营销问题的解决方案",
       "[B] 帮助解释了某些流行趋势",
-      "[C] 赢得了有影响力者的支持",
+      "[C] 赢得了有影响力的人的支持",
       "[D] 需要确凿的证据来证明其有效性"
     ]
   },
@@ -2253,9 +2253,9 @@
     ],
     "cn_q": "33. 研究人员最近观察到的结果表明 ________。",
     "cn_opts": [
-      "[A] 影响力的力量伴随着社会互动",
+      "[A] 影响力随社会交往而产生",
       "[B] 人际关系可以通过媒体得到加强",
-      "[C] 有影响力者有更多接触公众的渠道",
+      "[C] 有影响力的人有更多接触公众的渠道",
       "[D] 大多数名人享有广泛的媒体关注"
     ]
   },
@@ -2276,7 +2276,7 @@
       "[A] 停留在社会影响网络之外",
       "[B] 与影响源几乎没有联系",
       "[C] 被影响然后去影响他人",
-      "[D] 被最初的有影响力者所影响"
+      "[D] 被最初的有影响力的人所影响"
     ]
   },
   {
@@ -2333,7 +2333,7 @@
     ],
     "cn_q": "37. 根据作者的观点，美国财务会计准则委员会的规则变更可能导致 ________。",
     "cn_opts": [
-      "[A] 管理作用的减弱",
+      "[A] 管理层作用的减弱",
       "[B] 银行体系的复兴",
       "[C] 银行的长期资产损失",
       "[D] 其独立性的削弱"
@@ -2375,8 +2375,8 @@
     "cn_opts": [
       "[A] 误解了市场价格指标",
       "[B] 夸大了其资产的真实价值",
-      "[C] 忽视了坏账可能存在的可能性",
-      "[D] 否认在其资产销售中入账损失"
+      "[C] 忽视了可能存在的坏账",
+      "[D] 拒绝把出售资产的亏损入账"
     ]
   },
   {
