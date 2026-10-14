@@ -1644,16 +1644,16 @@
     "display_id": "英语一 2009年第1篇 第23题",
     "year": "2009",
     "source": "英语一",
-    "en_q": "23. The word \"ruts\" (Line 1, Paragraph 4) is closest in meaning to ________.",
+    "en_q": "23. The word \"ruts\" (Para. 4) is closest in meaning to ________.",
     "en_opts": [
       "[A] tracks",
       "[B] series",
       "[C] characteristics",
       "[D] connections"
     ],
-    "cn_q": "23. “ruts”一词（第四段第1行）最接近的意思是 ________。",
+    "cn_q": "23. “ruts”一词（第四段）最接近的意思是 ________。",
     "cn_opts": [
-      "[A] 轨道；车辙；路径",
+      "[A] 车辙；路径",
       "[B] 系列",
       "[C] 特征",
       "[D] 联系"
@@ -1694,7 +1694,7 @@
     "cn_q": "25. 瑞安的评论表明，标准化测试的做法 ________。",
     "cn_opts": [
       "[A] 阻止新习惯的形成",
-      "[B] 不再强调共性",
+      "[B] 不再强调平庸",
       "[C] 维持了美国固有的思维模式",
       "[D] 符合美国的信仰体系"
     ]
@@ -1711,7 +1711,7 @@
       "[C] successful promotion",
       "[D] popularity with households"
     ],
-    "cn_q": "26. 在第一段和第二段中，本文展示了PTK（亲缘关系检测）的 ________。",
+    "cn_q": "26. 在第一段和第二段中，本文展示了PTK（亲子鉴定工具包）的 ________。",
     "cn_opts": [
       "[A] 容易获得",
       "[B] 定价的灵活性",
@@ -1731,7 +1731,7 @@
       "[C] identify parent-child kinship",
       "[D] choose children for adoption"
     ],
-    "cn_q": "27. PTK（亲缘关系检测）被用来 ________。",
+    "cn_q": "27. PTK（亲子鉴定工具包）被用来 ________。",
     "cn_opts": [
       "[A] 定位一个人的出生地",
       "[B] 促进基因研究",
@@ -1800,8 +1800,8 @@
     ]
   },
   {
-    "id": "英语一_2009_2_31",
-    "display_id": "英语一 2009年第2篇 第31题",
+    "id": "英语一_2009_3_31",
+    "display_id": "英语一 2009年第3篇 第31题",
     "year": "2009",
     "source": "英语一",
     "en_q": "31. The author holds in Paragraph 1 that the importance of education in poor countries ________.",
@@ -1820,11 +1820,11 @@
     ]
   },
   {
-    "id": "英语一_2009_2_32",
-    "display_id": "英语一 2009年第2篇 第32题",
+    "id": "英语一_2009_3_32",
+    "display_id": "英语一 2009年第3篇 第32题",
     "year": "2009",
     "source": "英语一",
-    "en_q": "32. It is stated in Paragraph 1 that the construction of a new education system ________.",
+    "en_q": "32. It is stated in Paragraph 1 that the construction of a new educational system ________.",
     "en_opts": [
       "[A] challenges economists and politicians",
       "[B] takes efforts of generations",
@@ -1840,8 +1840,8 @@
     ]
   },
   {
-    "id": "英语一_2009_2_33",
-    "display_id": "英语一 2009年第2篇 第33题",
+    "id": "英语一_2009_3_33",
+    "display_id": "英语一 2009年第3篇 第33题",
     "year": "2009",
     "source": "英语一",
     "en_q": "33. A major difference between the Japanese and U.S. workforces is that ________.",
@@ -1860,8 +1860,8 @@
     ]
   },
   {
-    "id": "英语一_2009_2_34",
-    "display_id": "英语一 2009年第2篇 第34题",
+    "id": "英语一_2009_3_34",
+    "display_id": "英语一 2009年第3篇 第34题",
     "year": "2009",
     "source": "英语一",
     "en_q": "34. The author quotes the example of our ancestors to show that education emerged ________.",
@@ -1880,8 +1880,8 @@
     ]
   },
   {
-    "id": "英语一_2009_2_35",
-    "display_id": "英语一 2009年第2篇 第35题",
+    "id": "英语一_2009_3_35",
+    "display_id": "英语一 2009年第3篇 第35题",
     "year": "2009",
     "source": "英语一",
     "en_q": "35. According to the last paragraph, development of education ________.",
@@ -1935,7 +1935,7 @@
     "cn_opts": [
       "[A] 经历了相对和平的早期历史",
       "[B] 带来了旧大陆的文化",
-      "[C] 很少关注南方的知识生活",
+      "[C] 很少关注南部的精神生活",
       "[D] 痴迷于宗教创新"
     ]
   },
