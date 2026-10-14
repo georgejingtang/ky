@@ -10831,7 +10831,7 @@
       "[C] Childless wives.",
       "[D] Working fathers."
     ],
-    "cn_q": "22. 根据达马斯克的观点，谁可能在家中是最幸福的？",
+    "cn_q": "22. 根据达玛斯克的观点，谁可能在家中是最幸福的？",
     "cn_opts": [
       "[A] 在职母亲。",
       "[B] 没有孩子的丈夫。",
@@ -10844,14 +10844,14 @@
     "display_id": "英语二 2015年第1篇 第23题",
     "year": "2015",
     "source": "英语二",
-    "en_q": "23. The blurring of working women's roles refers to the fact that .",
+    "en_q": "23. The blurring of working women's roles refers to the fact that ________.",
     "en_opts": [
       "[A] they are both bread winners and housewives",
       "[B] their home is also a place for kicking back",
       "[C] there is often much housework left behind",
       "[D] it is difficult for them to leave their office"
     ],
-    "cn_q": "23. 职业女性角色的模糊指的是这样一个事实：。",
+    "cn_q": "23. 职业女性角色的模糊指的是这样一个事实：________。",
     "cn_opts": [
       "[A] 她们既是养家糊口者又是家庭主妇",
       "[B] 她们的家也是一个放松的地方",
@@ -10891,9 +10891,9 @@
       "[C] household tasks are generally more motivating",
       "[D] family labor is often adequately rewarded"
     ],
-    "cn_q": "25. 家庭战线与工作场所不同之处在于 ________。",
+    "cn_q": "25. 家庭与工作场所的不同之处在于 ________。",
     "cn_opts": [
-      "[A] 家几乎不是一个更舒适的工作环境",
+      "[A] 家很难说是更舒适的工作环境",
       "[B] 家庭中的分工很少是明确的",
       "[C] 家务活通常更有激励性",
       "[D] 家庭劳动往往得到充分的回报"
@@ -10914,8 +10914,8 @@
     "cn_q": "26. 招收更多第一代大学生已经 ________。",
     "cn_opts": [
       "[A] 降低了他们的辍学率",
-      "[B] 缩小了成绩差距",
-      "[C] 错过了其最初的目的",
+      "[B] 缩小了成就差距",
+      "[C] 未能实现其初衷",
       "[D] 使大学生感到沮丧"
     ]
   },
@@ -10956,7 +10956,7 @@
       "[A] 在私立大学学习",
       "[B] 来自单亲家庭",
       "[C] 需要经济支持",
-      "[D] 在大学里表现不佳"
+      "[D] 大学学业失败"
     ]
   },
   {
@@ -10973,7 +10973,7 @@
     ],
     "cn_q": "29. 论文的作者们认为，第一代大学生 ________。",
     "cn_opts": [
-      "[A] 实际上对成绩差距漠不关心",
+      "[A] 实际上对成就差距漠不关心",
       "[B] 可能对其他学生有潜在的影响",
       "[C] 可能缺乏申请研究项目的机会",
       "[D] 在处理大学中的问题时缺乏经验"
@@ -11015,8 +11015,8 @@
     "cn_opts": [
       "[A] 更加情绪化",
       "[B] 更加客观",
-      "[C] 更少活力",
-      "[D] 更少战略性"
+      "[C] 不那么有活力",
+      "[D] 不那么有战略性"
     ]
   },
   {
@@ -11095,7 +11095,7 @@
     "cn_opts": [
       "[A] 管理者欣赏它但避免使用它。",
       "[B] 语言学家认为它是胡说八道。",
-      "[C] 公司发现它是基本的。",
+      "[C] 公司认为它必不可少。",
       "[D] 普通人嘲笑它但接受它。"
     ]
   },
@@ -11116,7 +11116,7 @@
       "[A] 就业市场繁荣的前景。",
       "[B] 自愿兼职工作的增加。",
       "[C] 充分就业的可能性。",
-      "[D] 就业创造的加速。"
+      "[D] 创造就业的速度加快。"
     ]
   },
   {
@@ -11164,14 +11164,14 @@
     "display_id": "英语二 2015年第4篇 第39题",
     "year": "2015",
     "source": "英语二",
-    "en_q": "39. It can be learned that with Obamacare, .",
+    "en_q": "39. It can be learned that with Obamacare, ________.",
     "en_opts": [
       "[A] it is no longer easy for part-timers to get insurance",
       "[B] employment is no longer a precondition to get insurance",
       "[C] it is still challenging to get insurance for family members",
       "[D] full-time employment is still essential for insurance"
     ],
-    "cn_q": "39. 可以了解到，有了奥巴马医改，。",
+    "cn_q": "39. 可以了解到，有了奥巴马医改，________。",
     "cn_opts": [
       "[A] 兼职人员获得保险不再容易",
       "[B] 就业不再是获得保险的先决条件",
