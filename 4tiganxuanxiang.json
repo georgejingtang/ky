@@ -24,14 +24,14 @@
     "display_id": "英语一 2005年第1篇 第22题",
     "year": "2005",
     "source": "英语一",
-    "en_q": "22. The statement \"it is all too monkey\" (Last line, Paragraph l) implies that ________.",
+    "en_q": "22. The statement \"it is all too monkey\" (Last line, Paragraph 1) implies that ________.",
     "en_opts": [
       "[A] monkeys are also outraged by slack rivals",
       "[B] resenting unfairness is also monkeys' nature",
       "[C] monkeys, like humans, tend to be jealous of each other",
       "[D] no animals other than monkeys can develop such emotions"
     ],
-    "cn_q": "22. 第一段最后一句话 \"it is all too monkey\" 暗示了 ________。",
+    "cn_q": "22. 第一段最后一行的 “it is all too monkey” 暗示了 ________。",
     "cn_opts": [
       "[A] 猴子也会因对手懈怠而愤怒",
       "[B] 憎恶不公平也是猴子的天性",
@@ -71,7 +71,7 @@
       "[C] will not be co-operative if feeling cheated",
       "[D] are unhappy when separated from others"
     ],
-    "cn_q": "24. 布罗斯南博士和德瓦尔博士最终在他们的研究中发现，猴子 ________。",
+    "cn_q": "24. 布鲁斯南博士和德瓦尔博士最终在他们的研究中发现，猴子 ________。",
     "cn_opts": [
       "[A] 喜欢葡萄胜过黄瓜",
       "[B] 能被教会交换物品",
@@ -151,7 +151,7 @@
       "[C] Prudent planning hinders progress.",
       "[D] Extensive research helps decision-making."
     ],
-    "cn_q": "28. 作者所说的\"paralysis by analysis\"（第四段最后一行）是什么意思？",
+    "cn_q": "28. 作者所说的“paralysis by analysis”（第四段最后一行）是什么意思？",
     "cn_opts": [
       "[A] 无休止的研究扼杀了行动。",
       "[B] 仔细的调查揭示真相。",
@@ -213,7 +213,7 @@
     ],
     "cn_q": "31. 研究人员逐渐相信，梦 ________。",
     "cn_opts": [
-      "[A] 可以在其进程中被改变",
+      "[A] 梦的进程可以被改变",
       "[B] 容易受到情绪变化的影响",
       "[C] 反映了我们内心深处的欲望和恐惧",
       "[D] 是神经修复的随机结果"
@@ -236,7 +236,7 @@
       "[A] 它在梦中的功能",
       "[B] 快速眼动睡眠的机制",
       "[C] 梦与情绪的关系",
-      "[D] 它与前额叶皮层的区别"
+      "[D] 它与前额叶皮质的区别"
     ]
   },
   {
@@ -256,7 +256,7 @@
       "[A] 在我们无意识的心灵中加剧",
       "[B] 发展成快乐的梦",
       "[C] 一直持续到我们入睡",
-      "[D] 在夜间的早期梦境中出现"
+      "[D] 在前半夜的梦中出现"
     ]
   },
   {
@@ -295,7 +295,7 @@
     "cn_opts": [
       "[A] 像往常一样生活。",
       "[B] 寻求专业帮助。",
-      "[C] 练习有意识的控制。",
+      "[C] 有意识地加以控制。",
       "[D] 避免白天的焦虑。"
     ]
   },
@@ -324,14 +324,14 @@
     "display_id": "英语一 2005年第4篇 第37题",
     "year": "2005",
     "source": "英语一",
-    "en_q": "37. The word \"talking\" (Line 5, Paragraph 3) denotes ________.",
+    "en_q": "37. The word \"talking\" (Line 6, Paragraph 3) denotes ________.",
     "en_opts": [
       "[A] modesty",
       "[B] personality",
       "[C] liveliness",
       "[D] informality"
     ],
-    "cn_q": "37. “talking”一词（第三段第5行）指的是 ________。",
+    "cn_q": "37. “talking”一词（第三段第6行）指的是 ________。",
     "cn_opts": [
       "[A] 谦逊",
       "[B] 个性",
@@ -391,7 +391,7 @@
       "[C] \"functional\" is to \"artistic\"",
       "[D] \"humble\" is to \"noble\""
     ],
-    "cn_q": "40. 根据最后一段，“纸盘”之于“瓷器”就如同 ________。",
+    "cn_q": "40. 根据最后一段，“纸盘”之于“瓷盘”就如同 ________。",
     "cn_opts": [
       "[A] “暂时的”之于“永久的”",
       "[B] “激进的”之于“保守的”",
@@ -431,10 +431,10 @@
       "[C] satisfied the needs of a knowledgeable elite",
       "[D] owed its emergence to the culture of consumption"
     ],
-    "cn_q": "22. 根据作者的观点，19世纪的百货商场 ________。",
+    "cn_q": "22. 根据作者的观点，19世纪的百货商店 ________。",
     "cn_opts": [
       "[A] 在大众文化的传播中发挥了作用",
-      "[B] 成为普通消费者亲密的商店",
+      "[B] 成为面向普通消费者的精品小店",
       "[C] 满足了知识精英的需求",
       "[D] 其出现归功于消费文化"
     ]
@@ -471,7 +471,7 @@
       "[C] To give examples of successful immigrants.",
       "[D] To show the powerful influence of American culture."
     ],
-    "cn_q": "24. 为什么在第五段提到阿诺德·施瓦辛格和加斯·布鲁克斯？",
+    "cn_q": "24. 为什么在第五段提到阿诺·施瓦辛格和加思·布鲁克斯？",
     "cn_opts": [
       "[A] 为了证明他们在全世界的受欢迎程度。",
       "[B] 为了揭示公众对移民的恐惧。",
@@ -513,9 +513,9 @@
     ],
     "cn_q": "26. 从前两段我们了解到 ________。",
     "cn_opts": [
-      "[A] 镇民否认皇家莎士比亚剧团对小镇收入的贡献",
-      "[B] 皇家莎士比亚剧团的演员在台上台下都模仿莎士比亚",
-      "[C] 皇家莎士比亚剧团的两个分支关系不好",
+      "[A] 镇民否认皇家莎士比亚公司对小镇收入的贡献",
+      "[B] 皇家莎士比亚公司的演员在台上台下都模仿莎士比亚",
+      "[C] 皇家莎士比亚公司的两个分支关系不好",
       "[D] 镇民从旅游业中赚得很少"
     ]
   },
@@ -544,17 +544,17 @@
     "display_id": "英语一 2006年第2篇 第28题",
     "year": "2006",
     "source": "英语一",
-    "en_q": "28. By saying \"Stratford cries poor traditionally\" (Line 2-3, Paragraph 4), the author implies that ________.",
+    "en_q": "28. By saying \"Stratford cries poor traditionally\" (Line 2, Paragraph 4), the author implies that ________.",
     "en_opts": [
       "[A] Stratford cannot afford the expansion projects",
       "[B] Stratford has long been in financial difficulties",
       "[C] the town is not really short of money",
       "[D] the townsfolk used to be poorly paid"
     ],
-    "cn_q": "28. 作者说“Stratford cries poor traditionally”（第四段第2-3行），暗示了 ________。",
+    "cn_q": "28. 作者说“Stratford cries poor traditionally”（第四段第2行），暗示了 ________。",
     "cn_opts": [
-      "[A] 斯特拉特福镇负担不起扩建项目",
-      "[B] 斯特拉特福镇长期处于财务困境中",
+      "[A] 斯特拉福镇负担不起扩建项目",
+      "[B] 斯特拉福镇长期处于财务困境中",
       "[C] 这个小镇其实并不缺钱",
       "[D] 镇民过去工资很低"
     ]
@@ -571,7 +571,7 @@
       "[C] the behavior of the actors is not socially acceptable",
       "[D] the theatre attendance is on the rise"
     ],
-    "cn_q": "29. 根据镇民的观点，皇家莎士比亚剧团不应该得到补贴，因为 ________。",
+    "cn_q": "29. 根据镇民的观点，皇家莎士比亚公司不应该得到补贴，因为 ________。",
     "cn_opts": [
       "[A] 可以提高票价来弥补开支",
       "[B] 公司在财务上管理不善",
@@ -596,7 +596,7 @@
       "[A] 对双方都支持",
       "[B] 赞同镇民的观点",
       "[C] 持有超然的态度",
-      "[D] 同情皇家莎士比亚剧团"
+      "[D] 同情皇家莎士比亚公司"
     ]
   },
   {
@@ -606,7 +606,7 @@
     "source": "英语一",
     "en_q": "31. The extinction of large prehistoric animals is noted to suggest that ________.",
     "en_opts": [
-      "[A] large animal were vulnerable to the changing environment",
+      "[A] large animals were vulnerable to the changing environment",
       "[B] small species survived as large animals disappeared",
       "[C] large sea animals may face the same threat today",
       "[D] slow-growing fish outlive fast-growing ones"
@@ -629,9 +629,9 @@
       "[A] the stock of large predators in some old fisheries has reduced by 90%",
       "[B] there are only half as many fisheries as there were 15 years ago",
       "[C] the catch sizes in new fisheries are only 20% of the original amount",
-      "[D] the number of larger predators dropped faster in new fisheries than in the old"
+      "[D] the number of large predators dropped faster in new fisheries than in the old"
     ],
-    "cn_q": "32. 从迈尔斯博士和沃尔姆博士的论文中我们可以推断出 ________。",
+    "cn_q": "32. 从梅耶斯博士和沃尔姆博士的论文中我们可以推断出 ________。",
     "cn_opts": [
       "[A] 一些旧渔场中大型捕食者的储量已经减少了90%",
       "[B] 渔场的数量只有15年前的一半",
@@ -644,7 +644,7 @@
     "display_id": "英语一 2006年第3篇 第33题",
     "year": "2006",
     "source": "英语一",
-    "en_q": "33. By saying \"these figures are conservative\" (Line 1, paragraph 3), Dr. Worm means that ________.",
+    "en_q": "33. By saying \"these figures are conservative\" (Line 1, Paragraph 3), Dr. Worm means that ________.",
     "en_opts": [
       "[A] fishing technology has improved rapidly",
       "[B] the catch-sizes are actually smaller than recorded",
@@ -671,7 +671,7 @@
       "[C] the ocean biomass should be restored to its original level",
       "[D] people should adjust the fishing baseline to the changing situation"
     ],
-    "cn_q": "34. 迈尔斯博士和其他研究者认为 ________。",
+    "cn_q": "34. 梅耶斯博士和其他研究者认为 ________。",
     "cn_opts": [
       "[A] 人们应该寻找一个能够持续更长时间的基准",
       "[B] 渔场应该将其产量保持在生物量的50%以下",
@@ -724,7 +724,7 @@
     "display_id": "英语一 2006年第4篇 第37题",
     "year": "2006",
     "source": "英语一",
-    "en_q": "37. The word \"bummer\" (Line 5, paragraph 5) most probably means something ________.",
+    "en_q": "37. The word \"bummer\" (Line 5, Paragraph 5) most probably means something ________.",
     "en_opts": [
       "[A] religious",
       "[B] unpleasant",
@@ -753,7 +753,7 @@
     ],
     "cn_q": "38. 在作者看来，广告 ________。",
     "cn_opts": [
-      "[A] 紧随反快乐艺术之后出现",
+      "[A] 紧随反幸福艺术之后出现",
       "[B] 是导致公众失望的一个原因",
       "[C] 取代教堂成为信息的主要来源",
       "[D] 创造的是快乐的幻觉而非快乐本身"
@@ -774,9 +774,9 @@
     "cn_q": "39. 从最后一段我们可以了解到作者相信 ________。",
     "cn_opts": [
       "[A] 快乐往往以悲伤告终",
-      "[B] 反快乐艺术令人不快但令人耳目一新",
+      "[B] 反幸福艺术令人不快但令人耳目一新",
       "[C] 苦难应该被享受而不是被否认",
-      "[D] 反快乐艺术在经济繁荣时蓬勃发展"
+      "[D] 反幸福艺术在经济繁荣时蓬勃发展"
     ]
   },
   {
