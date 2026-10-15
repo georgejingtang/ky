@@ -874,7 +874,7 @@
     "cn_q": "24. 埃里克森和他的同事们相信 ______。",
     "cn_opts": [
       "[A] 天赋是职业成功的主导因素",
-      "[B] 传记数据提供了卓越表现的关键",
+      "[B] 传记资料提供了卓越表现的关键",
       "[C] 天赋的作用往往被忽视",
       "[D] 取得高成就的人将其成功主要归功于后天培养"
     ]
@@ -951,11 +951,11 @@
       "[C] vos Savant's case is an extreme one that will not repeat",
       "[D] the defining characteristic of IQ tests has changed"
     ],
-    "cn_q": "28. 如今人们不能再取得像沃斯·萨万特那样高的智商分数，因为 ______。",
+    "cn_q": "28. 如今人们不能再取得像沃斯·莎凡特那样高的智商分数，因为 ______。",
     "cn_opts": [
       "[A] 这些分数是通过不同的计算程序得出的",
       "[B] 现在强调的是创造力而不是分析能力",
-      "[C] 沃斯·萨万特的案例是一个极端案例，不会重复",
+      "[C] 沃斯·莎凡特的案例是一个极端案例，不会重复",
       "[D] 智商测试的定义性特征已经改变"
     ]
   },
@@ -974,7 +974,7 @@
     "cn_q": "29. 从最后一段我们可以得出结论 ______。",
     "cn_opts": [
       "[A] 测试分数可能不是个人能力的可靠指标",
-      "[B] 智商分数和学术评估测试成绩高度相关",
+      "[B] 智商分数和学术能力评估测试（SAT）成绩高度相关",
       "[C] 测试涉及大量猜测",
       "[D] 传统的测试已经过时了"
     ]
@@ -1011,7 +1011,7 @@
       "[C] they are more vulnerable to changes in family economics",
       "[D] they are deprived of unemployment or disability insurance"
     ],
-    "cn_q": "31. 如今的双收入家庭面临更大的财务风险，因为 ______。",
+    "cn_q": "31. 如今的双收入家庭面临更大的经济风险，因为 ______。",
     "cn_opts": [
       "[A] 他们曾经享有的安全网已经消失",
       "[B] 他们被解雇的几率大大增加了",
@@ -1073,10 +1073,10 @@
     ],
     "cn_q": "34. 从最后一段可以推断出 ______。",
     "cn_opts": [
-      "[A] 财务风险往往大于政治风险",
+      "[A] 经济风险往往大于政治风险",
       "[B] 中产阶级可能面临更大的政治挑战",
-      "[C] 财务问题可能引发政治问题",
-      "[D] 财务责任是政治地位的一个指标"
+      "[C] 经济问题可能引发政治问题",
+      "[D] 经济责任是政治地位的一个指标"
     ]
   },
   {
@@ -1096,7 +1096,7 @@
       "[A] 警觉的中产阶级",
       "[B] 悬崖边的中产阶级",
       "[C] 冲突中的中产阶级",
-      "[D] 废墟中的中产阶级"
+      "[D] 没落的中产阶级"
     ]
   },
   {
@@ -1104,14 +1104,14 @@
     "display_id": "英语一 2007年第4篇 第36题",
     "year": "2007",
     "source": "英语一",
-    "en_q": "36. The statement \"It never rains but it pours.\" is used to introduce ______.",
+    "en_q": "36. The statement \"It never rains but it pours\" is used to introduce ______.",
     "en_opts": [
       "[A] the fierce business competition",
       "[B] the feeble boss-board relations",
       "[C] the threat from news reports",
       "[D] the severity of data leakage"
     ],
-    "cn_q": "36. “It never rains but it pours.”（不雨则已，一雨倾盆/祸不单行）这句话被用来引出 ______。",
+    "cn_q": "36. “It never rains but it pours”（不雨则已，一雨倾盆/祸不单行）这句话被用来引出 ______。",
     "cn_opts": [
       "[A] 激烈的商业竞争",
       "[B] 薄弱的老板与董事会关系",
@@ -1151,7 +1151,7 @@
       "[C] businesses should enhance their level of accounting security",
       "[D] the market value of customer data should be emphasized"
     ],
-    "cn_q": "38. 通过提出GASP（一般会计实务标准化委员会）的概念，作者想要说明 ______。",
+    "cn_q": "38. 通过提出公认安全准则（GASP）的概念，作者想要说明 ______。",
     "cn_opts": [
       "[A] 股东的利益应该得到适当的关注",
       "[B] 信息保护应该得到应有的重视",
