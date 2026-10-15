@@ -7611,9 +7611,9 @@
       "[C] letting them grow in value",
       "[D] hiding them from the locals"
     ],
-    "cn_q": "21. 罗马人掩埋钉子可能是因为 _____。",
+    "cn_q": "21. 罗马人掩埋钉子可能是为了 _____。",
     "cn_opts": [
-      "[A] 为将来使用而保存它们",
+      "[A] 留着它们以备将来使用",
       "[B] 防止它们生锈",
       "[C] 让它们升值",
       "[D] 不让当地人找到它们"
@@ -7696,7 +7696,7 @@
       "[A] 廉价技术带来革命性变化。",
       "[B] 技术创新对经济成功不可或缺。",
       "[C] 技术定义了人们对世界的理解。",
-      "[D] 复杂的技术源于微小的发明。"
+      "[D] 精妙的技术源于微小的发明。"
     ]
   },
   {
@@ -7704,7 +7704,7 @@
     "display_id": "英语一 2024年第2篇 第26题",
     "year": "2024",
     "source": "英语一",
-    "en_q": "26. According to the first two paragraphs, alloparenting refers to the practice _____",
+    "en_q": "26. According to the first two paragraphs, alloparenting refers to the practice of _____",
     "en_opts": [
       "[A] sharing childcare among community members",
       "[B] assigning babies to specific adult caregivers",
@@ -7744,7 +7744,7 @@
     "display_id": "英语一 2024年第2篇 第28题",
     "year": "2024",
     "source": "英语一",
-    "en_q": "28. According to Para.4, the \"intensive mothering narrative\" ___",
+    "en_q": "28. According to Paragraph 4, the \"intensive mothering narrative\" ___",
     "en_opts": [
       "[A] alleviates parenting pressures.",
       "[B] consolidates family relationships.",
@@ -7756,7 +7756,7 @@
       "[A] 减轻了育儿压力。",
       "[B] 巩固了家庭关系。",
       "[C] 导致了以孩子为中心的家庭模式。",
-      "[D] 偏离了演化的进程。"
+      "[D] 偏离了进化的进程。"
     ]
   },
   {
@@ -7764,14 +7764,14 @@
     "display_id": "英语一 2024年第2篇 第29题",
     "year": "2024",
     "source": "英语一",
-    "en_q": "29. According to paragraph 6, what can we learn about nursery in the UK?",
+    "en_q": "29. What can be inferred about the nurseries in the UK?",
     "en_opts": [
       "[A] They tend to fall short of official requirements.",
       "[B] They have difficulty finding enough caregivers.",
-      "[C] They ought to improve their care-to-child ratio.",
+      "[C] They ought to improve their carer-to-child ratio.",
       "[D] They should try to prevent parental depression."
     ],
-    "cn_q": "29. 根据第六段，关于英国的托儿所我们可以了解到什么？",
+    "cn_q": "29. 关于英国的托儿所，可以推断出什么？",
     "cn_opts": [
       "[A] 它们往往达不到官方要求。",
       "[B] 它们难以找到足够的保育员。",
@@ -7784,18 +7784,18 @@
     "display_id": "英语一 2024年第2篇 第30题",
     "year": "2024",
     "source": "英语一",
-    "en_q": "30. Which of the following would be the best title?",
+    "en_q": "30. Which of the following would be the best title for the text?",
     "en_opts": [
       "[A] Instructive teaching: a dilemma for anxious parents",
       "[B] For a happier family, learn from the hunter-gatherers",
       "[C] Mixed-age playgroup, a better choice for lonely children",
       "[D] Tracing the history of parenting: from Africa to Europe"
     ],
-    "cn_q": "30. 以下哪项是最佳标题？",
+    "cn_q": "30. 以下哪项最适合作本文的标题？",
     "cn_opts": [
-      "[A] 指导式教学：焦虑父母的两难困境",
+      "[A] 教导式教学：焦虑父母的两难困境",
       "[B] 为了更幸福的家庭，向狩猎采集者学习",
-      "[C] 混龄游戏小组：孤独孩子的更好选择",
+      "[C] 混龄游戏群体：孤独孩子的更好选择",
       "[D] 追溯育儿史：从非洲到欧洲"
     ]
   },
@@ -7806,15 +7806,15 @@
     "source": "英语一",
     "en_q": "31. What can be learned about Rutkowski from the first two paragraphs?",
     "en_opts": [
-      "[A] He is enthusiastic about AI generation painting.",
-      "[B] He is popular with the users of an AI art generator.",
+      "[A] He is enthusiastic about using AI models.",
+      "[B] He is popular with users of an AI art generator.",
       "[C] He attracts admiration from other illustrators.",
       "[D] He specializes in classical painting digitalization."
     ],
     "cn_q": "31. 从前两段可以了解到关于鲁特科夫斯基的什么信息？",
     "cn_opts": [
-      "[A] 他对人工智能生成绘画充满热情。",
-      "[B] 他受到一个人工智能艺术生成器用户的欢迎。",
+      "[A] 他热衷于使用人工智能模型。",
+      "[B] 他很受一款人工智能艺术生成器的用户欢迎。",
       "[C] 他吸引了其他插画家的钦佩。",
       "[D] 他专攻古典绘画数字化。"
     ]
@@ -7866,12 +7866,12 @@
     "source": "英语一",
     "en_q": "34. According to Ortiz, AI companies are advised to ____.",
     "en_opts": [
-      "[A] campaign for new policies or regulations",
+      "[A] campaign for new policies or regulation",
       "[B] offer their services to public institutions",
       "[C] strengthen their relationships with AI users",
       "[D] adopt a different strategy for AI model training"
     ],
-    "cn_q": "34. 根据奥尔蒂斯的观点，人工智能公司被建议去 ____。",
+    "cn_q": "34. 根据奥尔蒂斯的观点，人工智能公司应该 ____。",
     "cn_opts": [
       "[A] 争取新的政策或法规",
       "[B] 向公共机构提供服务",
@@ -7894,7 +7894,7 @@
     "cn_q": "35. 本文主要关于什么？",
     "cn_opts": [
       "[A] 艺术家对人工智能艺术生成的回应。",
-      "[B] 人工智能在艺术创作中扩大的角色。",
+      "[B] 人工智能在艺术创作中日益扩大的作用。",
       "[C] 人工智能应用中的隐私问题。",
       "[D] 关于人工智能发展的对立观点。"
     ]
@@ -7904,7 +7904,7 @@
     "display_id": "英语一 2024年第4篇 第36题",
     "year": "2024",
     "source": "英语一",
-    "en_q": "36. The Chesapeake Bay is described in paragraph 1 as _____.",
+    "en_q": "36. The Chesapeake Bay is described in Paragraph 1 as _____.",
     "en_opts": [
       "[A] a valuable natural environment",
       "[B] a controversial conservation area",
@@ -7934,9 +7934,9 @@
     "cn_q": "37. 美国最高法院在爱达荷州案件中的裁决 _____。",
     "cn_opts": [
       "[A] 加强了水污染控制",
-      "[B] 削弱了美国环境保护署的监管权力",
+      "[B] 削弱了美国环境保护局的监管权力",
       "[C] 将结束当地居民之间的冲突",
-      "[D] 可能面临矿业运营商的反对"
+      "[D] 可能面临矿业经营者的反对"
     ]
   },
   {
@@ -7944,19 +7944,19 @@
     "display_id": "英语一 2024年第4篇 第38题",
     "year": "2024",
     "source": "英语一",
-    "en_q": "38. How does the author feel about future of the Chesapeake Bay?",
+    "en_q": "38. How does the author feel about the future of the Chesapeake Bay?",
     "en_opts": [
-      "[A] Worried",
-      "[B] Puzzled",
-      "[C] Relieved",
-      "[D] Encouraged"
+      "[A] Worried.",
+      "[B] Puzzled.",
+      "[C] Relieved.",
+      "[D] Encouraged."
     ],
     "cn_q": "38. 作者对切萨皮克湾的未来感觉如何？",
     "cn_opts": [
-      "[A] 担忧的",
-      "[B] 困惑的",
-      "[C] 感到宽慰的",
-      "[D] 感到鼓舞的"
+      "[A] 担忧。",
+      "[B] 困惑。",
+      "[C] 宽慰。",
+      "[D] 振奋。"
     ]
   },
   {
@@ -7971,7 +7971,7 @@
       "[C] It has set a fine example of respecting state authorities.",
       "[D] It has ensured the coordination of protection efforts."
     ],
-    "cn_q": "39. 关于美国环境保护署参与切萨皮克湾项目，可以推断出什么？",
+    "cn_q": "39. 关于环保局参与切萨皮克湾计划，可以推断出什么？",
     "cn_opts": [
       "[A] 它恢复了相邻司法管辖区之间的平衡。",
       "[B] 它引发了商业渔业的激进改革。",
@@ -7986,7 +7986,7 @@
     "source": "英语一",
     "en_q": "40. The author holds that the state lawmakers should _______.",
     "en_opts": [
-      "[A] be cautious about the influence of landowners",
+      "[A] be cautious about the influence of land owners",
       "[B] attach due importance to wetlands protections",
       "[C] recognize the need to expand wildlife refuges",
       "[D] improve the wellbeing of endangered species"
