@@ -21,7 +21,15 @@
   var zhRows = {};     // 单题打开了英汉对照的题
   var zh = null;       // 译文：来自仓库根目录的 1reading.json（原文）和 4tiganxuanxiang.json（题干选项）
   var zhFailed = false;
-  var revealed = {};   // 先做题时已点开答案的题
+  var showAll = false; // 看分析：全部显示答案与分析
+  try { showAll = localStorage.getItem("jiexi-ana") === "1"; } catch (e) {}
+  var rowState = {};   // 单题按钮：true = 显示答案与分析，false = 隐藏
+
+  // 这道题现在是否隐藏答案与分析
+  function isQuiz(rowId) {
+    if (rowId in rowState) return !rowState[rowId];
+    return hideAnswers && !showAll;
+  }
 
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
@@ -189,7 +197,7 @@
       return '<p class="para"><span class="pn">P' + c.p + "</span>" + rich(c.text) + "</p>" + cn;
     }).join("");
     var rowId = p.year + "-" + p.exam + "-" + q.num;
-    var quiz = hideAnswers && !revealed[rowId];
+    var quiz = isQuiz(rowId);
     var zhBtn = '<button class="zh-btn" type="button">' + (zhRows[rowId] ? "隐藏英汉对照译文" : "显示英汉对照译文") + "</button>";
     var map = (q.map || []).length ? '<div class="map">' + q.map.map(function (m) {
       return "<div><code>" + esc(m[0]) + "</code><span>≈</span><code>" + esc(m[1]) + "</code></div>";
@@ -207,7 +215,7 @@
       "</div>" +
       '<div class="ana' + (quiz ? " hidden" : "") + '">' +
         // 顺序：先做题 → 再检查（译文）→ 最后看答案与分析
-        '<div class="btns">' + zhBtn + (quiz ? '<button class="reveal" type="button">显示答案与分析</button>' : "") + "</div>" +
+        '<div class="btns">' + zhBtn + anaBtn(quiz) + "</div>" +
         '<div class="ans"><span class="badge">答案 ' + esc(q.answer) + "</span><strong>" + esc(q.answerZh) + "</strong></div>" +
         "<div><h3>定位与依据</h3>" + basis + map + note + "</div>" +
         '<div><h3>排除</h3><ul class="wrong">' + wrong + "</ul></div>" +
@@ -219,7 +227,7 @@
     // 题目定位到的段落，在全文里加左边线
     var located = {};
     qs.forEach(function (q) {
-      if (hideAnswers && !revealed[p.year + "-" + p.exam + "-" + q.num]) return;
+      if (isQuiz(p.year + "-" + p.exam + "-" + q.num)) return;
       q.context.forEach(function (c) { located[c.p] = true; });
     });
     var pz = passageZh(p);
@@ -280,9 +288,14 @@
     }).join("") + "</div>";
   }
 
+  function anaBtn(quiz) {
+    return '<button class="reveal" type="button">' + (quiz ? "显示答案与分析" : "隐藏答案与分析") + "</button>";
+  }
+
   function toolbar() {
     return '<div class="toolbar"><label><input type="checkbox" id="hide"' + (hideAnswers ? " checked" : "") + "> 先做题（隐藏原文定位、答案与分析）</label>" +
       '<label><input type="checkbox" id="zh"' + (zhAll ? " checked" : "") + "> 再检查（显示原文、题干和选项英汉对照）</label>" +
+      '<label><input type="checkbox" id="ana"' + (showAll ? " checked" : "") + "> 看分析（显示答案与分析）</label>" +
       (zhFailed ? '<span class="warn">译文加载失败，请刷新重试</span>' : "") + "</div>";
   }
 
@@ -336,18 +349,24 @@
     }
     var btn = e.target.closest(".reveal");
     if (btn) {
-      var ana = btn.closest(".ana");
-      ana.classList.remove("hidden");
       var row = btn.closest(".row");
-      row.classList.remove("quiz");
-      revealed[row.id] = true;
-      row.querySelector(".q").classList.remove("hide-ans");
-      var full = row.closest(".body").querySelector(".full");
+      var show = row.classList.contains("quiz");
+      rowState[row.id] = show;
+      row.classList.toggle("quiz", !show);
+      row.querySelector(".ana").classList.toggle("hidden", !show);
+      row.querySelector(".q").classList.toggle("hide-ans", !show);
+      btn.textContent = show ? "隐藏答案与分析" : "显示答案与分析";
+      // 全文里的定位段落：本组还有已显示的题定位到它，就保留左边线
+      var body = row.closest(".body");
+      var full = body.querySelector(".full");
       row.getAttribute("data-ps").split(",").forEach(function (n) {
         var para = full.querySelector('p[data-p="' + n + '"]');
-        if (para) para.classList.add("located");
+        if (!para) return;
+        var keep = Array.prototype.some.call(body.querySelectorAll(".row:not(.quiz)"), function (r) {
+          return r.getAttribute("data-ps").split(",").indexOf(n) >= 0;
+        });
+        para.classList.toggle("located", keep);
       });
-      btn.remove();
     }
   });
   document.addEventListener("change", function (e) {
@@ -357,9 +376,16 @@
       $results.classList.toggle("zh-all", zhAll);
       return;
     }
+    if (e.target.id === "ana") {
+      showAll = e.target.checked;
+      rowState = {};
+      try { localStorage.setItem("jiexi-ana", showAll ? "1" : "0"); } catch (err) {}
+      render();
+      return;
+    }
     if (e.target.id !== "hide") return;
     hideAnswers = e.target.checked;
-    revealed = {};
+    rowState = {};
     try { localStorage.setItem("jiexi-hide", hideAnswers ? "1" : "0"); } catch (err) {}
     render();
   });
